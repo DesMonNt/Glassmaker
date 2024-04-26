@@ -1,0 +1,273 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc816bf29e15e948ac8c4f230776cbd, type: 3}
+  m_Name: Level 0
+  m_EditorClassIdentifier: 
+  LevelIndex: 0
+  FloorTiles:
+  - Position: {x: -3, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: 2, z: 0}
+    Tile: {fileID: 0}
+  WallTiles:
+  - Position: {x: -8, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: -4, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: -3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: -2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: -1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: 0, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: 1, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: 2, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -8, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -7, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -6, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -5, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -4, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -3, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -2, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: -1, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 0, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 1, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 2, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 3, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 4, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 5, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 6, y: 3, z: 0}
+    Tile: {fileID: 0}
+  - Position: {x: 7, y: 3, z: 0}
+    Tile: {fileID: 0}
