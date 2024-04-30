@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Effects;
 using JetBrains.Annotations;
+using Random = UnityEngine.Random;
 
 namespace FightingScene
 {
@@ -17,9 +18,14 @@ namespace FightingScene
             AttackEffects = buffs;
         }
 
-        public void Execute(Unit target)
+        public void Execute(Unit target, float criticalChance)
         {
-            target.GetAttack(Damage);
+            var random = new System.Random();
+            var randomValue = random.Next(0, 100);
+            if (randomValue < criticalChance)
+                target.GetAttack(2 * Damage);
+            else 
+                target.GetAttack(Damage);
             if (AttackEffects is null)
                 return;
             foreach (var buff in AttackEffects)

@@ -15,11 +15,11 @@ public class CheckCollision : MonoBehaviour
         if (!IsInRedZone()) 
             return;
         if (IsInGreenZone())
-            AccuracyText.currentSum += 3;
+            AccuracyText.CurrentSum += 3;
         else if (IsInYellowZone())
-            AccuracyText.currentSum += 2;
+            AccuracyText.CurrentSum += 2;
         else 
-            AccuracyText.currentSum ++;
+            AccuracyText.CurrentSum ++;
     }
 
     private bool IsInGreenZone() =>

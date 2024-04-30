@@ -1,29 +1,26 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Serialization;
+using Effects;
 
-public class Ability : MonoBehaviour
+public class Ability
 {
-    public float damageFromAbility;
-    public string nameme;
-    [FormerlySerializedAs("goodStatuses")] public List<string> statuses;
+    private readonly int _damageFromAbility;
+    private readonly List<IBuff> _ownerStatuses;
+    private readonly List<IBuff> _targetStatuses;
 
-    public Ability(string title, List<string> ss, float damage)
+    public Ability(List<IBuff> ts, List<IBuff> os, int damage)
     {
-        nameme = title;
-        statuses = ss;
-        damageFromAbility = damage;
+        _targetStatuses = ts;
+        _ownerStatuses = os;
+        _damageFromAbility = damage;
     }
-
-    public void Execute(Unit target)
+    
+    public void Execute(Unit owner, Unit target)
     {
-        target.GetMagicAttack(damageFromAbility);
-        foreach (var status in statuses) 
-            target.AddBuff(Status.Statuses[status]);
+        target.GetMagicAttack(_damageFromAbility);
+        foreach (var status in _targetStatuses) 
+            target.AddBuff(status);
+        foreach (var status in _ownerStatuses) 
+            owner.AddBuff(status);
     }
     //
     // public void UseAbility(Unit target)

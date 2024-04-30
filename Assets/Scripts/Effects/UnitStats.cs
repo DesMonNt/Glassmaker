@@ -1,6 +1,4 @@
-﻿using UnityEditor.PackageManager.Requests;
-
-namespace Effects
+﻿namespace Effects
 {
     public class UnitStats
     {

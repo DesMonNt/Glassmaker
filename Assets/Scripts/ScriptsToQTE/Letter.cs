@@ -19,9 +19,9 @@ public class Letter : MonoBehaviour
 
     private void GoToTarget()
     {
+        if (!RandomSpawner.CanSpawn)
+            Destroy(gameObject);
         var target = (_targetPosition - _transform.position).normalized;
         _transform.position += speed * Time.deltaTime * target;
-        // if (_transform.position == Vector3.zero)
-        //     Destroy(this);
     }
 }

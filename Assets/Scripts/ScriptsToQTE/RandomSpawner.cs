@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = System.Random;
 
@@ -11,8 +8,9 @@ public class RandomSpawner : MonoBehaviour
     [FormerlySerializedAs("_prefabLetter")] [SerializeField] private GameObject _prefabLetter1;
     [SerializeField] private GameObject _prefabLetter2;
     [SerializeField] private GameObject _prefabLetter3;
-    private int _c;
+    public static int SpawnDelay;
     private int _r;
+    public static bool CanSpawn;
 
     private GameObject[] _letters = new GameObject [3];
 
@@ -27,40 +25,49 @@ public class RandomSpawner : MonoBehaviour
         new(0, -1200)
     };
 
-    void Start() => _letters = new[] { _prefabLetter1, _prefabLetter2, _prefabLetter3 };
+    private void Start()
+    {
+        CanSpawn = true;
+        SpawnDelay = 86;
+        _letters = new[] { _prefabLetter1, _prefabLetter2, _prefabLetter3 };
+    }
 
     private void Spawn()
     {
         var random = new Random();
         var rndCoordinateIndex = random.Next(0, _pointsToSpawn.Length);
-        var rndPos = _pointsToSpawn[rndCoordinateIndex];
+        var randomPosition = _pointsToSpawn[rndCoordinateIndex];
         var rndPrefabIndex = random.Next(0, _letters.Length);
         var rndPrefab = _letters[rndPrefabIndex];
 
-        Instantiate(rndPrefab, rndPos, Quaternion.identity);
-        //StartCoroutine(DelaySpawn());
+        Instantiate(rndPrefab, randomPosition, Quaternion.identity);
     }
 
-    void Update()
+    private void Update()
     {
-        _c++;
-        if (_c != 120)
+        if (SpawnDelay % 100 != 0)
+        {
+            SpawnDelay++;
+            if (SpawnDelay % 1000 == 0) StartCoroutine(EndGame());
             return;
+        }
+
+        SpawnDelay++;
         Spawn();
-        _c = 0;
-
-        //StartCoroutine(DelaySpawn());
     }
 
-    IEnumerator DelaySpawn()
+    private IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(4f);
-        SceneManager.LoadScene("FightingScene");
+        CanSpawn = false;
+        Fight.IsEndQte = true;
+        AccuracyText.IsEnd = true;
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
 
-    IEnumerator Destroyer(Collider2D other)
+    private static IEnumerator Destroyer(Collider2D other)
     {
-        AccuracyText.maxSum+=3;
+        AccuracyText.MaxSum += 3;
         yield return new WaitForSeconds (0);
         Destroy(other.gameObject);
     }

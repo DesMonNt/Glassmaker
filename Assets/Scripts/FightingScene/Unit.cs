@@ -21,7 +21,6 @@ public class Unit : MonoBehaviour, IBuffable
 
     private readonly List<IBuff> _buffs = new();
     
-    // hp bar
     public float HealthPoints;
     [FormerlySerializedAs("healthPoints")] public float currentHealthPoints;
     public float baseDamage;
@@ -37,14 +36,15 @@ public class Unit : MonoBehaviour, IBuffable
 
     private FighterTurnMeter _fighterTurnMeter;
 
-    public Ability skill;
-    public Ability ultimate;
-    public Ability passive;
+    public string skill;
+    public string ultimate;
+    public string passive;
 
     private void Awake() => _fighterTurnMeter = GetComponent<FighterTurnMeter>();
 
     private void Start()
     {
+        //AddBuff(Status.Statuses[passive]);
         currentHealthPoints = BaseStats.MaxHealth;
         spirtRenderer = GetComponent<SpriteRenderer>();
     }
@@ -72,8 +72,6 @@ public class Unit : MonoBehaviour, IBuffable
             GetDied();
     }
 
-    public Ability UseAbility() => new ("ultimate", new() { "провокация" }, 15);
-
     public event UnityAction<Unit> TurnMeterFilled;
     public event UnityAction<Unit> Died;
 
@@ -89,11 +87,10 @@ public class Unit : MonoBehaviour, IBuffable
     public void RemoveBuff(IBuff buff)
     {
         _buffs.Remove(buff);
-        
         ApplyBuffs();
     }
 
-    public void ApplyBuffs()
+    private void ApplyBuffs()
     {
         CurrentStats = BaseStats;
 

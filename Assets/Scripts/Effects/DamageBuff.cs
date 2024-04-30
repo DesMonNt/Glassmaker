@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-namespace Effects
+﻿namespace Effects
 {
     public class DamageBuff : IBuff
     {

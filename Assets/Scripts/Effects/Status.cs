@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using Effects;
 
-public static class Status
+public static class Status // TODO: все скиллы переписать + enum'ы
 {
     public static Dictionary<string, IBuff> Statuses = new()
     {
         { "провокация", new AttackBuff(20) },
+        { "непровокация", new AttackBuff(-20) },
         { "Невосприимчивость", new ImmortalityBuff() },
         // {
         //     "3 скилл Оракла", target =>
@@ -16,6 +17,7 @@ public static class Status
         // },
         {
             "Аура на бафф атаки", new DamageBuff(0.15f)
-        }
+        },
+        { "имба ебаная", new DamageBuff(100)}
     };
 }
