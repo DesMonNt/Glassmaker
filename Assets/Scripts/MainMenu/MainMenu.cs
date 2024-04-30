@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {  
     [SerializeField] private GameObject circle;
-    [SerializeField] private SpriteRenderer circleComponent;
+    [SerializeField] private Image circleComponent;
     [SerializeField] private GameObject[] texts;
     [SerializeField] private Text[] textsComponents;
     private float alphaCoeffitient = .5f;
@@ -26,7 +26,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         textsComponents = texts.Select(x => x.GetComponent<Text>()).ToArray();
-        circleComponent = circle.GetComponent<SpriteRenderer>();
+        circleComponent = circle.GetComponent<Image>();
         _menuButtons = GameObject.Find("MenuButtons");
         _menuButtons.SetActive(false);
         _startLine = GameObject.Find("StartLine");

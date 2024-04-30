@@ -14,7 +14,7 @@ public class Circle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startPos = CurrentPos;
+        startPos = transform.position;
         endPos = CurrentPos;
     }
 
