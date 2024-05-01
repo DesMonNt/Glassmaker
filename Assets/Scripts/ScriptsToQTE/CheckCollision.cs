@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +11,7 @@ public class CheckCollision : MonoBehaviour
 
     private void Update()
     {
-        if (!Input.GetButtonDown(tag + "Key")) 
+        if (!Input.GetKeyDown((KeyCode)Enum.Parse(typeof(KeyCode), tag))) 
             return;
         if (!IsInRedZone()) 
             return;

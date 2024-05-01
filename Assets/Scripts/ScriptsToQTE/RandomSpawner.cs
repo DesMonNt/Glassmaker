@@ -45,10 +45,10 @@ public class RandomSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (SpawnDelay % 100 != 0)
+        if (SpawnDelay % 250 != 0)
         {
             SpawnDelay++;
-            if (SpawnDelay % 1000 == 0) StartCoroutine(EndGame());
+            if (SpawnDelay % 2000 == 0) StartCoroutine(EndGame());
             return;
         }
 
