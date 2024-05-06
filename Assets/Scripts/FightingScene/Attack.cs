@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace FightingScene
 {
-    public class Attack
+    public class Attack: IAction
     {
         public int Damage;
         [CanBeNull] public IEnumerable<IBuff> AttackEffects; // single / group / Aoe
@@ -18,11 +18,11 @@ namespace FightingScene
             AttackEffects = buffs;
         }
 
-        public void Execute(Unit target, float criticalChance)
+        public void Execute(Unit owner, Unit target)
         {
             var random = new System.Random();
             var randomValue = random.Next(0, 100);
-            if (randomValue < criticalChance)
+            if (randomValue < owner.CurrentStats.CriticalChance)
                 target.GetAttack(2 * Damage);
             else 
                 target.GetAttack(Damage);

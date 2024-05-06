@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Effects;
 
-public class Ability
+public class Ability: IAction
 {
     private readonly int _damageFromAbility;
     private readonly List<IBuff> _ownerStatuses;
