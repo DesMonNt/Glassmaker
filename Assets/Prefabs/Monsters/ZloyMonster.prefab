@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f8b45826b744b4494284913ca3518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPoints: 100
+  HealthPoints: 1
   currentHealthPoints: 100
   baseDamage: 25
   spritePassive: {fileID: 21300000, guid: ac7722bd5d5ac9741b466bb616c88d72, type: 3}

@@ -98,18 +98,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f8b45826b744b4494284913ca3518c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthPoints: 0
-  currentHealthPoints: 100
+  HealthPoints: 1
+  currentHealthPoints: 1
   baseDamage: 10
   spritePassive: {fileID: 21300000, guid: d56e067a2f9ff4c4bb80a20363fcb3a5, type: 3}
   spriteActive: {fileID: 21300000, guid: 9c7958c38b5ca364bbdcd1dd819cd576, type: 3}
   spirtRenderer: {fileID: 7142444698882819815}
-  TemporaryStatueses: []
-  UnitGoodStatuses: []
-  UnitBadStatuses: []
-  skill: {fileID: 0}
-  ultimate: {fileID: 0}
-  passive: {fileID: 0}
+  speed: 0
+  armor: 0
+  energy: 0
+  energyToUltimate: 0
+  skill: 
+  ultimate: 
+  passive: 
 --- !u!114 &-8259966181749275309
 MonoBehaviour:
   m_ObjectHideFlags: 0
