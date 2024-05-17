@@ -2,34 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mime;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Application = UnityEngine.Device.Application;
 
 public class MainMenu : MonoBehaviour
 {  
     [SerializeField] private GameObject circle;
-    [SerializeField] private Image circleComponent;
     [SerializeField] private GameObject[] texts;
-    [SerializeField] private Text[] textsComponents;
     private float alphaCoeffitient = .5f;
-    private float opacity;
+    private float opacity1;
     
     [SerializeField] private GameObject _menuButtons;
     private float time;
 
     [SerializeField] private GameObject _startLine;
+    [SerializeField] private GameObject _exitConformation;
+
+    [SerializeField] private GameObject _blackout;
 
     private bool hadStarted = false;
     // Start is called before the first frame update
     void Start()
     {
-        textsComponents = texts.Select(x => x.GetComponent<Text>()).ToArray();
-        circleComponent = circle.GetComponent<Image>();
         _menuButtons = GameObject.Find("MenuButtons");
         _menuButtons.SetActive(false);
         _startLine = GameObject.Find("StartLine");
+        _exitConformation = GameObject.Find("ExitMenu");
+        _exitConformation.SetActive(false);
+        _blackout = GameObject.Find("Blackout");
+        _blackout.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -37,35 +44,60 @@ public class MainMenu : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            Show(_exitConformation);
         }
         if (Input.anyKey && !hadStarted)
         {
-            _menuButtons.SetActive(true);
-            foreach (var textComponent in textsComponents)
-            {
-                textComponent.color = new Color(255, 255, 255, 0);
-            }
-            circleComponent.color = new Color(255, 255, 255, 0);
-            _startLine.SetActive(false);
             hadStarted = true;
-        }
-        
-        else if (hadStarted && opacity < 255)
-        {
-            foreach (var textComponent in textsComponents)
+            _menuButtons.SetActive(true);
+            var appearTime = 1f;
+            foreach (var textComponent in texts.Select(x => x.GetComponent<Text>()))
             {
-                textComponent.color = new Color(255, 255, 255, opacity);
+                Appear(textComponent, appearTime);
             }
-            circleComponent.color = new Color(255, 255, 255, opacity);
-
-            opacity += Time.deltaTime * alphaCoeffitient;
-
+            Appear(circle.GetComponent<Image>(), appearTime);
+            _startLine.SetActive(false);
         }
         
+    }
+
+    private async Task Appear(Graphic graphic, float duration)
+    {
+        var timer = 0f;
+        var opacity = 0f;
+        var color = graphic.color;
+        graphic.color = new Color(color.r, color.g, color.b, 0);
+        while (timer < duration)
+        {
+            
+            graphic.color = new Color(color.r, color.g, color.b, opacity);
+            opacity += Time.deltaTime / duration;
+            timer += Time.deltaTime;
+
+            await Task.Delay(10);
+        }
     }
     void asfkjok()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
+    public void Show(GameObject obj)
+    {
+        obj.SetActive(true);
+        _blackout.SetActive(true);
+        _menuButtons.SetActive(false);
+    }
+    
+    public void Hide(GameObject obj)
+    {
+        obj.SetActive(false);
+        _blackout.SetActive(false);
+        _menuButtons.SetActive(true);
     }
 }

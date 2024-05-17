@@ -16,13 +16,15 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     [SerializeField]
     public Vector3 circlePos{ get; private set; }
-
-// Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
+        var boxcollider = GetComponent<BoxCollider2D>();
+        var rect = GetComponent<RectTransform>();
         sound = GameObject.Find("HoverSound").GetComponent<AudioSource>();
-        var x = circle.CurrentPos.x;
-        var y = GetComponent<RectTransform>().position.y;
+        var position = rect.position;
+        var x = rect.position.x ;
+        var y = position.y;
         circlePos = new Vector3(x, y, 0);
 
     }
@@ -33,7 +35,6 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         circle.startPos = circle.CurrentPos;
         circle.Time_ = 0;
         sound.Play();
-        Debug.Log(1);
         GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
     }
     
