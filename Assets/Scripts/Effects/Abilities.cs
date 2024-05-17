@@ -6,8 +6,8 @@ namespace Effects
     {
         public static readonly Dictionary<string, Ability> DictOfAbilities = new()
         {
-            {"Способность 1", new Ability(new () { Status.Statuses["непровокация"] }, 
-                new () { Status.Statuses["провокация"] },15) },
+            {"Способность 1", new Ability(new () { Status.Statuses["провокация"] }, 
+                new () { Status.Statuses["непровокация"] },15) },
             {"Ульта 1", new Ability(new (), new () { Status.Statuses["имба ебаная"] }, 5) }
         };
     }

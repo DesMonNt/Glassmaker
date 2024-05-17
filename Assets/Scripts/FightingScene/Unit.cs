@@ -1,17 +1,18 @@
-using System;
 using System.Collections.Generic;
+using AI;
 using Effects;
 using FightingScene;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class Unit : MonoBehaviour, IBuffable
 {
-    public UnitStats BaseStats = new (100, 0.2f, 20, 1999, 500, false, 0.15f);
-    public UnitStats CurrentStats = new (100, 0.2f, 20, 1999, 500, false, 0.15f);
+    [SerializeField] public new string name;
+    public UnitStats BaseStats = 
+        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single);
+    public UnitStats CurrentStats = 
+        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single);
 
     // public Unit(UnitStats baseStats)
     // {
@@ -19,15 +20,15 @@ public class Unit : MonoBehaviour, IBuffable
     //     CurrentStats = BaseStats;
     // }
 
+    public BufferAI Brain;
     private readonly List<IBuff> _buffs = new();
     
-    public float HealthPoints;
     [FormerlySerializedAs("healthPoints")] public float currentHealthPoints;
     public float baseDamage;
 
     public Sprite spritePassive;
     public Sprite spriteActive;
-    public SpriteRenderer spirtRenderer;
+    [FormerlySerializedAs("spirtRenderer")] public SpriteRenderer spriteRenderer;
     
     public int speed;
     public float armor;
@@ -44,9 +45,10 @@ public class Unit : MonoBehaviour, IBuffable
 
     private void Start()
     {
+        Brain = new BufferAI(this);
         //AddBuff(Status.Statuses[passive]);
         currentHealthPoints = BaseStats.MaxHealth;
-        spirtRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void IncreaseTurnMeter()
@@ -64,7 +66,9 @@ public class Unit : MonoBehaviour, IBuffable
             GetDied();
     }
 
-    public Attack UseAttack() => new (CurrentStats.Damage, _buffs);
+    public Attack UseAttack() => new (CurrentStats.Damage, _buffs, CurrentStats.AttacksType);
+    public Ability UseAbility() => Abilities.DictOfAbilities[skill];
+    public Ability UseUltimate() => Abilities.DictOfAbilities[ultimate];
     public void GetMagicAttack(float damage)
     {
         currentHealthPoints -= damage;
