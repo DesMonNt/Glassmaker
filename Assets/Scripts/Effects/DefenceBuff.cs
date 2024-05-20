@@ -1,10 +1,17 @@
+using System;
+
 namespace Effects
 {
     public class DefenceBuff : IBuff
     {
-        public UnitStats ApplyBuff(UnitStats baseStats)
+        private readonly float changeDefence;
+
+        public DefenceBuff(float changeDefence) => this.changeDefence = changeDefence;
+        public UnitStats ApplyBuff(Unit unit)
         {
-            throw new System.NotImplementedException();
+            var currentArmor = unit.CurrentStats.Armor;
+            currentArmor = Math.Clamp(0, currentArmor + changeDefence, 1);
+            return new(unit.CurrentStats, armor: currentArmor);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IBuff
     {
-        UnitStats ApplyBuff(UnitStats baseStats);
+        UnitStats ApplyBuff(Unit unit);
     }
 }

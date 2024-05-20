@@ -6,7 +6,7 @@
 
         public DamageBuff(float damageBonus) => _damageBonus = damageBonus;
 
-        public UnitStats ApplyBuff(UnitStats baseStats) 
-            => new(baseStats, (int)(baseStats.Damage + baseStats.Damage * _damageBonus));
+        public UnitStats ApplyBuff(Unit unit) 
+            => new(unit.CurrentStats, (int)(unit.CurrentStats.Damage + unit.CurrentStats.Damage * _damageBonus));
     }
 }

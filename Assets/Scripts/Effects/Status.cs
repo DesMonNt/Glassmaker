@@ -19,6 +19,10 @@ public static class Status // TODO: все скиллы переписать + e
         {
             "Аура на бафф атаки", new DamageBuff(0.15f)
         },
-        { "имба ебаная", new DamageBuff(100)}
+        { "имба ебаная", new DamageBuff(100)},
+        { "дебафф брони", new DefenceBuff(-0.1f) },
+        { "сильное ускорение", new SpeedBuff(1.15f) },
+        { "горение", new BurnBuff(250) },
+        { "повышение Макс ХП", new MaxHPBuff(10000) }
     };
 }

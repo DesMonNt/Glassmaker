@@ -6,7 +6,7 @@ namespace Effects
 
         public SpeedBuff(float additionalSpeed) => _additionalSpeed = additionalSpeed;
         
-        public UnitStats ApplyBuff(UnitStats baseStats) 
-            => new(baseStats, speed: (int)(baseStats.Speed + baseStats.Speed * _additionalSpeed));
+        public UnitStats ApplyBuff(Unit unit) 
+            => new(unit.CurrentStats, speed: (int)(unit.CurrentStats.Speed + unit.CurrentStats.Speed * _additionalSpeed));
     }
 }

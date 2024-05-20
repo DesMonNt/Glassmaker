@@ -59,7 +59,7 @@ public class Fight : MonoBehaviour
         _charComponentsOrder = new();
         _enemyComponentsOrder = new();
         _ultPointsRenderers = new();
-        _currentPoints = 0;
+        _currentPoints = 2;
         _activeSkill = false;
         _activeUlt = false;
         _pointsToUseAbility = 5;
@@ -105,7 +105,12 @@ public class Fight : MonoBehaviour
 
         foreach (var point in ultPoints) 
             _ultPointsRenderers.Add(point.GetComponent<SpriteRenderer>());
-
+        
+        for (var i = 0; i < _currentPoints; i++)
+        {
+            _ultPointsRenderers[i].sprite = ultSpriteActive;
+        }
+        
         StartCoroutine(Battle());
     }
     
@@ -119,6 +124,7 @@ public class Fight : MonoBehaviour
             {
                 if (_charComponentsOrder.Contains(nextUnit))
                 {
+                    _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
                     var (previousX, previousY) = (nextUnit.transform.position.x, nextUnit.transform.position.y);
                     GoToTarget(nextUnit, new Vector3(0, 0));
                     _isPrepare = true;
@@ -156,19 +162,13 @@ public class Fight : MonoBehaviour
                         _activeUlt = false;
                         yield return StartAbility(nextUnit, _enemyComponentsOrder[_numberOfChar], KeyCode.R);
                         _mouseUltimate.IsUltimate = false;
-                        _currentPoints = -1;
+                        _currentPoints = 0;
                         foreach (var render in _ultPointsRenderers) 
                             render.sprite = ultSpritePassive;
                     }
                         
                     GoToTarget(nextUnit, new Vector3(previousX, previousY));
                     buttons.SetActive(false);
-                    if (_enemyComponentsOrder.Count > 0)
-                    {
-                        Debug.Log($"Success, {_enemyComponentsOrder[_numberOfChar].name}");
-                        _enemyComponentsOrder[_numberOfChar].spriteRenderer.sprite 
-                            = _enemyComponentsOrder[_numberOfChar].spritePassive;
-                    }
                     _isPrepare = false;
                     _numberOfChar = 0;
                     _activeSkill = false;
@@ -208,7 +208,7 @@ public class Fight : MonoBehaviour
         => StartCoroutine(AIOffensive(attacker));
     
     private Coroutine StartOffensive(Unit attacker, Unit victim) 
-        => StartCoroutine(Offensive(attacker, victim));
+        => StartCoroutine(Offensive(attacker, victim, attacker.UseAttack(), "Attack"));
 
     private Coroutine StartAbility(Unit attacker, Unit target, KeyCode code) =>
         code switch
@@ -237,15 +237,11 @@ public class Fight : MonoBehaviour
             _enemyComponentsOrder[_numberOfChar].transform.position +
               new Vector3(0, -_spritesDictionary[_enemyComponentsOrder[_numberOfChar].name].bounds.extents.y - 58, 0);
         
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.RightArrow)) 
             _numberOfChar = (_numberOfChar + 1) %  _enemyComponentsOrder.Count;
-        }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) 
             _numberOfChar = (_numberOfChar - 1 + _enemyComponentsOrder.Count) % _enemyComponentsOrder.Count;
-        }
     }
     
     private void IncreaseTurnMethod(List<Unit> fighters) => fighters.ForEach(fighter => fighter.IncreaseTurnMeter());
@@ -314,10 +310,11 @@ public class Fight : MonoBehaviour
     {
         var previousHp = target.currentHealthPoints;
         Debug.Log($"{owner}, HP: {owner.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
-        skillName.text = owner.skill;
+        skillName.text = owner.skill.Name;
         skillName.GameObject().SetActive(true);
         owner.UseAbility().Execute(owner, target);
-        yield return StartCoroutine(GetDamageView(target, previousHp));
+        if (owner.skill.Attack is not null)
+            yield return Offensive(owner, target, owner.skill.Attack, owner.skill.Name);
         Debug.Log($"{owner},HP: {owner.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
     }
     
@@ -325,10 +322,9 @@ public class Fight : MonoBehaviour
     {
         var previousHp = target.currentHealthPoints;
         Debug.Log($"{target}, HP: {target.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
-        skillName.text = owner.ultimate;
-        skillName.GameObject().SetActive(true);
         owner.UseUltimate().Execute(owner, target);
-        yield return StartCoroutine(GetDamageView(target, previousHp));
+        if (owner.ultimate.Attack is not null)
+            yield return Offensive(owner, target, owner.ultimate.Attack, owner.ultimate.Name);
         Debug.Log($"{target},HP: {target.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
     }
     
@@ -347,14 +343,12 @@ public class Fight : MonoBehaviour
         return StartCoroutine(GetDamageView(target, previousHp));
     }
     
-    private IEnumerator Offensive(Unit attacker, Unit target)
+    private IEnumerator Offensive(Unit attacker, Unit target, Attack attack, string nameOfSkill)
     {
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
-        skillName.text = "Attack";
+        skillName.text = nameOfSkill;
         skillName.GameObject().SetActive(true);
-        var attack = attacker.UseAttack();
-        Debug.Log($"Type: {attack.TypeAttack}");
         switch (attack.TypeAttack)
         {
             case TypeOfAttack.Aoe:
@@ -416,8 +410,8 @@ public class Fight : MonoBehaviour
     private IEnumerator AIOffensive(Unit attacker)
     {
         var (action, target) = attacker.Brain.MakeDesicion(
-            _charComponentsOrder.Select(x => x as Character).ToList(),
-            _enemyComponentsOrder.Select(x => x as Enemy).ToList());
+            _charComponentsOrder.Select(x => x).ToList(),
+            _enemyComponentsOrder.Select(x => x).ToList());
         var previousHp = target.currentHealthPoints;
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);

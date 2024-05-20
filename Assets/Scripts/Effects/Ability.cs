@@ -1,22 +1,24 @@
 using System.Collections.Generic;
 using Effects;
+using FightingScene;
+using JetBrains.Annotations;
 
 public class Ability : IAction
 {
-    private readonly int _damageFromAbility;
     private readonly List<IBuff> _ownerStatuses;
     private readonly List<IBuff> _targetStatuses;
+    public readonly string Name;
+    [CanBeNull] public Attack Attack;
 
-    public Ability(List<IBuff> targetS, List<IBuff> ownerS, int damage)
+    public Ability(List<IBuff> targetS, List<IBuff> ownerS, string name)
     {
+        Name = name;
         _targetStatuses = targetS;
         _ownerStatuses = ownerS;
-        _damageFromAbility = damage;
     }
     
     public void Execute(Unit owner, Unit target)
     {
-        target.GetMagicAttack(_damageFromAbility);
         foreach (var status in _targetStatuses) 
             target.AddBuff(status);
         foreach (var status in _ownerStatuses) 

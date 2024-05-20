@@ -8,7 +8,7 @@ namespace AI
     {
         public HealerAI(Unit unit) : base(unit) { }
         
-        public (IAction, Unit target) MakeDesicion(List<Character> characters, List<Enemy> enemies)
+        public (IAction, Unit target) MakeDesicion(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
             var target = action is Ability 
@@ -17,7 +17,7 @@ namespace AI
 
             return (action, target);
         }
-        protected override Unit GetEnemyTarget(List<Enemy> enemies)
+        protected override Unit GetEnemyTarget(List<Unit> enemies)
         {
             foreach (var enemy in enemies.Where(enemy => !(enemy.currentHealthPoints >= enemy.CurrentStats.MaxHealth)))
                 return enemy;

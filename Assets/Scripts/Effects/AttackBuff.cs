@@ -8,6 +8,6 @@ namespace Effects
 
         public AttackBuff(int damageBonus) => _damageBonus = damageBonus;
 
-        public UnitStats ApplyBuff(UnitStats baseStats) => new(baseStats, damage: baseStats.Damage + _damageBonus);
+        public UnitStats ApplyBuff(Unit unit) => new(unit.CurrentStats, damage: unit.CurrentStats.Damage + _damageBonus);
     }
 }
