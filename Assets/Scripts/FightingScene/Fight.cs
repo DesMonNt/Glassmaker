@@ -41,9 +41,10 @@ public class Fight : MonoBehaviour
     private ViewDescription _mouseAttack;
     private ViewDescription _mouseSkill;
     private ViewDescription _mouseUltimate;
-    
+
+    private bool _activeSkill;
     private bool _activeUlt;
-    private int _pointsToUlt;
+    private int _pointsToUseAbility;
     private int _currentPoints;
     
     [SerializeField] private List<GameObject> viewQueue;
@@ -58,8 +59,9 @@ public class Fight : MonoBehaviour
         _enemyComponentsOrder = new();
         _ultPointsRenderers = new();
         _currentPoints = 0;
+        _activeSkill = false;
         _activeUlt = false;
-        _pointsToUlt = 5;
+        _pointsToUseAbility = 5;
         _spritesDictionary = new();
         _viewQueueSprites = viewQueue
             .Select(x => x.GetComponent<SpriteRenderer>())
@@ -116,23 +118,22 @@ public class Fight : MonoBehaviour
             {
                 if (_charComponentsOrder.Contains(nextUnit))
                 {
-                    if (_currentPoints > 0 && _currentPoints <= _pointsToUlt)
-                        _ultPointsRenderers[_currentPoints - 1].sprite = ultSpriteActive;
                     var (previousX, previousY) = (nextUnit.transform.position.x, nextUnit.transform.position.y);
                     GoToTarget(nextUnit, new Vector3(0, 0));
                     _isPrepare = true;
                     buttons.SetActive(true);
                     Debug.Log($"Hero, {nextUnit.name}");
-                        
                     
                     yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Q) 
-                                                     && !Input.GetKeyDown(KeyCode.W) && !_activeUlt
-                                                     && !_mouseAttack.IsAttack && !_mouseSkill.IsSkill);
+                                                     && !_activeSkill && !_activeUlt
+                                                     && !_mouseAttack.IsAttack);
                     
                     if (Input.GetKeyDown(KeyCode.Q) || _mouseAttack.IsAttack)
                     {
                         skillName.GameObject().SetActive(false);
                         buttons.SetActive(false);
+                        _currentPoints++;
+                        _ultPointsRenderers[_currentPoints - 1].sprite = ultSpriteActive;
                         PrepareCommonAttack();
                         yield return new WaitWhile(() => !IsEndQte);
                         IsEndQte = false;
@@ -140,8 +141,10 @@ public class Fight : MonoBehaviour
                         _mouseAttack.IsAttack = false;
                     }
 
-                    if (Input.GetKeyDown(KeyCode.W) || _mouseSkill.IsSkill)
+                    if (_activeSkill)
                     {
+                        _ultPointsRenderers[_currentPoints - 1].sprite = ultSpritePassive;
+                        _currentPoints--;
                         skillName.GameObject().SetActive(false);
                         yield return StartAbility(nextUnit, _enemyComponentsOrder[_numberOfChar], KeyCode.W);
                         _mouseSkill.IsSkill = false;
@@ -159,7 +162,6 @@ public class Fight : MonoBehaviour
                         
                     GoToTarget(nextUnit, new Vector3(previousX, previousY));
                     buttons.SetActive(false);
-                    _currentPoints++;
                     if (_enemyComponentsOrder.Count > 0)
                     {
                         Debug.Log($"Success, {_enemyComponentsOrder[_numberOfChar].name}");
@@ -168,6 +170,7 @@ public class Fight : MonoBehaviour
                     }
                     _isPrepare = false;
                     _numberOfChar = 0;
+                    _activeSkill = false;
                 }
                 else
                 {
@@ -223,8 +226,11 @@ public class Fight : MonoBehaviour
         if (!_isPrepare) 
             return;
 
-        if ((Input.GetKeyDown(KeyCode.R) || _mouseUltimate.IsUltimate) && _currentPoints >= _pointsToUlt)
+        if ((Input.GetKeyDown(KeyCode.R) || _mouseUltimate.IsUltimate) && _currentPoints >= _pointsToUseAbility)
             _activeUlt = true;
+        
+        if ((Input.GetKeyDown(KeyCode.W) || _mouseSkill.IsSkill) && _currentPoints >= 1)
+            _activeSkill = true;
 
         targetsPointer.transform.position =
             _enemyComponentsOrder[_numberOfChar].transform.position +

@@ -10,9 +10,9 @@ public class Unit : MonoBehaviour, IBuffable
 {
     [SerializeField] public new string name;
     public UnitStats BaseStats = 
-        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single);
+        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single, 0);
     public UnitStats CurrentStats = 
-        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single);
+        new (100, 0.2f, 20, 1999, 500, false, 0.15f, TypeOfAttack.Single, 0);
 
     // public Unit(UnitStats baseStats)
     // {
