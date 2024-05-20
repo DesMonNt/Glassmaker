@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 using System.Linq;
+using Effects;
 using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
@@ -342,7 +343,8 @@ public class Fight : MonoBehaviour
     
     private IEnumerator Offensive(Unit attacker, Unit target)
     {
-        attacker.CurrentStats.CriticalChance += CriticalChance;
+        attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
+            criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
         skillName.text = "Attack";
         skillName.GameObject().SetActive(true);
         var attack = attacker.UseAttack();
@@ -401,7 +403,8 @@ public class Fight : MonoBehaviour
                 break;
         }
 
-        attacker.CurrentStats.CriticalChance -= CriticalChance;
+        attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
+            criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
     }
 
     private IEnumerator AIOffensive(Unit attacker)
@@ -410,7 +413,8 @@ public class Fight : MonoBehaviour
             _charComponentsOrder.Select(x => x as Character).ToList(),
             _enemyComponentsOrder.Select(x => x as Enemy).ToList());
         var previousHp = target.currentHealthPoints;
-        attacker.CurrentStats.CriticalChance += CriticalChance;
+        attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
+            criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
         if (action is not Attack)
         {
             skillName.text = action.ToString();
@@ -424,7 +428,8 @@ public class Fight : MonoBehaviour
         }
         
         action.Execute(attacker, target);
-        attacker.CurrentStats.CriticalChance -= CriticalChance;
+        attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
+            criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
         yield return StartCoroutine(GetDamageView(target, previousHp));
     }
 

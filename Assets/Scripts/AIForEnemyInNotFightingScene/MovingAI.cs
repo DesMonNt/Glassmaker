@@ -29,8 +29,8 @@ public class MovingAI : MonoBehaviour
         _currentTarget = new Vector3(0, 0, 0);
         _maybeCoordinates = new[]
         {
-            (10, 10), (10, 10), (10, 0), (10, -10), (0, -10), (-10, -10), 
-            (-10, 0), (-10, 10), (0, 0)
+            (1, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), 
+            (-1, 0), (-1, 10), (0, 0)
         };
         _player = GameObject.FindWithTag("Player");
         _playerCollider = _player.GetComponent<Collider2D>();

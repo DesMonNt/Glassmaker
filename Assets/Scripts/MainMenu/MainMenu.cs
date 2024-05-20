@@ -66,6 +66,8 @@ public class MainMenu : MonoBehaviour
     }
     void asfkjok()
     {
+        PlayerPrefs.SetInt("hpBuff", 0);
+        PlayerPrefs.SetInt("energyBuff", 0);
         SceneManager.LoadScene("SampleScene");
     }
 }
