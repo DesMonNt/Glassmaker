@@ -20,7 +20,7 @@ public class TilemapManager : MonoBehaviour
         newLevel.FloorTiles = GetTilesFromMap(_floorMap).ToList();
         newLevel.WallTiles = GetTilesFromMap(_wallMap).ToList();
 
-        ScriptableObjectUtility.SaveLevelFile(newLevel);
+        //ScriptableObjectUtility.SaveLevelFile(newLevel);
     }
 
     public void ClearMap()

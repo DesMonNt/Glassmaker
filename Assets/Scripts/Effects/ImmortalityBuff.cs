@@ -2,11 +2,6 @@
 {
     public class ImmortalityBuff : IBuff
     {
-        public UnitStats ApplyBuff(UnitStats baseStats)
-        {
-            var newStats = baseStats;
-            newStats.IsImmortal = true;
-            return newStats;
-        }
+        public UnitStats ApplyBuff(UnitStats baseStats) => new(baseStats, isImmortal: true);
     }
 }

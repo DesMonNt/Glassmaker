@@ -20,9 +20,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable() => _playerControls.Enable();
 
-    private void Update() => PlayerInput();
-
-    private void FixedUpdate() => Move();
+    private void Update(){
+        PlayerInput();
+        Move();
+    } 
 
     private void PlayerInput() => _movement = _playerControls.Movement.Move.ReadValue<Vector2>();
 
