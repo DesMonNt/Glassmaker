@@ -1,16 +1,26 @@
-﻿namespace Effects
+﻿using FightingScene.Units;
+
+namespace Effects
 {
     public class BurnBuff : IBuff
     {
-        private readonly int burnDamage;
+        private readonly int _burnDamage;
+        private int _duration;
 
-        public BurnBuff(int burnDamage) => this.burnDamage = burnDamage;
+        public BurnBuff(int burnDamage, int duration)
+        {
+            _burnDamage = burnDamage;
+            _duration = duration;
+        }
+
         public UnitStats ApplyBuff(Unit unit)
         {
-            var healthPointsAfterBurn = unit.currentHealthPoints - burnDamage;
-            if (healthPointsAfterBurn < unit.CurrentStats.MaxHealth * 0.2)
+            if (_duration <= 0)
                 return unit.CurrentStats;
-            unit.currentHealthPoints = healthPointsAfterBurn;
+
+            _duration--;
+            unit.currentHealthPoints -= _burnDamage;
+            
             return unit.CurrentStats;
         }
     }

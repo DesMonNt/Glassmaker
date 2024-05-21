@@ -1,17 +1,30 @@
 using System;
+using FightingScene.Units;
 
 namespace Effects
 {
     public class DefenceBuff : IBuff
     {
-        private readonly float changeDefence;
+        private readonly float _changeDefence;
+        private int _duration;
 
-        public DefenceBuff(float changeDefence) => this.changeDefence = changeDefence;
+        public DefenceBuff(float changeDefence, int duration)
+        {
+           _changeDefence = changeDefence;
+           _duration = duration;
+        }
+
         public UnitStats ApplyBuff(Unit unit)
         {
+            if (_duration <= 0)
+                return unit.CurrentStats;
+
+            _duration--;
+            
             var currentArmor = unit.CurrentStats.Armor;
-            currentArmor = Math.Clamp(0, currentArmor + changeDefence, 1);
-            return new(unit.CurrentStats, armor: currentArmor);
+            currentArmor = Math.Clamp(0, currentArmor + _changeDefence, 1);
+            
+            return new UnitStats(unit.CurrentStats, armor: currentArmor);
         }
     }
 }

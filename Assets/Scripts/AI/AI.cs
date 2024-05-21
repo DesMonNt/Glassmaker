@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Effects;
+using FightingScene.Units;
 
 namespace AI
 {
@@ -10,9 +11,9 @@ namespace AI
     {
         private readonly Unit _unit;
 
-        public AI(Unit unit) => _unit = unit;
+        protected AI(Unit unit) => _unit = unit;
 
-        public virtual (IAction, Unit target) MakeDesicion(List<Unit> characters, List<Unit> enemies)
+        public virtual (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
             var target = GetCharacterTarget(characters);

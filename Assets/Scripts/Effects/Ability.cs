@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Effects;
 using FightingScene;
+using FightingScene.Units;
 using JetBrains.Annotations;
 
 public class Ability : IAction

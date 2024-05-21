@@ -1,3 +1,5 @@
+using FightingScene.Units;
+
 namespace Effects
 {
     public class SpeedBuff : IBuff

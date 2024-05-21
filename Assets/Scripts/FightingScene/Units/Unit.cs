@@ -1,92 +1,93 @@
-using System;
 using System.Collections.Generic;
 using AI;
 using Effects;
-using FightingScene;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
-public abstract class Unit : MonoBehaviour, IBuffable
+namespace FightingScene.Units
 {
-    [SerializeField] public new string name;
-    public UnitStats BaseStats;
-    public UnitStats CurrentStats;
+    public abstract class Unit : MonoBehaviour, IBuffable
+    {
+        [SerializeField] 
+        public new string name;
+        public UnitStats CurrentStats;
 
-    public AI.AI Brain;
-    protected List<IBuff> Buffs = new();
+        public AI.AI Brain;
+        protected readonly List<IBuff> Buffs = new();
     
-    public int currentHealthPoints;
-    public int currentShield;
-    public int speed;
+        public int currentHealthPoints;
+        public int currentShield;
+        public int speed;
 
-    private FighterTurnMeter _fighterTurnMeter;
-
-    public Ability skill;
-    public Ability ultimate;
-
-    public Unit(UnitStats baseStats)
-    {
-        BaseStats = baseStats;
-        CurrentStats = BaseStats;
-    }
+        public Ability Skill;
+        public Ability Ultimate;
     
-    private void Awake() => _fighterTurnMeter = GetComponent<FighterTurnMeter>();
+        private readonly UnitStats _baseStats;
+        private FighterTurnMeter _fighterTurnMeter;
 
-    private void Start()
-    {
-        Brain = new BufferAI(this);
-        currentHealthPoints = BaseStats.MaxHealth;
-    }
+        protected Unit(UnitStats baseStats)
+        {
+            _baseStats = baseStats;
+            CurrentStats = _baseStats;
+        }
+    
+        private void Awake() => _fighterTurnMeter = GetComponent<FighterTurnMeter>();
 
-    public void IncreaseTurnMeter()
-    {
-        _fighterTurnMeter.Increase();
+        private void Start()
+        {
+            Brain = new BufferAI(this);
+            currentHealthPoints = _baseStats.MaxHealth;
+        }
 
-        if (_fighterTurnMeter.CanOffensive)
-            TurnMeterFilled?.Invoke(this);
-    }
+        public void IncreaseTurnMeter()
+        {
+            _fighterTurnMeter.Increase();
 
-    public void GetAttack(int damage)
-    {
-        currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
-        if (currentHealthPoints <= 0)
-            GetDied();
-    }
+            if (_fighterTurnMeter.CanOffensive)
+                TurnMeterFilled?.Invoke(this);
+        }
 
-    public virtual Attack UseAttack() => new (CurrentStats.Damage, Buffs, CurrentStats.AttacksType);
-    public virtual Ability UseAbility() => skill;
-    public virtual Ability UseUltimate() => skill;
-    public void GetMagicAttack(int damage)
-    {
-        currentHealthPoints -= damage;
-        if (currentHealthPoints <= 0)
-            GetDied();
-    }
+        public void GetAttack(int damage)
+        {
+            currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
+            if (currentHealthPoints <= 0)
+                GetDied();
+        }
 
-    public event UnityAction<Unit> TurnMeterFilled;
-    public event UnityAction<Unit> Died;
+        public virtual Attack UseAttack() => new (CurrentStats.Damage, Buffs, CurrentStats.AttacksType);
+        public virtual Ability UseAbility() => Skill;
+        public virtual Ability UseUltimate() => Skill;
+        public void GetMagicAttack(int damage)
+        {
+            currentHealthPoints -= damage;
+            if (currentHealthPoints <= 0)
+                GetDied();
+        }
 
-    public void GetDied() => Died?.Invoke(this);
+        public event UnityAction<Unit> TurnMeterFilled;
+        public event UnityAction<Unit> Died;
 
-    public void AddBuff(IBuff buff)
-    {
-        Buffs.Add(buff);
+        public void GetDied() => Died?.Invoke(this);
+
+        public void AddBuff(IBuff buff)
+        {
+            Buffs.Add(buff);
         
-        ApplyBuffs();
-    }
+            ApplyBuffs();
+        }
 
-    public void RemoveBuff(IBuff buff)
-    {
-        Buffs.Remove(buff);
-        ApplyBuffs();
-    }
+        public void RemoveBuff(IBuff buff)
+        {
+            Buffs.Remove(buff);
+            ApplyBuffs();
+        }
 
-    private void ApplyBuffs()
-    {
-        CurrentStats = BaseStats;
+        private void ApplyBuffs()
+        {
+            CurrentStats = _baseStats;
 
-        foreach (var buff in Buffs) 
-            CurrentStats = buff.ApplyBuff(this);
+            foreach (var buff in Buffs) 
+                CurrentStats = buff.ApplyBuff(this);
+        }
     }
 }

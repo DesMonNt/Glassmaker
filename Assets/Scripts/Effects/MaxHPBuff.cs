@@ -1,4 +1,6 @@
-﻿namespace Effects
+﻿using FightingScene.Units;
+
+namespace Effects
 {
     public class MaxHPBuff : IBuff
     {
