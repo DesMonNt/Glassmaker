@@ -98,9 +98,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6561682453789036377}
   - component: {fileID: 1394292626960300985}
-  - component: {fileID: 7204555055682968327}
   - component: {fileID: 365559151653453556}
   - component: {fileID: 3220876981119274622}
+  - component: {fileID: 8412033473788714697}
+  - component: {fileID: -936903340784458869}
   m_Layer: 0
   m_Name: SecondInSquad
   m_TagString: Untagged
@@ -176,31 +177,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7204555055682968327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459059545088758473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76f171ff084bf6428313eb04aa8b81b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Cherv
-  currentHealthPoints: 300
-  baseDamage: 25
-  spritePassive: {fileID: 0}
-  spriteActive: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  speed: 0
-  armor: 0
-  energy: 0
-  energyToUltimate: 0
-  skill: "\u0421\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u044C 1"
-  ultimate: "\u0423\u043B\u044C\u0442\u0430 1"
-  passive: 
 --- !u!114 &365559151653453556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +204,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 2975041791986737567}
+--- !u!114 &8412033473788714697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459059545088758473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc82a7fc088efc46814c11cab276f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Cherv
+  currentHealthPoints: 0
+  currentShield: 0
+  speed: 0
+--- !u!114 &-936903340784458869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459059545088758473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d2dd866701d90a4fa9756f9d97685e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Tormentor
+  currentHealthPoints: 0
+  currentShield: 0
+  speed: 0
 --- !u!1 &3785911705508175640
 GameObject:
   m_ObjectHideFlags: 0

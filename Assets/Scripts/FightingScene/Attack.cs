@@ -30,12 +30,6 @@ namespace FightingScene
                 
             else 
                 target.GetAttack(Damage);
-            if (AttackEffects is null)
-                return;
-            foreach (var buff in AttackEffects)
-            {
-                target.AddBuff(buff);
-            }
         }
         
         public void Execute(Unit owner, Unit target, float coefficientOfDamage)

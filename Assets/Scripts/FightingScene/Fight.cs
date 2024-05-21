@@ -5,6 +5,7 @@ using System.Globalization;
 using UnityEngine;
 using System.Linq;
 using Effects;
+using Unit = FightingScene.Units.Unit;
 using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
@@ -122,6 +123,10 @@ public class Fight : MonoBehaviour
 
             if (nextUnit is not null)
             {
+                var previousHp = nextUnit.currentHealthPoints;
+                nextUnit.ApplyBuffs();
+                StartCoroutine(GetDamageView(nextUnit, previousHp));
+                
                 if (_charComponentsOrder.Contains(nextUnit))
                 {
                     _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
@@ -129,7 +134,7 @@ public class Fight : MonoBehaviour
                     GoToTarget(nextUnit, new Vector3(0, 0));
                     _isPrepare = true;
                     buttons.SetActive(true);
-                    Debug.Log($"Hero, {nextUnit.name}");
+                    Debug.Log($"Hero, {nextUnit.name}, {_activeUlt}");
                     
                     yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Q) 
                                                      && !_activeSkill && !_activeUlt
@@ -139,7 +144,7 @@ public class Fight : MonoBehaviour
                     {
                         skillName.GameObject().SetActive(false);
                         buttons.SetActive(false);
-                        _currentPoints++;
+                        _currentPoints = Math.Clamp(_currentPoints + 1, 0, 5);
                         _ultPointsRenderers[_currentPoints - 1].sprite = ultSpriteActive;
                         PrepareCommonAttack();
                         yield return new WaitWhile(() => !IsEndQte);
@@ -162,7 +167,7 @@ public class Fight : MonoBehaviour
                         _activeUlt = false;
                         yield return StartAbility(nextUnit, _enemyComponentsOrder[_numberOfChar], KeyCode.R);
                         _mouseUltimate.IsUltimate = false;
-                        _currentPoints = 0;
+                        _currentPoints -=  nextUnit.CurrentStats.EnergyToUlt;
                         foreach (var render in _ultPointsRenderers) 
                             render.sprite = ultSpritePassive;
                     }
@@ -308,23 +313,20 @@ public class Fight : MonoBehaviour
 
     private IEnumerator Abilitier(Unit owner, Unit target)
     {
-        var previousHp = target.currentHealthPoints;
-        Debug.Log($"{owner}, HP: {owner.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
-        skillName.text = owner.skill.Name;
+        Debug.Log($"СКИЛЛ {owner}, HP: {owner.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
+        skillName.text = owner.Skill.Name;
         skillName.GameObject().SetActive(true);
         owner.UseAbility().Execute(owner, target);
-        if (owner.skill.Attack is not null)
-            yield return Offensive(owner, target, owner.skill.Attack, owner.skill.Name);
+        if (owner.Skill.Attack is not null)
+            yield return Offensive(owner, target, owner.Skill.Attack, owner.Skill.Name);
         Debug.Log($"{owner},HP: {owner.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
     }
     
     private IEnumerator Ultimater(Unit owner, Unit target)
     {
-        var previousHp = target.currentHealthPoints;
-        Debug.Log($"{target}, HP: {target.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
         owner.UseUltimate().Execute(owner, target);
-        if (owner.ultimate.Attack is not null)
-            yield return Offensive(owner, target, owner.ultimate.Attack, owner.ultimate.Name);
+        if (owner.Ultimate.Attack is not null)
+            yield return Offensive(owner, target, owner.Ultimate.Attack, owner.Ultimate.Name);
         Debug.Log($"{target},HP: {target.currentHealthPoints}, Damage: {owner.CurrentStats.Damage}");
     }
     
@@ -409,25 +411,29 @@ public class Fight : MonoBehaviour
 
     private IEnumerator AIOffensive(Unit attacker)
     {
-        var (action, target) = attacker.Brain.MakeDesicion(
+        var (action, target) = attacker.Brain.MakeDecision(
             _charComponentsOrder.Select(x => x).ToList(),
             _enemyComponentsOrder.Select(x => x).ToList());
         var previousHp = target.currentHealthPoints;
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
-        if (action is not Attack)
+        Debug.Log($"{action}, {target.currentHealthPoints}, {target.name}");
+        switch (action)
         {
-            skillName.text = action.ToString();
-            skillName.GameObject().SetActive(true);
+            case Ability skill:
+                if (skill.Attack is not null)
+                    yield return Offensive(attacker, target, skill.Attack, skill.Name);
+                skillName.text = skill.Name;
+                skillName.GameObject().SetActive(true);
+                break;
+            case Attack:
+                skillName.text = "Райт клик";
+                skillName.GameObject().SetActive(true);
+                break;
         }
 
-        if (action is Attack)
-        {
-            skillName.text = "Райт клик";
-            skillName.GameObject().SetActive(true);
-        }
-        
         action.Execute(attacker, target);
+        Debug.Log($"{action}, {target.currentHealthPoints}");
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
         yield return StartCoroutine(GetDamageView(target, previousHp));
@@ -439,8 +445,23 @@ public class Fight : MonoBehaviour
             yield break;
         damageView.transform.position = target.transform.position +
                                         new Vector3(0, _spritesDictionary[target.name].bounds.extents.y, 0);
-        damageView.text = (previousHp - target.currentHealthPoints).ToString(CultureInfo.InvariantCulture);
+        
+        damageView.text = Math.Abs(previousHp - target.currentHealthPoints).ToString(CultureInfo.InvariantCulture);
         damageView.GameObject().SetActive(true);
+        
+        switch (previousHp - target.currentHealthPoints)
+        {
+            case 0:
+                damageView.GameObject().SetActive(false);
+                break;
+            case < 0:
+                damageView.color = Color.green;
+                break;
+            default:
+                damageView.color = Color.red;
+                break;
+        }
+        
         yield return new WaitForSeconds(2f);
         skillName.GameObject().SetActive(false);
         damageView.GameObject().SetActive(false);

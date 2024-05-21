@@ -14,9 +14,13 @@ namespace Effects
             new(), "Понижение защиты")},
             {"Ускорение", new Ability(new() { Status.Statuses["сильное ускорение"]},
                 new (), "Ускорение")},
-            { "Плевок", new Ability(new (), new(), "Плевок") },
+            {
+                "Плевок", new Ability(new (), new(), "Плевок")
+            },
             { "Обжигающий плевок", new Ability(new() { Status.Statuses["горение"] }, new(), "горение")},
-            { "Лечение ран", new Ability(new (), new(), "Лечение ран")},
+            {
+                "Лечение ран", new Ability(new (), new(), "Лечение ран")
+            },
             { "Повышение Макс ХП", new Ability(new() { Status.Statuses["повышение Макс ХП"]}, new(), "Повышение Макс ХП")}
         };
     }

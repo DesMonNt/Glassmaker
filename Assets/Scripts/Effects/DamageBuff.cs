@@ -20,7 +20,7 @@ namespace Effects
 
             _duration--;
             
-            return new UnitStats(unit.CurrentStats, (int)(unit.CurrentStats.Damage + unit.CurrentStats.Damage * _damageBonus));
+            return new UnitStats(unit.CurrentStats, damage: (int)(unit.CurrentStats.Damage + unit.CurrentStats.Damage * _damageBonus));
         }
     }
 }

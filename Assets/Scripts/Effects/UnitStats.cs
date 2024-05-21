@@ -15,7 +15,7 @@ namespace Effects
         public readonly int EnergyToUlt;
         
         public UnitStats(int maxHealth, float armor, int damage,
-            int speed, bool isImmortal, float criticalChance, TypeOfAttack attacksType, int energyToUlt = default)
+            int speed, bool isImmortal, float criticalChance, TypeOfAttack attacksType, int energyToUlt)
         {
             MaxHealth = maxHealth;
             Armor = armor;

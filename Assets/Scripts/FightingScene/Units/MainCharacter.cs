@@ -8,7 +8,7 @@ namespace FightingScene.Units
     {
         private int _criticalStack = 0;
         
-        public MainCharacter() : base(new UnitStats(5500, 0.2f, 3000, 110, false, 0.1f, TypeOfAttack.Single))
+        public MainCharacter() : base(new UnitStats(5500, 0.2f, 3000, 110, false, 0.1f, TypeOfAttack.Single, 3))
         {
             Skill = new Ability(new List<IBuff> { new SpeedBuff(-1.05f) }, new List<IBuff>(), "Багровая стрела")
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AI;
 using Effects;
@@ -33,11 +34,7 @@ namespace FightingScene.Units
     
         private void Awake() => _fighterTurnMeter = GetComponent<FighterTurnMeter>();
 
-        private void Start()
-        {
-            Brain = new BufferAI(this);
-            currentHealthPoints = _baseStats.MaxHealth;
-        }
+        private void Start() => currentHealthPoints = _baseStats.MaxHealth;
 
         public void IncreaseTurnMeter()
         {
@@ -49,20 +46,28 @@ namespace FightingScene.Units
 
         public void GetAttack(int damage)
         {
-            currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
+            if (damage < 0)
+            {
+                currentHealthPoints = Math.Clamp(currentHealthPoints - damage, 0, CurrentStats.MaxHealth);
+                return;
+            }
+            
+            if (currentShield == 0)
+                currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
+            else
+            {
+                var a = (int)(currentShield - damage * (1 - CurrentStats.Armor));
+                currentShield = Math.Clamp(a, 0, a);
+                if (a < 0)
+                    currentHealthPoints = currentHealthPoints += a;
+            }
             if (currentHealthPoints <= 0)
                 GetDied();
         }
 
         public virtual Attack UseAttack() => new (CurrentStats.Damage, Buffs, CurrentStats.AttacksType);
         public virtual Ability UseAbility() => Skill;
-        public virtual Ability UseUltimate() => Skill;
-        public void GetMagicAttack(int damage)
-        {
-            currentHealthPoints -= damage;
-            if (currentHealthPoints <= 0)
-                GetDied();
-        }
+        public virtual Ability UseUltimate() => Ultimate;
 
         public event UnityAction<Unit> TurnMeterFilled;
         public event UnityAction<Unit> Died;
@@ -82,7 +87,7 @@ namespace FightingScene.Units
             ApplyBuffs();
         }
 
-        private void ApplyBuffs()
+        public void ApplyBuffs()
         {
             CurrentStats = _baseStats;
 

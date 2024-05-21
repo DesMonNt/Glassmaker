@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using Effects;
 using FightingScene.Units;
+using UnityEngine;
+using Random = System.Random;
 
 namespace AI
 {

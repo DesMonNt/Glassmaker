@@ -7,7 +7,7 @@ namespace FightingScene.Units
     public class ShapeHassle: Unit
     {
         public ShapeHassle() : 
-            base(new UnitStats(45000, 0.2f, 600, 125, false, 0.1f, TypeOfAttack.Single))
+            base(new UnitStats(45000, 0.2f, 600, 125, false, 0.1f, TypeOfAttack.Single, 0))
         {
             Brain = new BufferAI(this);
             Skill = new Ability(new List<IBuff>(), new List<IBuff> { new DamageBuff(1.15f, 2) }, "Навык");
