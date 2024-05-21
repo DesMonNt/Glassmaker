@@ -868,6 +868,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c32cafa655d9b4f94ddfcd1b4dae7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 1689443202778301181, guid: dae04d1c7ccba8049a46df2d0a284b09, type: 3}
+  - {fileID: 9102888496911228780, guid: 44f156e8dfc9bcc429afdbaf764fa3bb, type: 3}
+  - {fileID: 9102888496911228780, guid: 44f156e8dfc9bcc429afdbaf764fa3bb, type: 3}
 --- !u!58 &1881736844
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1057,6 +1061,22 @@ PrefabInstance:
     - target: {fileID: 1204846100777597356, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
       propertyPath: m_Name
       value: ShardSelection
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813038965439826547, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813038965439826547, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813038965439826547, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5813038965439826547, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Destroyer, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9111602631719350036, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
       propertyPath: m_Pivot.x

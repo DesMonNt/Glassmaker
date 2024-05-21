@@ -6,6 +6,7 @@ using System.Linq;
 using Effects;
 using FightingScene;
 using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -33,6 +34,7 @@ public class Fight : MonoBehaviour
     
     void Awake()
     {
+        
         CriticalChance = -1;
         IsEndQte = false;
         qte.SetActive(false);
@@ -45,6 +47,10 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
+        enemies = new();
+        SetedUnitsFromPreviousScene.SetCharactersAndEnemies(enemies, squads);
+
+        Debug.Log(enemies[0] == enemies[1]);
         var firstPos = new Vector3(-662, 360);
         var firstPosToEnemy = new Vector3(0, 360);
         

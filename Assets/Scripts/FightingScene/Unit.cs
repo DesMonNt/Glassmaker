@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour, IBuffable
 
     public Sprite spritePassive;
     public Sprite spriteActive;
-    public SpriteRenderer spirtRenderer;
+    public SpriteRenderer spirtRenderer { get; private set; }
     
     public int speed;
     public float armor;
