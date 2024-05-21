@@ -393,8 +393,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -14.3082, y: 225.5557}
-  m_SizeDelta: {x: 569.7257, y: 204.4185}
+  m_AnchoredPosition: {x: 4.3612, y: 220.6427}
+  m_SizeDelta: {x: 1074.7858, y: 288.9227}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &112453120
 MonoBehaviour:
@@ -2783,7 +2783,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac702c641e020b546ac5c0901d9686fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40b17de32dc45ca41af5930b02f12c98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2803,7 +2803,7 @@ RectTransform:
   m_GameObject: {fileID: 1660341543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3167,6 +3167,7 @@ GameObject:
   - component: {fileID: 1809239365}
   - component: {fileID: 1809239364}
   - component: {fileID: 1809239363}
+  - component: {fileID: 1809239366}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3248,6 +3249,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1809239366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809239362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &1906188955
 GameObject:
   m_ObjectHideFlags: 0
@@ -3320,6 +3365,7 @@ MonoBehaviour:
   - {fileID: 5599372507147096884, guid: 6769ef57def456e439adb1188cb4d880, type: 3}
   squads:
   - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
+  - {fileID: 3459059545088758473, guid: 0a47de1ac3e77ea4b94df4b81381d3b0, type: 3}
   qte: {fileID: 7483550258029446731}
   qteAccuracy: {fileID: 4859831378510807771}
   damageView: {fileID: 375028068}
