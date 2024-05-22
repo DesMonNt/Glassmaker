@@ -39,6 +39,8 @@ public class Fight : MonoBehaviour
     [SerializeField] private Sprite ultSpriteActive;
     [SerializeField] private List<GameObject> ultPoints;
     private List<SpriteRenderer> _ultPointsRenderers;
+    [SerializeField] private List<GameObject> queueCircles;
+    private List<SpriteRenderer> _queueCirclesRenderers;
     
     private ViewDescription _mouseAttack;
     private ViewDescription _mouseSkill;
@@ -51,12 +53,14 @@ public class Fight : MonoBehaviour
     
     [SerializeField] private List<GameObject> viewQueue;
     private List<SpriteRenderer> _viewQueueSprites;
-    private Dictionary<string, SpriteRenderer> _spritesDictionary;
+    private Dictionary<string, (SpriteRenderer renderer, string typeOfFighter)> _spritesDictionary;
     
     private int _numberOfChar;
     
+#region InitializeMembers
     private void Awake()
     {
+        _queueCirclesRenderers = new();
         _charComponentsOrder = new();
         _enemyComponentsOrder = new();
         _ultPointsRenderers = new();
@@ -71,6 +75,7 @@ public class Fight : MonoBehaviour
         _mouseAttack = buttonAttack.GetComponent<ViewDescription>();
         _mouseSkill = buttonSkill.GetComponent<ViewDescription>();
         _mouseUltimate = buttonUltimate.GetComponent<ViewDescription>();
+        _mouseAttack.skillName.text = "Атака";
         CriticalChance = -1;
         IsEndQte = false;
         _readyFighters = new Queue<Unit>();
@@ -102,10 +107,18 @@ public class Fight : MonoBehaviour
         var listImages = _charComponentsOrder.ToList();
         listImages.AddRange(_enemyComponentsOrder);
         foreach (var unit in listImages)
-            _spritesDictionary.Add(unit.name, unit.GameObject().GetComponent<SpriteRenderer>());
+        {
+            _spritesDictionary.Add(unit.name,
+                _charComponents.Contains(unit)
+                    ? (unit.GameObject().GetComponent<SpriteRenderer>(), "Char")
+                    : (unit.GameObject().GetComponent<SpriteRenderer>(), "Enemy"));
+        }
 
         foreach (var point in ultPoints) 
             _ultPointsRenderers.Add(point.GetComponent<SpriteRenderer>());
+        
+        foreach (var circle in queueCircles) 
+            _queueCirclesRenderers.Add(circle.GetComponent<SpriteRenderer>());
         
         for (var i = 0; i < _currentPoints; i++)
         {
@@ -115,6 +128,11 @@ public class Fight : MonoBehaviour
         StartCoroutine(Battle());
     }
     
+
+#endregion
+
+
+#region FightProcess
     private IEnumerator Battle()
     {
         while (_charComponentsOrder.Count > 0 && _enemyComponentsOrder.Count > 0)
@@ -129,6 +147,8 @@ public class Fight : MonoBehaviour
                 
                 if (_charComponentsOrder.Contains(nextUnit))
                 {
+                    _mouseSkill.skillName.text = nextUnit.Skill.Name;
+                    _mouseUltimate.skillName.text = nextUnit.Ultimate.Name;
                     _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
                     var (previousX, previousY) = (nextUnit.transform.position.x, nextUnit.transform.position.y);
                     GoToTarget(nextUnit, new Vector3(0, 0));
@@ -138,9 +158,9 @@ public class Fight : MonoBehaviour
                     
                     yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Q) 
                                                      && !_activeSkill && !_activeUlt
-                                                     && !_mouseAttack.IsAttack);
+                                                     && !_mouseAttack.isAttack);
                     
-                    if (Input.GetKeyDown(KeyCode.Q) || _mouseAttack.IsAttack)
+                    if (Input.GetKeyDown(KeyCode.Q) || _mouseAttack.isAttack)
                     {
                         skillName.GameObject().SetActive(false);
                         buttons.SetActive(false);
@@ -150,7 +170,7 @@ public class Fight : MonoBehaviour
                         yield return new WaitWhile(() => !IsEndQte);
                         IsEndQte = false;
                         yield return StartOffensive(nextUnit, _enemyComponentsOrder[_numberOfChar]);
-                        _mouseAttack.IsAttack = false;
+                        _mouseAttack.isAttack = false;
                     }
 
                     if (_activeSkill)
@@ -159,17 +179,20 @@ public class Fight : MonoBehaviour
                         _currentPoints--;
                         skillName.GameObject().SetActive(false);
                         yield return StartAbility(nextUnit, _enemyComponentsOrder[_numberOfChar], KeyCode.W);
-                        _mouseSkill.IsSkill = false;
+                        _mouseSkill.isSkill = false;
                     }
                     
                     if (_activeUlt)
                     {
                         _activeUlt = false;
                         yield return StartAbility(nextUnit, _enemyComponentsOrder[_numberOfChar], KeyCode.R);
-                        _mouseUltimate.IsUltimate = false;
+                        _mouseUltimate.isUltimate = false;
                         _currentPoints -=  nextUnit.CurrentStats.EnergyToUlt;
-                        foreach (var render in _ultPointsRenderers) 
-                            render.sprite = ultSpritePassive;
+                        for (var i = 0; i < 5; i++)
+                        {
+                            if (i + 1 > _currentPoints)
+                                _ultPointsRenderers[i].sprite = ultSpritePassive;
+                        }
                     }
                         
                     GoToTarget(nextUnit, new Vector3(previousX, previousY));
@@ -189,7 +212,7 @@ public class Fight : MonoBehaviour
                 }
             }
             
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
             
             IncreaseTurnMethod(_charComponentsOrder);
             IncreaseTurnMethod(_enemyComponentsOrder);
@@ -197,6 +220,9 @@ public class Fight : MonoBehaviour
         
         SceneManager.LoadScene("GameOver");
     }
+    
+
+#endregion
 
     private void PrepareCommonAttack()
     {
@@ -227,20 +253,26 @@ public class Fight : MonoBehaviour
     {
         var queueAsList = _readyFighters.ToList();
         for (var i = 0; i < queueAsList.Count; i++)
-            _viewQueueSprites[i].sprite = _spritesDictionary[queueAsList[i].name].sprite;
-        
+        {
+            _viewQueueSprites[i].sprite = _spritesDictionary[queueAsList[i].name].renderer.sprite;
+            _queueCirclesRenderers[i].color = _spritesDictionary[queueAsList[i].name].typeOfFighter == "Enemy" 
+                ? Color.red 
+                : Color.green;
+        }
+
         if (!_isPrepare) 
             return;
 
-        if ((Input.GetKeyDown(KeyCode.R) || _mouseUltimate.IsUltimate) && _currentPoints >= _pointsToUseAbility)
+        if ((Input.GetKeyDown(KeyCode.R) || _mouseUltimate.isUltimate) && _currentPoints >= _pointsToUseAbility)
             _activeUlt = true;
         
-        if ((Input.GetKeyDown(KeyCode.W) || _mouseSkill.IsSkill) && _currentPoints >= 1)
+        if ((Input.GetKeyDown(KeyCode.W) || _mouseSkill.isSkill) && _currentPoints >= 1)
             _activeSkill = true;
 
         targetsPointer.transform.position =
             _enemyComponentsOrder[_numberOfChar].transform.position +
-              new Vector3(0, -_spritesDictionary[_enemyComponentsOrder[_numberOfChar].name].bounds.extents.y - 58, 0);
+              new Vector3(0, 
+                  -_spritesDictionary[_enemyComponentsOrder[_numberOfChar].name].renderer.bounds.extents.y - 58, 0);
         
         if (Input.GetKeyDown(KeyCode.RightArrow)) 
             _numberOfChar = (_numberOfChar + 1) %  _enemyComponentsOrder.Count;
@@ -248,7 +280,9 @@ public class Fight : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow)) 
             _numberOfChar = (_numberOfChar - 1 + _enemyComponentsOrder.Count) % _enemyComponentsOrder.Count;
     }
-    
+
+#region HpBar
+
     private void IncreaseTurnMethod(List<Unit> fighters) => fighters.ForEach(fighter => fighter.IncreaseTurnMeter());
     
     private void InitializeFighter(IEnumerable<Unit> fighters)
@@ -286,6 +320,8 @@ public class Fight : MonoBehaviour
             _readyFighters.Enqueue(unit);
     }
 
+#endregion
+
     private Unit GetNextFighter()
     {
         if (_readyFighters.Count <= 0)
@@ -293,7 +329,9 @@ public class Fight : MonoBehaviour
         var next = _readyFighters.Dequeue();
         if (next is null)
             Debug.Log("Is null");
-        return !_deletedUnits.Contains(next) ? next : null;
+        return !_deletedUnits.Contains(next) 
+            ? next 
+            : null;
     }
 
     private void SpawnFighters<T>
@@ -310,6 +348,8 @@ public class Fight : MonoBehaviour
     }
     
     private void GoToTarget(Unit attacker, Vector3 positionTo) => attacker.transform.position = positionTo;
+
+#region Enumerators
 
     private IEnumerator Abilitier(Unit owner, Unit target)
     {
@@ -444,7 +484,7 @@ public class Fight : MonoBehaviour
         if (_deletedUnits.Contains(target))
             yield break;
         damageView.transform.position = target.transform.position +
-                                        new Vector3(0, _spritesDictionary[target.name].bounds.extents.y, 0);
+                                        new Vector3(0, _spritesDictionary[target.name].renderer.bounds.extents.y, 0);
         
         damageView.text = Math.Abs(previousHp - target.currentHealthPoints).ToString(CultureInfo.InvariantCulture);
         damageView.GameObject().SetActive(true);
@@ -462,8 +502,11 @@ public class Fight : MonoBehaviour
                 break;
         }
         
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         skillName.GameObject().SetActive(false);
         damageView.GameObject().SetActive(false);
     }
+    
+
+#endregion
 }

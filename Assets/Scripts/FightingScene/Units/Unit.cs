@@ -57,7 +57,7 @@ namespace FightingScene.Units
             else
             {
                 var a = (int)(currentShield - damage * (1 - CurrentStats.Armor));
-                currentShield = Math.Clamp(a, 0, a);
+                currentShield = Math.Clamp(a, 0, Math.Abs(a));
                 if (a < 0)
                     currentHealthPoints = currentHealthPoints += a;
             }
