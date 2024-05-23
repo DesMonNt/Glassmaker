@@ -135,6 +135,8 @@ public class Fight : MonoBehaviour
 #region FightProcess
     private IEnumerator Battle()
     {
+        yield return new WaitForSeconds(3f);
+        
         while (_charComponentsOrder.Count > 0 && _enemyComponentsOrder.Count > 0)
         {
             var nextUnit = GetNextFighter();

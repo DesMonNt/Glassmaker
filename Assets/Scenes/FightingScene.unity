@@ -3844,9 +3844,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cb58c83ab74d147449ea18cf4695899f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7e99e3650d0bef040a198f05b9f94c24, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.36
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4232,8 +4232,8 @@ MonoBehaviour:
   - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
   - {fileID: 5599372507147096884, guid: 6769ef57def456e439adb1188cb4d880, type: 3}
   squads:
-  - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
   - {fileID: 3459059545088758473, guid: 0a47de1ac3e77ea4b94df4b81381d3b0, type: 3}
+  - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
   qte: {fileID: 7483550258029446731}
   qteAccuracy: {fileID: 4859831378510807771}
   damageView: {fileID: 375028068}
