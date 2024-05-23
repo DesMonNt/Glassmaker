@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] float x,y,z;
+    [SerializeField] GameObject coordinatesObject;
      void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             var player = GameObject.FindGameObjectWithTag("Player").transform;
             var camera = GameObject.FindGameObjectWithTag("MainCamera").transform;
-            player.position = new Vector3(x,y,z);
+            player.position = coordinatesObject.transform.position;
             //camera.position = new Vector3(x,y,z);
         }
     }
