@@ -1,7 +1,9 @@
-﻿namespace Effects
+﻿using FightingScene.Units;
+
+namespace Effects
 {
     public interface IBuff
     {
-        UnitStats ApplyBuff(UnitStats baseStats);
+        UnitStats ApplyBuff(Unit unit);
     }
 }

@@ -5,9 +5,9 @@ using Random = System.Random;
 
 public class RandomSpawner : MonoBehaviour
 {
-    [FormerlySerializedAs("_prefabLetter")] [SerializeField] private GameObject _prefabLetter1;
-    [SerializeField] private GameObject _prefabLetter2;
-    [SerializeField] private GameObject _prefabLetter3;
+    [FormerlySerializedAs("_prefabLetter1")] [SerializeField] private GameObject prefabLetter1;
+    [FormerlySerializedAs("_prefabLetter2")] [SerializeField] private GameObject prefabLetter2;
+    [FormerlySerializedAs("_prefabLetter3")] [SerializeField] private GameObject prefabLetter3;
     public static int SpawnDelay;
     private int _r;
     public static bool CanSpawn;
@@ -29,7 +29,7 @@ public class RandomSpawner : MonoBehaviour
     {
         CanSpawn = true;
         SpawnDelay = 86;
-        _letters = new[] { _prefabLetter1, _prefabLetter2, _prefabLetter3 };
+        _letters = new[] { prefabLetter1, prefabLetter2, prefabLetter3 };
     }
 
     private void Spawn()
@@ -43,12 +43,12 @@ public class RandomSpawner : MonoBehaviour
         Instantiate(rndPrefab, randomPosition, Quaternion.identity);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (SpawnDelay % 250 != 0)
+        if (SpawnDelay % 20 != 0)
         {
             SpawnDelay++;
-            if (SpawnDelay % 2000 == 0) StartCoroutine(EndGame());
+            if (SpawnDelay % 240 == 0) StartCoroutine(EndGame());
             return;
         }
 

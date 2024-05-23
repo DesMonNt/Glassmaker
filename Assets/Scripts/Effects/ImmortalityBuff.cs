@@ -1,12 +1,21 @@
-﻿namespace Effects
+﻿using FightingScene.Units;
+
+namespace Effects
 {
     public class ImmortalityBuff : IBuff
     {
-        public UnitStats ApplyBuff(UnitStats baseStats)
+        private int _duration;
+
+        public ImmortalityBuff(int duration) => _duration = duration;
+        
+        public UnitStats ApplyBuff(Unit unit)
         {
-            var newStats = baseStats;
-            newStats.IsImmortal = true;
-            return newStats;
+            if (_duration <= 0)
+                return unit.CurrentStats;
+
+            _duration--;
+            
+            return new UnitStats(unit.CurrentStats, isImmortal: true);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FightingScene.Units;
+using UnityEngine;
 
 namespace Effects
 {
@@ -8,11 +9,6 @@ namespace Effects
 
         public AttackBuff(int damageBonus) => _damageBonus = damageBonus;
 
-        public UnitStats ApplyBuff(UnitStats baseStats)
-        {
-            var newStats = baseStats;
-            newStats.Damage = Mathf.Max(newStats.Damage + _damageBonus, 0);
-            return newStats;
-        }
+        public UnitStats ApplyBuff(Unit unit) => new(unit.CurrentStats, damage: unit.CurrentStats.Damage + _damageBonus);
     }
 }

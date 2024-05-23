@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1180616475797344310
+--- !u!1 &2366459085625329844
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,64 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8347822842318853321}
-  - component: {fileID: 9154927581745375126}
-  - component: {fileID: 5683280755094924402}
+  - component: {fileID: 4628271038894467156}
+  - component: {fileID: 7427890164505737921}
+  - component: {fileID: 7640650929414145108}
   m_Layer: 0
-  m_Name: hpBarRed
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8347822842318853321
+--- !u!224 &4628271038894467156
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180616475797344310}
+  m_GameObject: {fileID: 2366459085625329844}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5145327, y: 1.4230156, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.22, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1121965405101592869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1234, y: -0.2993}
+  m_AnchoredPosition: {x: 0.062994, y: 3.53}
   m_SizeDelta: {x: 20.8733, y: 3.9266}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &9154927581745375126
+--- !u!222 &7427890164505737921
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180616475797344310}
+  m_GameObject: {fileID: 2366459085625329844}
   m_CullTransparentMesh: 1
---- !u!114 &5683280755094924402
+--- !u!114 &7640650929414145108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180616475797344310}
+  m_GameObject: {fileID: 2366459085625329844}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.04535168, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 883b0cb318bfb9742a83fb8201c5a3c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 594eef0f53452db47b1c719d4df8d95e, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -101,14 +101,14 @@ RectTransform:
   m_GameObject: {fileID: 3198926856694319298}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.2, z: 1}
+  m_LocalScale: {x: 5.5, y: 9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1121965405101592869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1234, y: 0}
+  m_AnchoredPosition: {x: 0.063, y: 2.174}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &5561278552858336990
@@ -152,7 +152,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4b3a381aa17d2ad48b090538510e9682, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 594eef0f53452db47b1c719d4df8d95e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,9 +173,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6561682453789036377}
   - component: {fileID: 1394292626960300985}
-  - component: {fileID: 7204555055682968327}
   - component: {fileID: 365559151653453556}
   - component: {fileID: 3220876981119274622}
+  - component: {fileID: -936903340784458869}
+  - component: {fileID: 1385046769342012459}
   m_Layer: 0
   m_Name: SecondInSquad
   m_TagString: Untagged
@@ -192,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 3459059545088758473}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -972.332, y: -385.0407, z: 0}
+  m_LocalPosition: {x: -2809.3857, y: -1409.1238, z: 0}
   m_LocalScale: {x: 27.309908, y: 26.15712, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -251,31 +252,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7204555055682968327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459059545088758473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76f171ff084bf6428313eb04aa8b81b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HealthPoints: 0
-  currentHealthPoints: 300
-  baseDamage: 25
-  spritePassive: {fileID: 0}
-  spriteActive: {fileID: 0}
-  spirtRenderer: {fileID: 0}
-  speed: 0
-  armor: 0
-  energy: 0
-  energyToUltimate: 0
-  skill: "\u0421\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u044C 1"
-  ultimate: "\u0423\u043B\u044C\u0442\u0430 1"
-  passive: 
 --- !u!114 &365559151653453556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +279,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 2975041791986737567}
-  hpBarRed: {fileID: 5683280755094924402}
+--- !u!114 &-936903340784458869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459059545088758473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d2dd866701d90a4fa9756f9d97685e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Tormentor
+  currentHealthPoints: 0
+  currentShield: 55000
+  speed: 0
+--- !u!114 &1385046769342012459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459059545088758473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df0af8392b6146689b9c523f684d44b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldBar: {fileID: 7640650929414145108}
 --- !u!1 &3785911705508175640
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,13 +340,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8488588193081977001}
-  - {fileID: 8347822842318853321}
+  - {fileID: 4628271038894467156}
   - {fileID: 7590471419670811238}
   m_Father: {fileID: 6561682453789036377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.22, y: 4.03}
+  m_AnchoredPosition: {x: 0.22, y: 4.34}
   m_SizeDelta: {x: 12.94427, y: 3.1437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &838330849502392580
@@ -435,14 +439,14 @@ RectTransform:
   m_GameObject: {fileID: 7494670227956501041}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5145327, y: 1.4230156, z: 1}
+  m_LocalScale: {x: 0.47, y: 0.35, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1121965405101592869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.1234, y: -0.2993}
+  m_AnchoredPosition: {x: 0.07, y: 2.17}
   m_SizeDelta: {x: 20.8733, y: 3.9266}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5662757910639474992
@@ -466,14 +470,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.04535168, b: 0, a: 1}
+  m_Color: {r: 0.20178771, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 883b0cb318bfb9742a83fb8201c5a3c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44880606955d7794e9c16f9155e30b63, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

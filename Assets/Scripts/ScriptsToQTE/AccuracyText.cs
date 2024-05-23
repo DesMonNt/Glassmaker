@@ -45,6 +45,6 @@ public class AccuracyText : MonoBehaviour
                     break;
             }
         }
-        thisAccuracy.text = Mathf.Clamp((float)(1.75 * Math.Round(_accuracy, 2)), 0, 100) + "%";
+        thisAccuracy.text = Mathf.Clamp((float)(2 * Math.Round(_accuracy, 2)), 0, 100) + "%";
     }
 }
