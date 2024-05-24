@@ -4228,12 +4228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
-  - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
   - {fileID: 5599372507147096884, guid: 6769ef57def456e439adb1188cb4d880, type: 3}
+  - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
+  - {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
   squads:
   - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
-  - {fileID: 3459059545088758473, guid: 0a47de1ac3e77ea4b94df4b81381d3b0, type: 3}
   qte: {fileID: 7483550258029446731}
   qteAccuracy: {fileID: 4859831378510807771}
   damageView: {fileID: 375028068}
@@ -5419,6 +5418,7 @@ MonoBehaviour:
   prefabLetter1: {fileID: 6414668312882987431, guid: fda2dbc79bf9d9a4bb7cd41eb30eabc0, type: 3}
   prefabLetter2: {fileID: 1080804499315269502, guid: 9d331802d0df8154395478ebda39444c, type: 3}
   prefabLetter3: {fileID: 5739797880943464156, guid: 3229613194afba14aa862ad7dfb0b9a0, type: 3}
+  square: {fileID: 0}
 --- !u!4 &7444468515873779768
 Transform:
   m_ObjectHideFlags: 0

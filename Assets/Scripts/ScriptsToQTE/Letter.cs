@@ -9,10 +9,13 @@ public class Letter : MonoBehaviour
     private Vector3 _targetPosition;
     private Transform _transform;
 
+    private Vector3 _direction;
     void Start()
     {
         _transform = transform;
         _targetPosition = new Vector3(0f, 1f);
+        _direction = (_targetPosition - _transform.position).normalized;
+        
     }
 
     void Update() => GoToTarget();
@@ -21,7 +24,6 @@ public class Letter : MonoBehaviour
     {
         if (!RandomSpawner.CanSpawn)
             Destroy(gameObject);
-        var target = (_targetPosition - _transform.position).normalized;
-        _transform.position += speed * Time.deltaTime * target;
+        _transform.position += speed * Time.deltaTime * _direction;
     }
 }

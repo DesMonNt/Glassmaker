@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Effects;
 using UnityEngine;
+using Unit = FightingScene.Units.Unit;
 
 namespace FightingScene
 {
@@ -13,7 +14,6 @@ namespace FightingScene
         private static List<IBuff> savedShards = new();
         public static void SaveCharactersAndEnemies(List<GameObject> enemies)
         {
-
             foreach (var enemyPrefab in enemies)
             {
                 enemiesPrefabs.Add(enemyPrefab);
@@ -24,7 +24,7 @@ namespace FightingScene
         {
             savedShards.Add(shard);
         }
-        public static void SetCharactersAndEnemies(List<GameObject> enemies, List<GameObject> characters)
+        public static void SetCharactersAndEnemies(List<GameObject> enemies, List<GameObject> characters = null)
         {
             
             // foreach (var characterPrefabPath in charactersPrefabsPaths)
@@ -34,18 +34,24 @@ namespace FightingScene
             // }
             //
 
-            foreach (var gameObject in characters)
-            {
-                var character = gameObject.GetComponent<Unit>();
-                foreach (var shard in savedShards)
-                {
-                    character.AddBuff(shard);
-                }
-            }
-            foreach (var enemy in enemiesPrefabs)
-            {
-                enemies.Add(enemy);
-            }
+            // foreach (var gameObject in characters)
+            // {
+            //     var character = gameObject.GetComponent<Unit>();
+            //     foreach (var shard in savedShards)
+            //     {
+            //         character.AddBuff(shard);
+            //     }
+            // }
+            
+            
+            // Раскомментить снизу, чтобы все работало, но на сцену нужно заходить именно с SampleScene,
+            // а не сразу, иначе врагов не будет
+            
+            // enemies.Clear();
+            // foreach (var enemy in enemiesPrefabs)
+            // {
+            //     enemies.Add(enemy);
+            // }
         }
     }
 }

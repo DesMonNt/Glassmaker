@@ -423,6 +423,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZloyMonster 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8338834946954761556, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338834946954761556, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 9188105627619525032, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -3941,6 +3949,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZloyMonster 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8338834946954761556, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 7.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338834946954761556, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 10.24
+      objectReference: {fileID: 0}
     - target: {fileID: 9188105627619525032, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
@@ -4188,6 +4204,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4374694869395990094, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: enemiesInFight.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4374694869395990094, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: enemiesInFight.Array.data[0]
+      value: 
+      objectReference: {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
+    - target: {fileID: 4374694869395990094, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: enemiesInFight.Array.data[1]
+      value: 
+      objectReference: {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
+    - target: {fileID: 4374694869395990094, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
+      propertyPath: enemiesInFight.Array.data[2]
+      value: 
+      objectReference: {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
     - target: {fileID: 5312805985964455206, guid: e335600d98776f14f9ef2e5e237a703b, type: 3}
       propertyPath: m_Name
       value: ZloyMonster

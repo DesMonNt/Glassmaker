@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,11 +15,13 @@ public class MovingAI : MonoBehaviour
     private Collider2D _playerCollider;
     private System.Timers.Timer _timer;
     [SerializeField] public AudioClip _clip;
-    private AudioSource _audioSource;
+    // private AudioSource _audioSource;
 
     private SpriteRenderer _renderer;
     [SerializeField] public Sprite spritePassive;
     [SerializeField] public Sprite spriteActive;
+
+    public List<GameObject> enemiesInFight;
     
     public bool IsRun { get; set; }
     
@@ -46,7 +50,7 @@ public class MovingAI : MonoBehaviour
         _startPosition = _transform.position;
         _boxCollider = GetComponent<BoxCollider2D>();
         _sphereCollider = GetComponent<CapsuleCollider2D>();
-        _audioSource = GetComponent<AudioSource>();
+        // _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -66,8 +70,8 @@ public class MovingAI : MonoBehaviour
             IsRun = true;
             _currentTarget = _playerCollider.GameObject().transform.position;
             GoToTarget(_player.GameObject().transform.position);
-            if (!_audioSource.isPlaying)
-                _audioSource.PlayOneShot(_clip);
+            // if (!_audioSource.isPlaying)
+            //     _audioSource.PlayOneShot(_clip);
             if (_renderer.sprite != spriteActive)
                 _renderer.sprite = spriteActive;
         }
@@ -76,7 +80,7 @@ public class MovingAI : MonoBehaviour
             IsRun = false;
         
         if (_boxCollider.IsTouching(_playerCollider))
-            SceneManager.LoadScene("LoadingScene");
+            TriggerFight();
     }
     
     private void GoToTarget(Vector3 targetPosition)
@@ -101,5 +105,12 @@ public class MovingAI : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Player"))
             _currentTarget = GetWalk();
+    }
+
+    private void TriggerFight()
+    {
+        SetedUnitsFromPreviousScene.SaveCharactersAndEnemies(enemiesInFight);
+        SceneManager.LoadScene("LoadingScene");
+
     }
 }

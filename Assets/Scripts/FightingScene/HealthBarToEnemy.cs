@@ -13,6 +13,7 @@ public class HealthBarToEnemy : MonoBehaviour
     private Unit _comp;
     private void Start()
     {
+        GetComponent(typeof(Unit));
         var assembly = Assembly.GetAssembly(typeof(Unit));
         var unitTypes = assembly.GetTypes()
             .Where(type => typeof(Unit).IsAssignableFrom(type) && !type.IsAbstract)

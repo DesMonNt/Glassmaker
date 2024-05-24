@@ -9,33 +9,34 @@ using UnityEngine.UI;
 public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Text _text;
-    [SerializeField] private AudioSource sound;
 
-    // [SerializeField]
-    public Circle circle;
+    [SerializeField] public Vector3 circlePos;
 
-    [SerializeField]
-    public Vector3 circlePos{ get; private set; }
+    private MainMenu _mainMenu;
     // Start is called before the first frame update
     void Start()
     {
-        var boxcollider = GetComponent<BoxCollider2D>();
+        _mainMenu = GameObject.Find("Menu").GetComponent<MainMenu>();
         var rect = GetComponent<RectTransform>();
-        sound = GameObject.Find("HoverSound").GetComponent<AudioSource>();
         var position = rect.position;
-        var x = rect.position.x ;
+        var x = position.x ;
         var y = position.y;
         circlePos = new Vector3(x, y, 0);
 
     }
 
+    public void SetPos()
+    {
+        var rect = GetComponent<RectTransform>();
+        var position = rect.position;
+        var x = position.x ;
+        var y = position.y;
+        circlePos = new Vector3(x, y, 0);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        circle.endPos = circlePos;
-        circle.startPos = circle.CurrentPos;
-        circle.Time_ = 0;
-        sound.Play();
-        GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
+        _mainMenu.Selected = GetComponent<MenuButton>();
     }
     
     public void OnPointerExit(PointerEventData eventData)

@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2252905162901390816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946851457414822189}
+  - component: {fileID: 1559608136196497031}
+  - component: {fileID: 3505043021829683494}
+  m_Layer: 0
+  m_Name: hpBarWhenLosingHp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2946851457414822189
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252905162901390816}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.45, y: 0.3, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 95080818135066168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.08, y: 0.58}
+  m_SizeDelta: {x: 20.8733, y: 3.9266}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1559608136196497031
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252905162901390816}
+  m_CullTransparentMesh: 1
+--- !u!114 &3505043021829683494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2252905162901390816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6603774, g: 0.09344954, b: 0.17262661, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 44880606955d7794e9c16f9155e30b63, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3084188351571454676
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,8 +161,8 @@ GameObject:
   - component: {fileID: 1681619133556764580}
   - component: {fileID: 3416333618310193295}
   - component: {fileID: 7787926393379458147}
-  - component: {fileID: 235077927300070430}
   - component: {fileID: 2801148850861140595}
+  - component: {fileID: 3529172173203359329}
   m_Layer: 0
   m_Name: Test_Crimson_Elemental WithHP
   m_TagString: Enemy
@@ -177,19 +252,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepValue: 0.6
   maxValue: 1
---- !u!114 &235077927300070430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4947941574762787136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a648b4d90ee4da4c80fa0d02e7180d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpBar: {fileID: 5097305089875627383}
 --- !u!114 &2801148850861140595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +268,20 @@ MonoBehaviour:
   currentHealthPoints: 0
   currentShield: 0
   speed: 0
+--- !u!114 &3529172173203359329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947941574762787136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0dace5ea53f6b478ce0c746f74457d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 5097305089875627383}
+  hpBarWhenLosingHp: {fileID: 3505043021829683494}
 --- !u!1 &5214948685279029898
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +401,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2946851457414822189}
   - {fileID: 5658405454232497935}
   - {fileID: 3457721694823879538}
   m_Father: {fileID: 1681619133556764580}

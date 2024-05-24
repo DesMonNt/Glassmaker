@@ -53,7 +53,7 @@ public class Fight : MonoBehaviour
     
     [SerializeField] private List<GameObject> viewQueue;
     private List<SpriteRenderer> _viewQueueSprites;
-    private Dictionary<string, (SpriteRenderer renderer, string typeOfFighter)> _spritesDictionary;
+    private Dictionary<Unit, (SpriteRenderer renderer, string typeOfFighter)> _spritesDictionary;
     
     private int _numberOfChar;
     
@@ -90,6 +90,8 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
+        SetedUnitsFromPreviousScene.SetCharactersAndEnemies(enemies);
+        Debug.Log(enemies.Count);
         var firstPosition = new Vector3(-520, 420);
         var firstPositionToEnemy = new Vector3(400, 480);
         
@@ -108,7 +110,7 @@ public class Fight : MonoBehaviour
         listImages.AddRange(_enemyComponentsOrder);
         foreach (var unit in listImages)
         {
-            _spritesDictionary.Add(unit.name,
+            _spritesDictionary.Add(unit,
                 _charComponents.Contains(unit)
                     ? (unit.GameObject().GetComponent<SpriteRenderer>(), "Char")
                     : (unit.GameObject().GetComponent<SpriteRenderer>(), "Enemy"));
@@ -254,8 +256,8 @@ public class Fight : MonoBehaviour
         var queueAsList = _readyFighters.ToList();
         for (var i = 0; i < queueAsList.Count; i++)
         {
-            _viewQueueSprites[i].sprite = _spritesDictionary[queueAsList[i].name].renderer.sprite;
-            _queueCirclesRenderers[i].color = _spritesDictionary[queueAsList[i].name].typeOfFighter == "Enemy" 
+            _viewQueueSprites[i].sprite = _spritesDictionary[queueAsList[i]].renderer.sprite;
+            _queueCirclesRenderers[i].color = _spritesDictionary[queueAsList[i]].typeOfFighter == "Enemy" 
                 ? Color.red 
                 : Color.green;
         }
@@ -272,7 +274,7 @@ public class Fight : MonoBehaviour
         targetsPointer.transform.position =
             _enemyComponentsOrder[_numberOfChar].transform.position +
               new Vector3(0, 
-                  -_spritesDictionary[_enemyComponentsOrder[_numberOfChar].name].renderer.bounds.extents.y - 58, 0);
+                  -_spritesDictionary[_enemyComponentsOrder[_numberOfChar]].renderer.bounds.extents.y - 58, 0);
         
         if (Input.GetKeyDown(KeyCode.RightArrow)) 
             _numberOfChar = (_numberOfChar + 1) %  _enemyComponentsOrder.Count;
@@ -484,7 +486,7 @@ public class Fight : MonoBehaviour
         if (_deletedUnits.Contains(target))
             yield break;
         damageView.transform.position = target.transform.position +
-                                        new Vector3(0, _spritesDictionary[target.name].renderer.bounds.extents.y, 0);
+                                        new Vector3(0, _spritesDictionary[target].renderer.bounds.extents.y, 0);
         
         damageView.text = Math.Abs(previousHp - target.currentHealthPoints).ToString(CultureInfo.InvariantCulture);
         damageView.GameObject().SetActive(true);

@@ -25,6 +25,8 @@ public class RandomSpawner : MonoBehaviour
         new(0, -1200)
     };
 
+    public SpriteRenderer square;
+
     private void Start()
     {
         CanSpawn = true;
@@ -68,7 +70,7 @@ public class RandomSpawner : MonoBehaviour
     private static IEnumerator Destroyer(Collider2D other)
     {
         AccuracyText.MaxSum += 3;
-        yield return new WaitForSeconds (0);
+        yield return new WaitForSeconds(2);
         Destroy(other.gameObject);
     }
     

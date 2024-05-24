@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Application = UnityEngine.Device.Application;
 
@@ -17,7 +18,8 @@ public class MainMenu : MonoBehaviour
     private float alphaCoeffitient = .5f;
     private float opacity1;
     
-    [SerializeField] private GameObject _menuButtons;
+    [SerializeField] private GameObject _menuButtons; 
+    private List<MenuButton> _menuButtonsList;
     private float time;
 
     [SerializeField] private GameObject _startLine;
@@ -26,11 +28,47 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject _blackout;
 
     private bool hadStarted = false;
+
+    private int selectedIndex;
+    [SerializeField] private MenuButton _selected;
+
+    private AudioSource _hoverSound;
+    
+
+    public MenuButton Selected
+    {
+        private get => _selected;
+        set
+        {
+            _selected.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
+            _selected = value;
+            _selected.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
+
+            selectedIndex = _menuButtonsList.IndexOf(_selected);
+            var circleComp = circle.GetComponent<Circle>();
+            circleComp.endPos = _selected.circlePos;
+
+            circleComp.startPos = circleComp.CurrentPos;
+            circleComp.Time_ = 0;
+            _hoverSound.Play();
+            Debug.Log(_selected.circlePos);
+
+            
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        _selected = Selected;
+        _hoverSound = GameObject.Find("HoverSound").GetComponent<AudioSource>();
         _menuButtons = GameObject.Find("MenuButtons");
         _menuButtons.SetActive(false);
+        _menuButtonsList = new();
+        foreach (var button in _menuButtons.transform.GetComponentsInChildren<MenuButton>())
+        {
+            _menuButtonsList.Add(button);
+        }
         _startLine = GameObject.Find("StartLine");
         _exitConformation = GameObject.Find("ExitMenu");
         _exitConformation.SetActive(false);
@@ -57,6 +95,23 @@ public class MainMenu : MonoBehaviour
             }
             Appear(circle.GetComponent<Image>(), appearTime);
             _startLine.SetActive(false);
+            Selected.SetPos();
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            selectedIndex++;
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            selectedIndex--;
+            
+        }
+
+        if (Input.anyKeyDown)
+        {
+            selectedIndex = (selectedIndex + _menuButtonsList.Count) % _menuButtonsList.Count;
+            Selected = _menuButtonsList[selectedIndex];
         }
         
     }
@@ -67,6 +122,7 @@ public class MainMenu : MonoBehaviour
         var opacity = 0f;
         var color = graphic.color;
         graphic.color = new Color(color.r, color.g, color.b, 0);
+        await Task.Delay(100);
         while (timer < duration)
         {
             
@@ -89,7 +145,7 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Show(GameObject obj)
+    private void Show(GameObject obj)
     {
         obj.SetActive(true);
         _blackout.SetActive(true);
