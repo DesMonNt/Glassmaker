@@ -3,6 +3,9 @@
 using System;
 using System.Collections.Generic;
 using Effects;
+using FightingScene.Units;
+using UnityEngine;
+using Random = System.Random;
 
 namespace AI
 {
@@ -10,9 +13,9 @@ namespace AI
     {
         private readonly Unit _unit;
 
-        public AI(Unit unit) => _unit = unit;
+        protected AI(Unit unit) => _unit = unit;
 
-        public virtual (IAction, Unit target) MakeDesicion(List<Character> characters, List<Enemy> enemies)
+        public virtual (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
             var target = GetCharacterTarget(characters);
@@ -33,14 +36,14 @@ namespace AI
             };
         }
 
-        protected virtual Unit GetCharacterTarget(List<Character> characters)
+        protected virtual Unit GetCharacterTarget(List<Unit> characters)
         {
             var targetNumber = new Random().Next(0, characters.Count);
 
             return characters[targetNumber];
         }
         
-        protected virtual Unit GetEnemyTarget(List<Enemy> enemies)
+        protected virtual Unit GetEnemyTarget(List<Unit> enemies)
         {
             var targetNumber = new Random().Next(0, enemies.Count);
 

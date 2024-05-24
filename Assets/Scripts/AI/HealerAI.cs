@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Effects;
+using FightingScene.Units;
+using UnityEngine;
 
 namespace AI
 {
@@ -8,7 +10,7 @@ namespace AI
     {
         public HealerAI(Unit unit) : base(unit) { }
         
-        public (IAction, Unit target) MakeDesicion(List<Character> characters, List<Enemy> enemies)
+        public override (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
             var target = action is Ability 
@@ -17,12 +19,12 @@ namespace AI
 
             return (action, target);
         }
-        protected override Unit GetEnemyTarget(List<Enemy> enemies)
+        protected override Unit GetEnemyTarget(List<Unit> enemies)
         {
-            foreach (var enemy in enemies.Where(enemy => !(enemy.currentHealthPoints >= enemy.CurrentStats.MaxHealth)))
+            foreach (var enemy in enemies.Where(enemy => enemy.currentHealthPoints <= enemy.CurrentStats.MaxHealth * 0.5))
                 return enemy;
 
-            return enemies[0];
+            return base.GetEnemyTarget(enemies);
         }
     }
 }

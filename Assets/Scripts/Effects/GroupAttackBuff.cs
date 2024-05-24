@@ -1,17 +1,26 @@
 ﻿using FightingScene;
+using FightingScene.Units;
 
 namespace Effects
 {
     public class TypeAttackBuff : IBuff
     {
         private readonly TypeOfAttack _attacksType;
-
-        public TypeAttackBuff(TypeOfAttack attackTypeBonus) => _attacksType = attackTypeBonus;
-        public UnitStats ApplyBuff(UnitStats baseStats)
+        private int _duration;
+        public TypeAttackBuff(TypeOfAttack attackTypeBonus, int duration)
         {
-            var newStats = baseStats;
-            newStats.AttacksType = _attacksType;
-            return newStats;
+            _attacksType = attackTypeBonus;
+            _duration = duration;
+        }
+
+        public UnitStats ApplyBuff(Unit unit)
+        {
+            if (_duration <= 0)
+                return unit.CurrentStats;
+            
+            _duration--;
+            
+            return new UnitStats(unit.CurrentStats, attacksType: _attacksType);
         }
     }
 }

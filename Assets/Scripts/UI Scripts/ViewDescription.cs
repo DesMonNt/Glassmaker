@@ -8,31 +8,47 @@ using UnityEngine.UI;
 
 public class ViewDescription : MonoBehaviour
 {
-    public bool IsAttack;
-    public bool IsSkill;
-    public bool IsUltimate;
+    [FormerlySerializedAs("IsAttack")] public bool isAttack;
+    [FormerlySerializedAs("IsSkill")] public bool isSkill;
+    [FormerlySerializedAs("IsUltimate")] public bool isUltimate;
+    [FormerlySerializedAs("_spritePassive")] [SerializeField] private Sprite spritePassive;
+    [FormerlySerializedAs("_spriteActive")] [SerializeField] private Sprite spriteActive;
+    private SpriteRenderer _renderer;
     
     [FormerlySerializedAs("Description")] [SerializeField] private Image description;
+    [SerializeField] public Text skillName;
 
     private void Awake()
     {
-        IsAttack = false;
-        IsSkill = false;
-        IsUltimate = false;
+        skillName.GameObject().SetActive(false);
+        _renderer = GetComponent<SpriteRenderer>();
+        isAttack = false;
+        isSkill = false;
+        isUltimate = false;
         description.GameObject().SetActive(false);
     }
 
-    private void OnMouseOver() => description.GameObject().SetActive(true);
+    private void OnMouseOver()
+    {
+        skillName.GameObject().SetActive(true);
+        _renderer.sprite = spriteActive;
+        description.GameObject().SetActive(true);
+    }
 
-    private void OnMouseExit() => description.GameObject().SetActive(false);
+    private void OnMouseExit()
+    {
+        skillName.GameObject().SetActive(false);
+        _renderer.sprite = spritePassive;
+        description.GameObject().SetActive(false);
+    }
 
     private void OnMouseDown()
     {
         if (this.GameObject().name is "Attack")
-            IsAttack = true;
+            isAttack = true;
         else if (this.GameObject().name is "Skill")
-            IsSkill = true;
+            isSkill = true;
         else if (this.GameObject().name is "Ultimate")
-            IsUltimate = true;
+            isUltimate = true;
     }
 }

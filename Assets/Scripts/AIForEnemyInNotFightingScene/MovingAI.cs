@@ -12,6 +12,8 @@ public class MovingAI : MonoBehaviour
     private GameObject _player;
     private Collider2D _playerCollider;
     private System.Timers.Timer _timer;
+
+    private SpriteRenderer _renderer;
     
     public bool IsRun { get; set; }
     
@@ -25,16 +27,17 @@ public class MovingAI : MonoBehaviour
     
     private void Start()
     {
+        _renderer = GetComponent<SpriteRenderer>();
         _timer = new ();
         _currentTarget = new Vector3(0, 0, 0);
         _maybeCoordinates = new[]
         {
-            (10, 10), (10, 10), (10, 0), (10, -10), (0, -10), (-10, -10), 
-            (-10, 0), (-10, 10), (0, 0)
+            (1, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), 
+            (-1, 0), (-1, 10), (0, 0)
         };
         _player = GameObject.FindWithTag("Player");
         _playerCollider = _player.GetComponent<Collider2D>();
-        _speed = 2;
+        _speed = 3;
         _transform = transform;
         _startPosition = _transform.position;
         _boxCollider = GetComponent<BoxCollider2D>();
@@ -43,10 +46,10 @@ public class MovingAI : MonoBehaviour
 
     private void Update()
     {
-        if (!(Math.Abs(_currentTarget.x - _transform.position.x) < 1e-5
-              && Math.Abs(_currentTarget.y - _transform.position.y) < 1e-5))
+        if (!(Math.Abs(_currentTarget.x - _transform.position.x) < 1
+              && Math.Abs(_currentTarget.y - _transform.position.y) < 1))
         {
-            _timer = new Timer(1000);
+            //_timer = new Timer(1000);
             GoToTarget(_currentTarget);
         }
             
@@ -84,5 +87,10 @@ public class MovingAI : MonoBehaviour
             ? GetWalk() 
             : delta;
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (!other.gameObject.CompareTag("Player"))
+            _currentTarget = GetWalk();
+    }
 }

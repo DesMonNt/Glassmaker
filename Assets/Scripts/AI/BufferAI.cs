@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Effects;
+using FightingScene.Units;
+using UnityEngine;
 
 namespace AI
 {
@@ -7,14 +9,12 @@ namespace AI
     {
         public BufferAI(Unit unit) : base(unit) { }
         
-        public (IAction, Unit target) MakeDesicion(List<Character> characters, List<Enemy> enemies)
+        public override (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
-            // var target = action is Ability
-            //     ? GetCharacterTarget(characters) // вернуть обратно, не забыть
-            //     : GetEnemyTarget(enemies);
-
-            var target = GetCharacterTarget(characters);
+            var target = action is Ability 
+                ? GetEnemyTarget(enemies) 
+                : GetCharacterTarget(characters);
 
             return (action, target);
         }

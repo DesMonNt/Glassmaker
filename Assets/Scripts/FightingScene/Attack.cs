@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Effects;
+using FightingScene.Units;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace FightingScene
 {
@@ -22,15 +24,12 @@ namespace FightingScene
             var random = new System.Random();
             var randomValue = random.Next(0, 100);
             if (randomValue < owner.CurrentStats.CriticalChance)
+            {
                 target.GetAttack(2 * Damage);
+            }
+                
             else 
                 target.GetAttack(Damage);
-            if (AttackEffects is null)
-                return;
-            foreach (var buff in AttackEffects)
-            {
-                target.AddBuff(buff);
-            }
         }
         
         public void Execute(Unit owner, Unit target, float coefficientOfDamage)

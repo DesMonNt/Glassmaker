@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FightingScene.unity
     guid: 85286fef2ee0d5f438cd4d82ee917cc6
+  - enabled: 1
+    path: Assets/Scenes/LoadingScene.unity
+    guid: f737383aae013cd40b955a060bfd61c4
+  - enabled: 1
+    path: Assets/Scenes/QTE.unity
+    guid: fed2493745ec1c148ad8081467f37862
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 8ba2119d5041e2d44b545e1a6a88ffc5
   m_configObjects: {}
