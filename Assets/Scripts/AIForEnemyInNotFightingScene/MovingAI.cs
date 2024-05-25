@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.Generic;
+using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,9 +15,8 @@ public class MovingAI : MonoBehaviour
     private GameObject _player;
     private Collider2D _playerCollider;
     private System.Timers.Timer _timer;
-
     private SpriteRenderer _renderer;
-    
+    public List<GameObject> enemiesInFight;
     public bool IsRun { get; set; }
     
     private (int x, int y)[] _maybeCoordinates;
@@ -65,9 +67,6 @@ public class MovingAI : MonoBehaviour
         
         if (!_sphereCollider.IsTouching(_playerCollider)) 
             IsRun = false;
-        
-        // if (_boxCollider.IsTouching(_playerCollider))
-        //     SceneManager.LoadScene("LoadingScene");
     }
     
     private void GoToTarget(Vector3 targetPosition)

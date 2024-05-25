@@ -95,6 +95,8 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
+        SetedUnitsFromPreviousScene.SetCharactersAndEnemies(enemies);
+        Debug.Log(enemies.Count);
         var firstPosition = new Vector3(-520, 420);
         var firstPositionToEnemy = new Vector3(400, 480);
         
