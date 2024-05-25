@@ -9,6 +9,10 @@ namespace FightingScene.Units
 {
     public abstract class Unit : MonoBehaviour, IBuffable
     {
+        [SerializeField] public Sprite attackSprite;
+        [SerializeField] public Sprite skillSprite;
+        [SerializeField] public Sprite ultimateSprite;
+        
         [SerializeField] 
         public new string name;
         public UnitStats CurrentStats;

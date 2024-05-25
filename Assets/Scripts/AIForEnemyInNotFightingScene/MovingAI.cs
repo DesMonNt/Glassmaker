@@ -66,8 +66,8 @@ public class MovingAI : MonoBehaviour
         if (!_sphereCollider.IsTouching(_playerCollider)) 
             IsRun = false;
         
-        if (_boxCollider.IsTouching(_playerCollider))
-            SceneManager.LoadScene("LoadingScene");
+        // if (_boxCollider.IsTouching(_playerCollider))
+        //     SceneManager.LoadScene("LoadingScene");
     }
     
     private void GoToTarget(Vector3 targetPosition)

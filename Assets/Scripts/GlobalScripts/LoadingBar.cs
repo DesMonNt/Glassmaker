@@ -9,6 +9,7 @@ public class LoadingBar : MonoBehaviour
     public Image loadingBar;
     [FormerlySerializedAs("_percent")] public int percent;
     private float _square;
+    public string nameOfScene;
     
     private void Start()
     {
@@ -22,7 +23,7 @@ public class LoadingBar : MonoBehaviour
         _square += GetFunc(percent);
         loadingBar.fillAmount = _square / 44.01f;
         if (percent == 100)
-            SceneManager.LoadScene("FightingScene");
+            SceneManager.LoadScene(nameOfScene);
     }
 
     private float GetFunc(int x) => (float)Math.Pow(Math.E, -((0.04 * x - 2) * (0.04 * x - 2)));

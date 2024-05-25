@@ -11,7 +11,7 @@ namespace AI
 {
     public abstract class AI
     {
-        public readonly Unit Unit;
+        protected readonly Unit Unit;
 
         protected AI(Unit unit) => Unit = unit;
 

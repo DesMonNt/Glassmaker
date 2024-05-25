@@ -175,8 +175,8 @@ GameObject:
   - component: {fileID: 1394292626960300985}
   - component: {fileID: 365559151653453556}
   - component: {fileID: 3220876981119274622}
-  - component: {fileID: -936903340784458869}
   - component: {fileID: 1385046769342012459}
+  - component: {fileID: 473415833935526121}
   m_Layer: 0
   m_Name: SecondInSquad
   m_TagString: Untagged
@@ -279,22 +279,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 2975041791986737567}
---- !u!114 &-936903340784458869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3459059545088758473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2dd866701d90a4fa9756f9d97685e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Tormentor
-  currentHealthPoints: 0
-  currentShield: 55000
-  speed: 0
 --- !u!114 &1385046769342012459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,6 +292,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shieldBar: {fileID: 7640650929414145108}
+--- !u!114 &473415833935526121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3459059545088758473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5aafb3d726dfc64da30a8546173885f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSprite: {fileID: 21300000, guid: f9a0fa08979c49842953eb0f12b2ed04, type: 3}
+  skillSprite: {fileID: 21300000, guid: dd160d85d8f80644c89418b044ac140a, type: 3}
+  ultimateSprite: {fileID: 21300000, guid: 27579d6863adbbd40b3f133de0986127, type: 3}
+  name: Blacksmith
+  currentHealthPoints: 0
+  currentShield: 0
+  speed: 0
 --- !u!1 &3785911705508175640
 GameObject:
   m_ObjectHideFlags: 0

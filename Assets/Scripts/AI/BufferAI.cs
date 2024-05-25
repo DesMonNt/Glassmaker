@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Effects;
+using FightingScene;
 using FightingScene.Units;
 using UnityEngine;
 
@@ -12,9 +13,12 @@ namespace AI
         public override (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
-            var target = action is Ability && !Unit.CurrentStats.IsConfused
-                ? GetEnemyTarget(enemies) 
-                : GetCharacterTarget(characters);
+            var target = Unit.CurrentStats.IsConfused
+                ? action is Ability ? GetCharacterTarget(characters) : GetEnemyTarget(enemies)
+                : action is Ability ? GetEnemyTarget(enemies) : GetCharacterTarget(characters);
+
+            if (action is Attack && Unit.CurrentStats.IsConfused)
+                target = GetCharacterTarget(characters);
 
             return (action, target);
         }

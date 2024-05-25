@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +11,17 @@ public class PlaterController : MonoBehaviour
     private float moveXInput;
     private float moveYInput;
 
-    public AudioClip clip;
+    [SerializeField] public GameObject loadingScene;
+    private LoadingBar _loading;
+    [SerializeField] public string nameNextScene;
 
     private Rigidbody2D rb;
 
     private void Start()
     {
+        loadingScene.SetActive(false);
+        _loading = loadingScene.GetComponent<LoadingBar>();
+        //_loading.nameOfScene = nameNextScene;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -29,8 +35,11 @@ public class PlaterController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("FIIT"))
-            SceneManager.LoadScene("FightingScene");
-        if (other.CompareTag("BigB"))
-            GetComponent<AudioSource>().PlayOneShot(clip);
+        {
+            loadingScene.GetComponent<LoadingBar>().loadingBar.color = new Color(255, 0, 0, 255);
+            loadingScene.SetActive(true);
+            loadingScene.GetComponent<LoadingBar>().loadingBar.color = new Color(0, 255, 0, 255);
+        }
+            
     }
 }

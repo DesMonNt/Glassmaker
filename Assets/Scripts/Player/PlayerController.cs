@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,11 +12,24 @@ public class PlayerController : MonoBehaviour
     private PlayerContols _playerControls;
     private Vector2 _movement;
     private Rigidbody2D _rb;
+    
+    [SerializeField] public GameObject loadingScene;
+    private LoadingBar _loading;
+    [SerializeField] public string nameNextScene;
 
     private void Awake()
     {
+        _loading = loadingScene.GetComponent<LoadingBar>();
         _playerControls = new PlayerContols();
         _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        _loading.loadingBar.color = new Color(0, 0, 0, 0);
+        loadingScene.SetActive(false);
+        _loading = loadingScene.GetComponent<LoadingBar>();
+        _loading.nameOfScene = nameNextScene;
     }
 
     private void OnEnable() => _playerControls.Enable();
@@ -23,7 +37,22 @@ public class PlayerController : MonoBehaviour
     private void Update(){
         PlayerInput();
         Move();
-    } 
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("BigB") && other is BoxCollider2D)
+        {
+            loadingScene.SetActive(true);
+            StartCoroutine(ChangeColor());
+        }
+    }
+
+    private IEnumerator ChangeColor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _loading.loadingBar.color = new Color(255, 255, 255, 255);
+    }
 
     private void PlayerInput() => _movement = _playerControls.Movement.Move.ReadValue<Vector2>();
 

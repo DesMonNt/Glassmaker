@@ -40,12 +40,6 @@ namespace FightingScene
                 target.GetAttack((int)(2 * Damage * coefficientOfDamage));
             else 
                 target.GetAttack((int)(Damage * coefficientOfDamage));
-            if (AttackEffects is null)
-                return;
-            foreach (var buff in AttackEffects)
-            {
-                target.AddBuff(buff);
-            }
         }
     }
 }
