@@ -44,23 +44,34 @@ namespace FightingScene.Units
                 TurnMeterFilled?.Invoke(this);
         }
 
-        public void GetAttack(int damage)
+        public virtual void GetAttack(int damage)
         {
             if (damage < 0)
             {
                 currentHealthPoints = Math.Clamp(currentHealthPoints - damage, 0, CurrentStats.MaxHealth);
+                
                 return;
             }
             
-            if (currentShield == 0)
-                currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
-            else
+            if (CurrentStats.IsImmortal)
+                return;
+            
+            switch (currentShield)
             {
-                var a = (int)(currentShield - damage * (1 - CurrentStats.Armor));
-                currentShield = Math.Clamp(a, 0, Math.Abs(a));
-                if (a < 0)
-                    currentHealthPoints = currentHealthPoints += a;
+                case 0:
+                    currentHealthPoints -= (int)(damage * (1 - CurrentStats.Armor));
+                    break;
+                default:
+                {
+                    var delta = (int)(currentShield - damage * (1 - CurrentStats.Armor));
+                    currentShield = Math.Clamp(delta, 0, Math.Abs(delta));
+                
+                    if (delta < 0)
+                        currentHealthPoints = currentHealthPoints += delta;
+                    break;
+                }
             }
+            
             if (currentHealthPoints <= 0)
                 GetDied();
         }

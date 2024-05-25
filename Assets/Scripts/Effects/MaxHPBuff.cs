@@ -8,7 +8,11 @@ namespace Effects
 
         public MaxHPBuff(int maxHpBonus) => _maxHpBonus = maxHpBonus;
 
-        public UnitStats ApplyBuff(Unit unit) 
-            => new(unit.CurrentStats, unit.CurrentStats.MaxHealth + _maxHpBonus);
+        public UnitStats ApplyBuff(Unit unit)
+        {
+            unit.currentHealthPoints += _maxHpBonus;
+            
+            return new UnitStats(unit.CurrentStats, unit.CurrentStats.MaxHealth + _maxHpBonus);
+        }
     }
 }
