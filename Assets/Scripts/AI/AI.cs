@@ -11,14 +11,16 @@ namespace AI
 {
     public abstract class AI
     {
-        private readonly Unit _unit;
+        public readonly Unit Unit;
 
-        protected AI(Unit unit) => _unit = unit;
+        protected AI(Unit unit) => Unit = unit;
 
         public virtual (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
-            var target = GetCharacterTarget(characters);
+            var target = !Unit.CurrentStats.IsConfused
+                ? GetCharacterTarget(characters)
+                : GetEnemyTarget(enemies);
 
             return (action, target);
         }
@@ -29,9 +31,9 @@ namespace AI
 
             return actionNumber switch
             {
-                0 => _unit.UseAbility(),
-                1 => _unit.UseUltimate(),
-                2 => _unit.UseAttack(),
+                0 => Unit.UseAbility(),
+                1 => Unit.UseUltimate(),
+                2 => Unit.UseAttack(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

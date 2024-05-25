@@ -12,7 +12,7 @@ namespace AI
         public override (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
             var action = GetAction();
-            var target = action is Ability 
+            var target = action is Ability && !Unit.CurrentStats.IsConfused
                 ? GetEnemyTarget(enemies) 
                 : GetCharacterTarget(characters);
 
