@@ -2510,7 +2510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 165.23987, y: 59.133022}
+  m_AnchoredPosition: {x: 158, y: 59.133}
   m_SizeDelta: {x: 118.0798, y: 118.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1488922177
@@ -4065,7 +4065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4560c060334a8324796c840a5c25bc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FightKey: 101
   enemies:
   - {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
   - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
@@ -4073,6 +4072,7 @@ MonoBehaviour:
   squads:
   - {fileID: 3459059545088758473, guid: 0a47de1ac3e77ea4b94df4b81381d3b0, type: 3}
   - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
+  - {fileID: 551176974349897492, guid: 0c1113bed3f00b847bc29bb3bc40caf5, type: 3}
   qte: {fileID: 7483550258029446731}
   qteAccuracy: {fileID: 4859831378510807771}
   damageView: {fileID: 375028068}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Effects;
 using FightingScene;
@@ -10,9 +11,11 @@ public class Ability : IAction
     private readonly List<IBuff> _targetStatuses;
     public readonly string Name;
     [CanBeNull] public Attack Attack;
+    public Targets Target;
 
-    public Ability(List<IBuff> targetS, List<IBuff> ownerS, string name)
+    public Ability(List<IBuff> targetS, List<IBuff> ownerS, string name, Targets target = default)
     {
+        Target = target;
         Name = name;
         _targetStatuses = targetS;
         _ownerStatuses = ownerS;

@@ -15,12 +15,10 @@ public class ViewDescription : MonoBehaviour
     [FormerlySerializedAs("_spriteActive")] [SerializeField] private Sprite spriteActive;
     private SpriteRenderer _renderer;
     
-    [FormerlySerializedAs("Description")] [SerializeField] private Image description;
-    [SerializeField] public Text skillName;
+    [FormerlySerializedAs("Description")] [SerializeField] public Image description;
 
     private void Awake()
     {
-        skillName.GameObject().SetActive(false);
         _renderer = GetComponent<SpriteRenderer>();
         isAttack = false;
         isSkill = false;
@@ -30,14 +28,12 @@ public class ViewDescription : MonoBehaviour
 
     private void OnMouseOver()
     {
-        skillName.GameObject().SetActive(true);
         _renderer.sprite = spriteActive;
         description.GameObject().SetActive(true);
     }
 
     private void OnMouseExit()
     {
-        skillName.GameObject().SetActive(false);
         _renderer.sprite = spritePassive;
         description.GameObject().SetActive(false);
     }

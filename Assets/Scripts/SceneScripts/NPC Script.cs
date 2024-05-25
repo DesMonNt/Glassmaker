@@ -12,7 +12,7 @@ public class NPCScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        dialoge.text = "В вилку раз или в жопу раз?..";
+        dialoge.text = "Welcome to the club, buddy...";
         if (other.CompareTag("Player"))
             dialoge.gameObject.SetActive(true);
     }
