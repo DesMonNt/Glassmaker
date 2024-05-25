@@ -14,6 +14,7 @@ using UnityEngine.UI;
 
 public class Fight : MonoBehaviour
 {
+    public int FightKey;
     public List<GameObject> enemies;
     public List<GameObject> squads;
     private Queue<Unit> _readyFighters;
@@ -219,8 +220,9 @@ public class Fight : MonoBehaviour
             IncreaseTurnMethod(_charComponentsOrder);
             IncreaseTurnMethod(_enemyComponentsOrder);
         }
-        
-        SceneManager.LoadScene("GameOver");
+
+        Saves.Fights.Remove(FightKey);
+        SceneManager.LoadScene("Tower exploration");
     }
     
 
