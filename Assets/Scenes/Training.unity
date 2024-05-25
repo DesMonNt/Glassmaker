@@ -4065,6 +4065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4560c060334a8324796c840a5c25bc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FightKey: 0
   enemies:
   - {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
   - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}

@@ -18,6 +18,7 @@ public class MovingAI : MonoBehaviour
     private SpriteRenderer _renderer;
     public List<GameObject> enemiesInFight;
     public bool IsRun { get; set; }
+    private bool _isStart;
     
     private (int x, int y)[] _maybeCoordinates;
 
@@ -25,7 +26,7 @@ public class MovingAI : MonoBehaviour
     private Vector3 _startPosition;
     
     private Transform _transform;
-    private int _speed;
+    public int _speed;
     
     private void Start()
     {
@@ -39,7 +40,7 @@ public class MovingAI : MonoBehaviour
         };
         _player = GameObject.FindWithTag("Player");
         _playerCollider = _player.GetComponent<Collider2D>();
-        _speed = 3;
+        _speed = 5;
         _transform = transform;
         _startPosition = _transform.position;
         _boxCollider = GetComponent<BoxCollider2D>();
@@ -51,12 +52,12 @@ public class MovingAI : MonoBehaviour
         if (!(Math.Abs(_currentTarget.x - _transform.position.x) < 1
               && Math.Abs(_currentTarget.y - _transform.position.y) < 1))
         {
-            //_timer = new Timer(1000);
             GoToTarget(_currentTarget);
         }
             
         else if (!IsRun) 
             _currentTarget = GetWalk();
+        
 
         if (_sphereCollider.IsTouching(_playerCollider))
         {
@@ -67,6 +68,12 @@ public class MovingAI : MonoBehaviour
         
         if (!_sphereCollider.IsTouching(_playerCollider)) 
             IsRun = false;
+
+        if (_boxCollider.IsTouching(_playerCollider) && !_isStart)
+        {
+            _isStart = true;
+            SetedUnitsFromPreviousScene.SaveCharactersAndEnemies(enemiesInFight);
+        }
     }
     
     private void GoToTarget(Vector3 targetPosition)

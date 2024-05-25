@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class LoadingBar : MonoBehaviour
 {
     public Image loadingBar;
-    public string nextScene;
     [FormerlySerializedAs("_percent")] public int percent;
     private float _square;
     public string nameOfScene;
