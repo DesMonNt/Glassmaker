@@ -47,11 +47,11 @@ namespace FightingScene
             // Раскомментить снизу, чтобы все работало, но на сцену нужно заходить именно с SampleScene,
             // а не сразу, иначе врагов не будет
             
-            // enemies.Clear();
-            // foreach (var enemy in enemiesPrefabs)
-            // {
-            //     enemies.Add(enemy);
-            // }
+            enemies.Clear();
+            foreach (var enemy in enemiesPrefabs)
+            {
+                enemies.Add(enemy);
+            }
         }
     }
 }
