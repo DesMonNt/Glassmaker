@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - YellowZone
+  - FIIT
+  - GreenZone
+  - RedZone
+  - Enemy
+  - Z
+  - X
+  - C
+  - BigB
+  - Wall
   layers:
   - Default
   - TransparentFX

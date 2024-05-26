@@ -19,38 +19,40 @@ public class MovingAI : MonoBehaviour
     public List<GameObject> enemiesInFight;
     public bool IsRun { get; set; }
     private bool _isStart;
+    private Rigidbody2D _rb;
     
     private (int x, int y)[] _maybeCoordinates;
 
-    private Vector3 _currentTarget;
-    private Vector3 _startPosition;
+    private Vector2 _currentTarget;
+    private Vector2 _startPosition;
     
     private Transform _transform;
     public int _speed;
     
     private void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
         _timer = new ();
-        _currentTarget = new Vector3(0, 0, 0);
         _maybeCoordinates = new[]
         {
-            (1, 1), (1, 1), (1, 0), (1, -1), (0, -1), (-1, -1), 
-            (-1, 0), (-1, 10), (0, 0)
+            (0, 10), (10, 10), (10, 0), (10, -10), (0, -10), (-5, -5), 
+            (-5, 0), (-5, -5), (0, 0)
         };
         _player = GameObject.FindWithTag("Player");
         _playerCollider = _player.GetComponent<Collider2D>();
-        _speed = 5;
+        _speed = 3;
         _transform = transform;
-        _startPosition = _transform.position;
+        _startPosition = _rb.position;
+        _currentTarget = _startPosition;
         _boxCollider = GetComponent<BoxCollider2D>();
         _sphereCollider = GetComponent<CapsuleCollider2D>();
     }
 
     private void Update()
     {
-        if (!(Math.Abs(_currentTarget.x - _transform.position.x) < 1
-              && Math.Abs(_currentTarget.y - _transform.position.y) < 1))
+        if (!(Math.Abs(_currentTarget.x - _rb.position.x) < 1
+              && Math.Abs(_currentTarget.y - _rb.position.y) < 1))
         {
             GoToTarget(_currentTarget);
         }
@@ -58,11 +60,10 @@ public class MovingAI : MonoBehaviour
         else if (!IsRun) 
             _currentTarget = GetWalk();
         
-
         if (_sphereCollider.IsTouching(_playerCollider))
         {
-            IsRun = true;
             _currentTarget = _playerCollider.GameObject().transform.position;
+            IsRun = true;
             GoToTarget(_player.GameObject().transform.position);
         }
         
@@ -76,25 +77,28 @@ public class MovingAI : MonoBehaviour
         }
     }
     
-    private void GoToTarget(Vector3 targetPosition)
+    private void GoToTarget(Vector2 targetPosition)
     {
-        var target = (targetPosition - _transform.position).normalized;
-        _transform.position += _speed * Time.deltaTime * target;
+        if (Vector2.Distance(targetPosition, _rb.position) > 20)
+            GetWalk();
+        var target = (targetPosition - _rb.position).normalized;
+        _rb.MovePosition(_rb.position + target * (_speed * Time.fixedDeltaTime));
     }
 
-    private Vector3 GetWalk()
+    private Vector2 GetWalk()
     {
         var randomValue = new Random().Next(0, 7); 
-        var delta = new Vector3(
-            _transform.position.x + _maybeCoordinates[randomValue].x,
-            _transform.position.y + _maybeCoordinates[randomValue].y);
-        var a = _transform.position + delta - _startPosition;
-        return a.x * a.x + a.y * a.y - _sphereCollider.size.y * _sphereCollider.size.y < 1e-5 
+        var delta = new Vector2( 
+            _rb.position.x + _maybeCoordinates[randomValue].x,
+            _rb.position.y + _maybeCoordinates[randomValue].y);
+        var a = _rb.position + delta - _startPosition;
+            
+        return Math.Abs(a.x * a.x + a.y * a.y - 10 * 10) < 1e-5 
             ? GetWalk() 
             : delta;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (!other.gameObject.CompareTag("Player"))
             _currentTarget = GetWalk();
