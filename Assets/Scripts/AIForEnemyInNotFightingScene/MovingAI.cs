@@ -36,7 +36,7 @@ public class MovingAI : MonoBehaviour
         _timer = new ();
         _maybeCoordinates = new[]
         {
-            (0, 10), (10, 10), (10, 0), (10, -10), (0, -10), (-5, -5), 
+            (0, 5), (5, 5), (5, 0), (5, -5), (0, -5), (-5, -5), 
             (-5, 0), (-5, -5), (0, 0)
         };
         _player = GameObject.FindWithTag("Player");
@@ -64,12 +64,20 @@ public class MovingAI : MonoBehaviour
         {
             _currentTarget = _playerCollider.GameObject().transform.position;
             IsRun = true;
-            GoToTarget(_player.GameObject().transform.position);
+            GoToTarget(_currentTarget);
+        }
+
+        if (Vector2.Distance(_currentTarget, _rb.position) > 20)
+        {
+            IsRun = false;
+            _currentTarget = GetWalk();
+        }
+
+        if (!_sphereCollider.IsTouching(_playerCollider))
+        {
+            IsRun = false;
         }
         
-        if (!_sphereCollider.IsTouching(_playerCollider)) 
-            IsRun = false;
-
         if (_boxCollider.IsTouching(_playerCollider) && !_isStart)
         {
             _isStart = true;
@@ -79,8 +87,8 @@ public class MovingAI : MonoBehaviour
     
     private void GoToTarget(Vector2 targetPosition)
     {
-        if (Vector2.Distance(targetPosition, _rb.position) > 20)
-            GetWalk();
+        // if (Vector2.Distance(targetPosition, _rb.position) > 20)
+        //     GetWalk();
         var target = (targetPosition - _rb.position).normalized;
         _rb.MovePosition(_rb.position + target * (_speed * Time.fixedDeltaTime));
     }
@@ -91,6 +99,7 @@ public class MovingAI : MonoBehaviour
         var delta = new Vector2( 
             _rb.position.x + _maybeCoordinates[randomValue].x,
             _rb.position.y + _maybeCoordinates[randomValue].y);
+
         var a = _rb.position + delta - _startPosition;
             
         return Math.Abs(a.x * a.x + a.y * a.y - 10 * 10) < 1e-5 
