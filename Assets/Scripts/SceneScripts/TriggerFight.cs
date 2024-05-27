@@ -11,7 +11,7 @@ public class TriggerFight : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SetedUnitsFromPreviousScene.SaveCharactersAndEnemies(enemies);
+            SetedUnitsFromPreviousScene.SaveEnemies(enemies);
             SceneManager.LoadScene("FightingScene");
         }
     }

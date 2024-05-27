@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSprite: {fileID: 21300000, guid: e2c377657cab93643bbeaf83b8d43b90, type: 3}
-  skillSprite: {fileID: 21300000, guid: 3257452d836a458498a6443adcf67813, type: 3}
+  skillSprite: {fileID: 21300000, guid: 0cc8c9b83f1a21c4c8f562e2f9ab439d, type: 3}
   ultimateSprite: {fileID: 21300000, guid: d4a137f6fcef07a46acecbcfd9eb518a, type: 3}
   name: MC
   currentHealthPoints: 0

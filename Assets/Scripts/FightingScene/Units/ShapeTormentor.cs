@@ -11,12 +11,21 @@ namespace FightingScene.Units
         {
             Brain = new DamageDealerAI(this);
             Skill = new Ability(new List<IBuff>(),
-                new List<IBuff> { new TypeAttackBuff(TypeOfAttack.Aoe, 1), new AttackBuff(100) }, "Ярость Мучителя");
+                new List<IBuff> { new AttackBuff(100) }, "Ярость Мучителя");
             Ultimate = new Ability(new List<IBuff> {new BurnBuff((int)(CurrentStats.Damage * 0.35), 3)}, 
                 new List<IBuff> { new DamageBuff(1.07f, 2) }, "Обжигающий багрянец")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 0.9), Buffs, TypeOfAttack.Aoe)
+                Attack = new Attack((int)(CurrentStats.Damage * 0.9), Buffs, TypeOfAttack.Single)
             };
         }
+        
+        public override Ability UseAbility() => new (new List<IBuff>(),
+            new List<IBuff> { new AttackBuff(100) }, "Ярость Мучителя");
+        
+        public override Ability UseUltimate() => new (new List<IBuff> {new BurnBuff((int)(CurrentStats.Damage * 0.35), 3)}, 
+            new List<IBuff> { new DamageBuff(1.07f, 2) }, "Обжигающий багрянец")
+        {
+            Attack = new Attack((int)(CurrentStats.Damage * 0.9), Buffs, TypeOfAttack.Single)
+        };
     }
 }

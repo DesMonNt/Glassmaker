@@ -11,5 +11,16 @@ namespace FightingScene.Units
             Ultimate = new Ability(new List<IBuff> { new ConfusionBuff(2) }, new List<IBuff>(), "Замешательство",
                 Targets.Enemy);
         }
+        
+        public override Ability UseAbility() => new (new List<IBuff> 
+            { new SpeedBuff(1.17f, 2), new DamageBuff(1.42f, 1) },
+            new List<IBuff>(), "Повышение защиты", Targets.Character);
+        
+        public override Ability UseUltimate() =>  new (new List<IBuff>
+            {
+                new ConfusionBuff(2)
+            }, new List<IBuff>(), "Замешательство",
+            Targets.Enemy);
+
     }
 }

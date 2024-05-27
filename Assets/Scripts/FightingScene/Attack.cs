@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Effects;
-using FightingScene.Units;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
+using Unit = FightingScene.Units.Unit;
 
 namespace FightingScene
 {
-    public class Attack :IAction
+    public class Attack : IAction
     {
         public int Damage;
         [CanBeNull] public IEnumerable<IBuff> AttackEffects;

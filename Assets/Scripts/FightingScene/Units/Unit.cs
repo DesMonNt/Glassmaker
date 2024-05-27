@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AI;
 using Effects;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -67,11 +68,13 @@ namespace FightingScene.Units
                     break;
                 default:
                 {
+                    Debug.Log($"{name}, {currentShield}");
                     var delta = (int)(currentShield - damage * (1 - CurrentStats.Armor));
                     currentShield = Math.Clamp(delta, 0, Math.Abs(delta));
+                    Debug.Log($"{name}, {currentShield}");
                 
                     if (delta < 0)
-                        currentHealthPoints = currentHealthPoints += delta;
+                        currentHealthPoints += delta;
                     break;
                 }
             }
@@ -101,6 +104,8 @@ namespace FightingScene.Units
             Buffs.Remove(buff);
             ApplyBuffs();
         }
+
+        public void RemoveAllBuffs() => Buffs.Clear();
 
         public void ApplyBuffs()
         {

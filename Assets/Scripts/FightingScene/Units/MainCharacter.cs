@@ -26,19 +26,25 @@ namespace FightingScene.Units
             _criticalStack = Math.Clamp(0, _criticalStack + 1, 5);
             AddBuff(new SpeedBuff(1.1f, 2));
             
-            return Skill;
+            return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела")
+            {
+                Attack = new Attack((int)(CurrentStats.Damage * 2.75), Buffs, TypeOfAttack.Single)
+            };
         }
         
         public override Ability UseUltimate()
         {
-            Ultimate.Attack.Damage += 100 * _criticalStack;
+            var ultimateAttackDamage = Ultimate.Attack.Damage + 100 * _criticalStack;
             
             if (_criticalStack > 2)
-                Ultimate.Attack.Damage += 100 * (_criticalStack - 2);
+                ultimateAttackDamage += 100 * (_criticalStack - 2);
             
             _criticalStack = 0;
             
-            return Ultimate;
+            return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела: Дождь")
+            {
+                Attack = new Attack((ultimateAttackDamage), Buffs, TypeOfAttack.Group)
+            };
         }
     }
 }

@@ -45,8 +45,12 @@ namespace FightingScene.Units
 
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Третье желание: Последнее", Targets.Character)
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 3), Buffs, TypeOfAttack.Single)
+                Attack = new Attack((int)(CurrentStats.Damage * 3.5), Buffs, TypeOfAttack.Single)
             };
         }
+        
+        public override Ability UseUltimate() => new (new List<IBuff>(), 
+            new List<IBuff> { new ShieldBuff((int)(0.2 * CurrentStats.MaxHealth)) },
+            "Хрустальный доспех");
     }
 }

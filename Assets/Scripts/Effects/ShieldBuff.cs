@@ -1,5 +1,6 @@
 using FightingScene.Units;
 using UnityEditor;
+using UnityEngine;
 
 namespace Effects
 {
@@ -16,6 +17,8 @@ namespace Effects
             
             unit.currentShield += _shieldValue;
             _isUsed = true;
+            
+            Debug.Log($"Наложил: {_shieldValue}");
             
             return unit.CurrentStats;
         }

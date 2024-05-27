@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using Effects;
 using FightingScene;
-using FightingScene.Units;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
+using Unit = FightingScene.Units.Unit;
 
 public class Ability : IAction
 {

@@ -14,5 +14,13 @@ namespace FightingScene.Units
             };
             Ultimate = new Ability(new() { new BurnBuff((int)(CurrentStats.Damage * 0.35), 3) }, new(), "Колющая рана");
         }
+        
+        public override Ability UseAbility() => new (new (), new(), "Багровый шип")
+        {
+            Attack = new Attack((int)(CurrentStats.Damage * 1.25), Buffs, TypeOfAttack.Single)
+        };
+        
+        public override Ability UseUltimate() => new (new() 
+            { new BurnBuff((int)(CurrentStats.Damage * 0.35), 3) }, new(), "Колющая рана");
     }
 }

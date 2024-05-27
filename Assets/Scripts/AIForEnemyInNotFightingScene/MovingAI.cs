@@ -81,7 +81,7 @@ public class MovingAI : MonoBehaviour
         if (_boxCollider.IsTouching(_playerCollider) && !_isStart)
         {
             _isStart = true;
-            SetedUnitsFromPreviousScene.SaveCharactersAndEnemies(enemiesInFight);
+            SetedUnitsFromPreviousScene.SaveEnemies(enemiesInFight);
         }
     }
     
