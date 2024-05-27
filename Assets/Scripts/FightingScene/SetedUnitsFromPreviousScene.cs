@@ -24,6 +24,7 @@ namespace FightingScene
         {
             savedShards.Add(shard);
         }
+        
         public static void SetCharactersAndEnemies(List<GameObject> enemies, List<GameObject> characters = null)
         {
             
