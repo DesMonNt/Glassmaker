@@ -20,13 +20,12 @@ namespace FightingScene
             }
         }
 
-        public static void SaveShard(IBuff shard)
+        public static void SavaShard(IBuff shard)
         {
             savedShards.Add(shard);
         }
         public static void SetCharactersAndEnemies(List<GameObject> enemies, List<GameObject> characters = null)
         {
-            
             // foreach (var characterPrefabPath in charactersPrefabsPaths)
             // {
             //     var characterPrefab = Resources.Load(characterPrefabPath) as GameObject;
@@ -48,10 +47,7 @@ namespace FightingScene
             // а не сразу, иначе врагов не будет
             
             enemies.Clear();
-            foreach (var enemy in enemiesPrefabs)
-            {
-                enemies.Add(enemy);
-            }
+            enemies.AddRange(enemiesPrefabs);
         }
     }
 }

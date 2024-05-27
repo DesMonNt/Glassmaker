@@ -8,7 +8,7 @@ namespace FightingScene.Units
     {
         public Blacksmith() : base(new UnitStats(4000, 0.2f, 300, 100, false, 0.1f, TypeOfAttack.Single, 3))
         {
-            Skill = new Ability(new List<IBuff> { new ShieldBuff((int)(0.17 * CurrentStats.MaxHealth)) }, new List<IBuff>(), "Лазурная защита", Targets.Character);
+            Skill = new Ability(new List<IBuff> { new ShieldBuff((int)(0.47 * CurrentStats.MaxHealth)) }, new List<IBuff>(), "Лазурная защита", Targets.Character);
             Ultimate = new Ability(new List<IBuff> { new ShieldHealBuff(0.09f, 3) }, new List<IBuff>(), "Исцеляющий щит", Targets.Character);
         }
 

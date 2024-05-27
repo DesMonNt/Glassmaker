@@ -1,17 +1,23 @@
 using FightingScene.Units;
+using UnityEditor;
 
 namespace Effects
 {
     public class ShieldBuff: IBuff
     {
         private readonly int _shieldValue;
+        private bool _isUsed;
 
         public ShieldBuff(int shieldValue) => _shieldValue = shieldValue;
         public UnitStats ApplyBuff(Unit unit)
         {
-            unit.currentShield += _shieldValue;
+            if (_isUsed)
+                return unit.CurrentStats;
             
-            return new UnitStats(unit.CurrentStats);
+            unit.currentShield += _shieldValue;
+            _isUsed = true;
+            
+            return unit.CurrentStats;
         }
     }
 }

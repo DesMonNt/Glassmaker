@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using AI;
 using Effects;
 
 namespace FightingScene.Units
@@ -10,10 +11,11 @@ namespace FightingScene.Units
         private bool _secondWish;
         private bool _thirdWish;
         
-        public Glassmaker() : base(new UnitStats(20000, 0.2f, 1100, 80, false, 0.1f, TypeOfAttack.Group, 0))
+        public Glassmaker() : base(new UnitStats(20000, 0.2f, 950, 80, false, 0.1f, TypeOfAttack.Single, 0))
         {
+            Brain = new DamageDealerAI(this);
             Ultimate = new Ability(new List<IBuff>(), 
-                new List<IBuff> { new ShieldBuff((int)(0.1 * CurrentStats.MaxHealth)) }, "Хрустальный доспех");
+                new List<IBuff> { new ShieldBuff((int)(0.2 * CurrentStats.MaxHealth)) }, "Хрустальный доспех");
         }
 
         public override Ability UseAbility()
@@ -32,18 +34,18 @@ namespace FightingScene.Units
                 return new Ability(new List<IBuff>(), new List<IBuff>(), "Первое желание: Сила");
             }
             
-            if (!_firstWish)
+            if (!_secondWish)
             {
-                _firstWish = true;
+                _secondWish = true;
                 
-                return new Ability(new List<IBuff>(), new List<IBuff>(), "Первое желание: Жизнь");
+                return new Ability(new List<IBuff>(), new List<IBuff>(), "Второе желание: Жизнь");
             }
 
             _thirdWish = true;
 
-            return new Ability(new List<IBuff>(), new List<IBuff>(), "Третье желание: Последнее")
+            return new Ability(new List<IBuff>(), new List<IBuff>(), "Третье желание: Последнее", Targets.Character)
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 3), Buffs, TypeOfAttack.Aoe)
+                Attack = new Attack((int)(CurrentStats.Damage * 3), Buffs, TypeOfAttack.Single)
             };
         }
     }
