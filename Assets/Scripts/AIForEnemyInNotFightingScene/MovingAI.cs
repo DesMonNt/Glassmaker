@@ -112,4 +112,10 @@ public class MovingAI : MonoBehaviour
         if (!other.gameObject.CompareTag("Player"))
             _currentTarget = GetWalk();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+            _currentTarget = GetWalk();
+    }
 }
