@@ -8,6 +8,7 @@ public static class Saves
 
     public static Dictionary<int, ExploreObject> Fights = new()
     {
+        [101] = new ExploreObject(Resources.Load("Fight1") as GameObject),
         [102] = new ExploreObject(Resources.Load("Fight2") as GameObject)
     };
     public static Dictionary<int, ExploreObject> Shards = new()

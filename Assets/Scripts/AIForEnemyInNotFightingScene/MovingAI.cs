@@ -40,7 +40,7 @@ public class MovingAI : MonoBehaviour
         };
         _player = GameObject.FindWithTag("Player");
         _playerCollider = _player.GetComponent<Collider2D>();
-        _speed = 5;
+        _speed = 3;
         _transform = transform;
         _startPosition = _transform.position;
         _boxCollider = GetComponent<BoxCollider2D>();
@@ -94,9 +94,15 @@ public class MovingAI : MonoBehaviour
             : delta;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (!other.gameObject.CompareTag("Player"))
+            _currentTarget = GetWalk();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
             _currentTarget = GetWalk();
     }
 }
