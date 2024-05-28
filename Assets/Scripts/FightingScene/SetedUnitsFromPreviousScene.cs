@@ -23,6 +23,7 @@ namespace FightingScene
         public static void SaveShard(IBuff shard)
         {
             savedShards.Add(shard);
+            Debug.Log($"{savedShards.Count}");
         }
         
         public static void SetCharactersAndEnemies(List<GameObject> enemies, List<GameObject> characters = null)
