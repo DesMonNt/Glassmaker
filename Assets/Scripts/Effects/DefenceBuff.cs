@@ -22,7 +22,7 @@ namespace Effects
             _duration--;
             
             var currentArmor = unit.CurrentStats.Armor;
-            currentArmor = Math.Clamp(currentArmor + _changeDefence, 0, 1);
+            currentArmor = Math.Clamp(currentArmor + _changeDefence, 0, 0.9f);
             
             return new UnitStats(unit.CurrentStats, armor: currentArmor);
         }

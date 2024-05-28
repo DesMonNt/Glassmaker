@@ -33,6 +33,12 @@ namespace FightingScene
                 character.GetComponent<Unit>().RemoveAllBuffs();
             }
             
+            // foreach (var characterPrefabPath in charactersPrefabsPaths)
+            // {
+            //     var characterPrefab = Resources.Load(characterPrefabPath) as GameObject;
+            //     characters.Add(characterPrefab);
+            // }
+            //
 
             foreach (var gameObject in characters)
             {
