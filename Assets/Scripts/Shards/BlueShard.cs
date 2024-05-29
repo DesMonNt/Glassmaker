@@ -23,6 +23,6 @@ public class AzureShard : MonoBehaviour
     {
         canvas.SetActive(false);
         Debug.Log($"{nameOfBuff.text}");
-        SetedUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAzureBuff[nameOfBuff.text]);
+        SetUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAzureBuff[nameOfBuff.text]);
     }
 }

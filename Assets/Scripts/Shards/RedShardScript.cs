@@ -20,7 +20,6 @@ public class CrimsonShardScript : MonoBehaviour
     public void GetClicked()
     {
         canvas.SetActive(false);
-        Debug.Log($"{nameOfBuff.text}");
-        SetedUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToCrimsonBuff[nameOfBuff.text]);
+        SetUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToCrimsonBuff[nameOfBuff.text]);
     }
 }

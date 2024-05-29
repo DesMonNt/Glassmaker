@@ -26,6 +26,5 @@ namespace FightingScene.Units
         
         public override Ability UseUltimate() => new (new List<IBuff> 
             { new MaxHPBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
-
     }
 }

@@ -13,7 +13,7 @@ namespace SceneScripts
             if (!other.CompareTag("Player") || _isUsed) 
                 return;
             _isUsed = true;
-            SetedUnitsFromPreviousScene.SaveCharacters(character);
+            SetUnitsFromPreviousScene.SaveCharacters(character);
         }
     }
 }

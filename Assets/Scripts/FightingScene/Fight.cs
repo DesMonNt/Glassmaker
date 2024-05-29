@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Effects;
 using Unit = FightingScene.Units.Unit;
 using FightingScene;
+using FightingScene.Units;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -16,8 +17,8 @@ using UnityEngine.UI;
 public class Fight : MonoBehaviour
 {
     public int FightKey;
-    public List<GameObject> enemies;
-    public List<GameObject> squads;
+    public List<GameObject> enemies = new();
+    public List<GameObject> squads = new();
     private Queue<Unit> _readyFighters;
     private List<Unit> _charComponents;
     private List<Unit> _enemyComponents;
@@ -44,6 +45,16 @@ public class Fight : MonoBehaviour
     private List<SpriteRenderer> _ultPointsRenderers;
     [SerializeField] private List<GameObject> queueCircles;
     private List<SpriteRenderer> _queueCirclesRenderers;
+
+    public GameObject winBoss;
+    public GameObject winEnemy;
+    public GameObject lose;
+    //
+    // private Sprite _winBossSprite;
+    // private Sprite _winEnemySprite;
+    // private Sprite _loseSprite;
+
+    private bool _isBossFight;
     
     private ViewDescription _mouseAttack;
     private ViewDescription _mouseSkill;
@@ -65,6 +76,9 @@ public class Fight : MonoBehaviour
 #region InitializeMembers
     private void Awake()
     {
+        winBoss.GameObject().SetActive(false);
+        winEnemy.GameObject().SetActive(false);
+        lose.GameObject().SetActive(false);
         _selectedComponentsOrder = new();
         _queueCirclesRenderers = new();
         _charComponentsOrder = new();
@@ -95,10 +109,9 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
-        SetedUnitsFromPreviousScene.SetCharactersAndEnemies(enemies, squads);
-        Debug.Log(enemies.Count);
-        var firstPosition = new Vector3(-520, 420);
-        var firstPositionToEnemy = new Vector3(400, 480);
+        (squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
+        var firstPosition = new Vector3(-340, 0);
+        var firstPositionToEnemy = new Vector3(580, 0);
         
         SpawnFighters(firstPosition, _charComponents, _allUnits, squads);
         SpawnFighters(firstPositionToEnemy, _enemyComponents, _allUnits, enemies);
@@ -130,6 +143,20 @@ public class Fight : MonoBehaviour
         for (var i = 0; i < _currentPoints; i++) _ultPointsRenderers[i].sprite = ultSpriteActive;
 
         _selectedComponentsOrder = _enemyComponentsOrder;
+
+        foreach (var comp in _charComponentsOrder)
+        {
+            if (comp.GetComponent<Glassmaker>() is null) 
+                continue;
+            _isBossFight = true;
+            break;
+        }
+        
+        foreach (var myUnit in _charComponentsOrder)
+        {
+            foreach (var shard in SetUnitsFromPreviousScene.savedShards) 
+                myUnit.AddBuff(shard);
+        }
         
         StartCoroutine(Battle());
     }
@@ -245,6 +272,8 @@ public class Fight : MonoBehaviour
             IncreaseTurnMethod(_enemyComponentsOrder);
         }
 
+        yield return StartCoroutine(EndingScene());
+
         Saves.Fights.Remove(FightKey);
         SceneManager.LoadScene("Tower exploration");
     }
@@ -252,6 +281,24 @@ public class Fight : MonoBehaviour
 
 #endregion
 
+    private IEnumerator EndingScene()
+    {
+        if (_charComponentsOrder.Count > 0)
+        {
+            if (!_isBossFight)
+            {
+                winEnemy.GameObject().SetActive(true);
+                
+                yield return new WaitForSeconds(4);
+            }
+                
+            else winBoss.GameObject().SetActive(true);
+        }
+        
+        else if (_enemyComponentsOrder.Count > 0) lose.GameObject().SetActive(true);
+
+        yield return new WaitForSeconds(2);
+    }
     private void PrepareCommonAttack()
     {
         RandomSpawner.SpawnDelay = 86;
@@ -373,10 +420,17 @@ public class Fight : MonoBehaviour
     private void SpawnFighters<T>
         (Vector3 firstPositionality, List<T> fightersComps, List<T> allComps, List<GameObject> fighters)
     {
+        var coefficient = -1;
+        if (firstPositionality == new Vector3(-520, 480))
+            coefficient = 1;
         for (var i = 0; i < fighters.Count; i++)
         {
-            firstPositionality += new Vector3((float)(180 * Math.Pow(-1, i)), -240);
-            var initObject = Instantiate(fighters[i], firstPositionality, Quaternion.identity);
+            var initObject = new GameObject();
+            if (i == 0)
+                initObject = Instantiate(fighters[i], firstPositionality, new Quaternion());
+            else 
+                initObject = Instantiate(fighters[i], firstPositionality + new Vector3(180 * coefficient, 
+                (float) (-240 * Math.Pow(-1, i))), Quaternion.identity);
             var comp = initObject.GetComponent<T>();
             fightersComps.Add(comp);
             allComps.Add(comp);

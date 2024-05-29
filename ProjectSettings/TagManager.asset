@@ -14,6 +14,8 @@ TagManager:
   - C
   - BigB
   - Wall
+  - Circle
+  - Shard
   layers:
   - Default
   - TransparentFX

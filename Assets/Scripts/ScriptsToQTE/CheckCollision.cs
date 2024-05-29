@@ -26,27 +26,18 @@ public class CheckCollision : MonoBehaviour
             return;
         if (IsInGreenZone())
         {
-            Debug.Log("green");
-            
-            if (!_isPulsing)
-            {
-                Debug.Log("greenadf");
-
+            if (!_isPulsing) 
                 Pulse(_sprite, Color.green, .1f);
-            }
             AccuracyText.CurrentSum += 3;
         }
         else if (IsInYellowZone())
         {
-            Debug.Log("yellow");
-
             if (!_isPulsing)
                 Pulse(_sprite, Color.green, .1f);
             AccuracyText.CurrentSum += 2;
         }
         else
         {
-            Debug.Log("else");
             if (!_isPulsing)
                 Pulse(_sprite, Color.green, .1f);
             AccuracyText.CurrentSum++;
@@ -64,30 +55,19 @@ public class CheckCollision : MonoBehaviour
 
     private async Task Pulse(SpriteRenderer graphic, Color color, float totalTime)
     {
-        
-            Debug.Log("pulsing");
-
             if (_isPulsing)
                 return;
             _isPulsing = true;
             var time = 0f;
             var startColor = graphic.color;
-            Debug.Log(time < totalTime / 2);
-            Debug.Log("hi))))");
-
 
             while (time < totalTime / 2)
             {
-                Debug.Log(graphic.color);
-
                 graphic.color += (color - startColor) * Time.deltaTime / totalTime;
                 time += Time.deltaTime;
-                Debug.Log(graphic.color);
 
                 await Task.Delay(10);
             }
-
-            Debug.Log(graphic.color);
 
             while (time < totalTime)
             {
@@ -97,6 +77,5 @@ public class CheckCollision : MonoBehaviour
             }
 
             _isPulsing = false;
-        
     }
 }

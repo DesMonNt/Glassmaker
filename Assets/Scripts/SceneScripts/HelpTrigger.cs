@@ -22,7 +22,7 @@ public class Trigger : MonoBehaviour
     private IEnumerator EightSecondsWait()
     {
         help.SetActive(true);
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(6);
         help.SetActive(false);
     } 
 }

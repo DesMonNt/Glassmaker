@@ -54,7 +54,6 @@ namespace FightingScene.Units
             if (damage < 0)
             {
                 currentHealthPoints = Math.Clamp(currentHealthPoints - damage, 0, CurrentStats.MaxHealth);
-                
                 return;
             }
             
@@ -68,10 +67,8 @@ namespace FightingScene.Units
                     break;
                 default:
                 {
-                    Debug.Log($"{name}, {currentShield}");
                     var delta = (int)(currentShield - damage * (1 - CurrentStats.Armor));
                     currentShield = Math.Clamp(delta, 0, Math.Abs(delta));
-                    Debug.Log($"{name}, {currentShield}");
                 
                     if (delta < 0)
                         currentHealthPoints += delta;

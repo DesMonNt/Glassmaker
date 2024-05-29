@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Effects;
 using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEngine;
 using Unit = FightingScene.Units.Unit;
 
 namespace FightingScene
 {
     public class Attack : IAction
     {
-        public int Damage;
+        public readonly int Damage;
         [CanBeNull] public IEnumerable<IBuff> AttackEffects;
-        public TypeOfAttack TypeAttack;
+        public readonly TypeOfAttack TypeAttack;
 
         public Attack(int damage, [CanBeNull] IEnumerable<IBuff> buffs, TypeOfAttack type)
         {

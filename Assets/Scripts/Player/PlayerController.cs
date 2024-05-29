@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -41,11 +37,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("BigB") && other is BoxCollider2D)
-        {
-            loadingScene.SetActive(true);
-            StartCoroutine(ChangeColor());
-        }
+        if (!other.CompareTag("BigB") || other is not CircleCollider2D) 
+            return;
+        loadingScene.SetActive(true);
+        StartCoroutine(ChangeColor());
     }
 
     private IEnumerator ChangeColor()

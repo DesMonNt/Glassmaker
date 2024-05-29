@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4879184544310357984}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -201.42506, y: -12.9020405, z: 0}
+  m_LocalPosition: {x: -197.64, y: -8.21, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,8 +134,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92140d76a57f064b8e7e1da334052cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  key: 0
   pic: {fileID: 21300000, guid: 3a74e68e28302c245925a1f373f57ef4, type: 3}
-  canvas: {fileID: 1204846100777597356, guid: 93ae8d0b206f5e44195172dac6b81884, type: 3}
+  canvas: {fileID: 5210065843529685992, guid: d4a806a1bfe240f46875c28711acdb90, type: 3}
+  crimsonShardBuff: "+16% \u043A \u0443\u0440\u043E\u043D\u0443"
+  azureShardBuff: "+8% \u043A \u0437\u0430\u0449\u0438\u0442\u0435"
+  amberShardBuff: "+10% \u043A \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u0438"
+  crimsonShard: {fileID: 0}
+  azureShard: {fileID: 0}
+  amberShard: {fileID: 0}
+  crimsonShardText: {fileID: 0}
+  azureShardText: {fileID: 0}
+  amberShardText: {fileID: 0}
 --- !u!82 &519996916098895349
 AudioSource:
   m_ObjectHideFlags: 0
@@ -148,7 +158,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c9569256c1650e24abcb79162938e564, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 0
   Mute: 0

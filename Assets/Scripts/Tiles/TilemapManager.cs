@@ -38,7 +38,6 @@ public class TilemapManager : MonoBehaviour
         if (level is null)
         {
             Debug.Break();
-            Debug.LogError($"Level {_levelIndex} doesn't exist");
             return;
         }
         

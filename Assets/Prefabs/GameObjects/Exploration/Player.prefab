@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3879691154710661181}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.3, y: 7.7, z: 0}
+  m_LocalPosition: {x: 43, y: 40.8, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,8 +75,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: c4a21709c2cbee844972f77549fa48d2, type: 3}
+  m_SortingOrder: 26
+  m_Sprite: {fileID: 21300000, guid: 1bd2f38391b2e534fadb8bdc93a5141f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 8
+  loadingScene: {fileID: 0}
+  nameNextScene: FightingScene
 --- !u!70 &4958676246315006599
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

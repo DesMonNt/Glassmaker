@@ -24,7 +24,6 @@ public class HealthBarToEnemy : MonoBehaviour
             if (GetComponent(unitType) is null) 
                 continue;
             _comp = (Unit)GetComponent(unitType);
-            Debug.Log($"{unitType.FullName}, {gameObject.name}");
         }
     }
 

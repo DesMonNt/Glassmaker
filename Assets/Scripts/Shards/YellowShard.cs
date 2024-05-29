@@ -21,7 +21,6 @@ public class AmberShard : MonoBehaviour
     public void GetClicked()
     {
         canvas.SetActive(false);
-        Debug.Log($"{nameOfBuff.text}");
-        SetedUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAmberBuff[nameOfBuff.text]);
+        SetUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAmberBuff[nameOfBuff.text]);
     }
 }
