@@ -3954,7 +3954,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7e99e3650d0bef040a198f05b9f94c24, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.114
   m_Pitch: 1
@@ -4378,6 +4378,8 @@ MonoBehaviour:
   - {fileID: 370781500}
   - {fileID: 82551238}
   - {fileID: 372915725}
+  basicFight: {fileID: 8300000, guid: 7e99e3650d0bef040a198f05b9f94c24, type: 3}
+  bossFight: {fileID: 8300000, guid: f5b60edbf2120bd4a8ea4bbcfc9dc8f5, type: 3}
 --- !u!4 &1975885273
 Transform:
   m_ObjectHideFlags: 0
@@ -4406,7 +4408,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 55456086f1bda90419aa67f047aac686, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0
+  m_Volume: 0.623
   m_Pitch: 1
   Loop: 0
   Mute: 0

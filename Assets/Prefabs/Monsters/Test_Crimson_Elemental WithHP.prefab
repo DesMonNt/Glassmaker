@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6603774, g: 0.09344954, b: 0.17262661, a: 1}
+  m_Color: {r: 0.9547169, g: 0.016213447, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 44880606955d7794e9c16f9155e30b63, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 594eef0f53452db47b1c719d4df8d95e, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -161,8 +161,8 @@ GameObject:
   - component: {fileID: 1681619133556764580}
   - component: {fileID: 3416333618310193295}
   - component: {fileID: 7787926393379458147}
-  - component: {fileID: 2801148850861140595}
   - component: {fileID: 3529172173203359329}
+  - component: {fileID: 5155961348690058472}
   m_Layer: 0
   m_Name: Test_Crimson_Elemental WithHP
   m_TagString: Enemy
@@ -179,7 +179,7 @@ Transform:
   m_GameObject: {fileID: 4947941574762787136}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1986.4055, y: -1563.0918, z: 0}
+  m_LocalPosition: {x: -228.57434, y: 21.279026, z: 0}
   m_LocalScale: {x: 14.031038, y: 12.053235, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -250,24 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d28e72e481bdc3f4db6b22fa67bdeb0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepValue: 0.6
+  stepValue: 0.4
   maxValue: 1
---- !u!114 &2801148850861140595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4947941574762787136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55fb16e3331b85409a22ecd9848db5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: "\u0425\u0443\u0439"
-  currentHealthPoints: 0
-  currentShield: 0
-  speed: 0
 --- !u!114 &3529172173203359329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +266,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpBar: {fileID: 5097305089875627383}
   hpBarWhenLosingHp: {fileID: 3505043021829683494}
+--- !u!114 &5155961348690058472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4947941574762787136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55fb16e3331b85409a22ecd9848db5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSprite: {fileID: 0}
+  skillSprite: {fileID: 0}
+  ultimateSprite: {fileID: 0}
+  name: Crimson
+  currentHealthPoints: 0
+  currentShield: 0
+  speed: 0
 --- !u!1 &5214948685279029898
 GameObject:
   m_ObjectHideFlags: 0

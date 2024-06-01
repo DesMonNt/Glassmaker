@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movement;
     private Rigidbody2D _rb;
     
+    private Animator _playerAnimator;
+    
     [SerializeField] public GameObject loadingScene;
     private LoadingBar _loading;
     [SerializeField] public string nameNextScene;
 
     private void Awake()
     {
+        _playerAnimator = GetComponent<Animator>();
         _loading = loadingScene.GetComponent<LoadingBar>();
         _playerControls = new PlayerContols();
         _rb = GetComponent<Rigidbody2D>();
@@ -31,8 +34,14 @@ public class PlayerController : MonoBehaviour
     private void OnEnable() => _playerControls.Enable();
 
     private void Update(){
-        PlayerInput();
-        Move();
+        if (!Input.anyKey)
+            _playerAnimator.Play("StopAnimation");
+        else
+        {
+            PlayerInput();
+            Move();
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -51,5 +60,9 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerInput() => _movement = _playerControls.Movement.Move.ReadValue<Vector2>();
 
-    private void Move() => _rb.MovePosition(_rb.position + _movement * (moveSpeed * Time.fixedDeltaTime));
+    private void Move()
+    {
+        _playerAnimator.Play("PlayerAnimation");
+        _rb.MovePosition(_rb.position + _movement * (moveSpeed * Time.fixedDeltaTime));
+    }
 }

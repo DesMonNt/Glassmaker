@@ -1,14 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using FightingScene;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class NPCScript : MonoBehaviour
 {
-    public GameObject dialoge;
+    [FormerlySerializedAs("dialoge")] public GameObject dialog;
     [SerializeField] public Sprite dialoge1;
     [SerializeField] public Sprite dialoge2;
     private bool _isStart;
@@ -18,8 +14,8 @@ public class NPCScript : MonoBehaviour
 
     private void Start()
     {
-        _renderer = dialoge.GetComponent<SpriteRenderer>();
-        dialoge.SetActive(false);
+        _renderer = dialog.GetComponent<SpriteRenderer>();
+        dialog.SetActive(false);
         blackOut.SetActive(false);
     }
 
@@ -28,18 +24,18 @@ public class NPCScript : MonoBehaviour
         if (!other.CompareTag("Player") || _isStart) 
             return;
         _isStart = true;
-        StartCoroutine(GetDialoge());
+        StartCoroutine(GetDialog());
     }
 
-    private IEnumerator GetDialoge()
+    private IEnumerator GetDialog()
     {
         _renderer.sprite = dialoge1;
-        dialoge.SetActive(true);
+        dialog.SetActive(true);
         blackOut.SetActive(true);
         yield return new WaitForSeconds(8);
         _renderer.sprite = dialoge2;
         yield return new WaitForSeconds(8);
-        dialoge.SetActive(false);
+        dialog.SetActive(false);
         blackOut.SetActive(false);
     }
 }

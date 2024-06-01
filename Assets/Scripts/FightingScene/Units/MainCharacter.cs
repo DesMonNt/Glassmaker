@@ -43,7 +43,7 @@ namespace FightingScene.Units
             
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела: Дождь")
             {
-                Attack = new Attack((ultimateAttackDamage), Buffs, TypeOfAttack.Group)
+                Attack = new Attack(ultimateAttackDamage, Buffs, TypeOfAttack.Group)
             };
         }
     }

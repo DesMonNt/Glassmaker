@@ -68,6 +68,10 @@ public class Fight : MonoBehaviour
     private int _numberOfChar;
     private Unit _selectedChar;
     private float _timer;
+
+    public AudioClip basicFight;
+    public AudioClip bossFight;
+    private AudioSource _audio;
     
 #region InitializeMembers
     private void Awake()
@@ -101,6 +105,7 @@ public class Fight : MonoBehaviour
         buttons.SetActive(false);
         qte.SetActive(false);
         skillName.GameObject().SetActive(false);
+        _audio = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -140,19 +145,20 @@ public class Fight : MonoBehaviour
 
         _selectedComponentsOrder = _enemyComponentsOrder;
 
-        foreach (var comp in _charComponentsOrder)
-        {
-            if (comp.GetComponent<Glassmaker>() is null) 
-                continue;
+        if (_enemyComponentsOrder.Any(comp => comp.GetComponent<Glassmaker>() is not null)) 
             _isBossFight = true;
-            break;
-        }
         
         foreach (var myUnit in _charComponentsOrder)
         {
             foreach (var shard in SetUnitsFromPreviousScene.savedShards) 
                 myUnit.AddBuff(shard);
         }
+
+        _audio.clip = _isBossFight 
+            ? bossFight 
+            : basicFight;
+        
+        _audio.Play();
         
         StartCoroutine(Battle());
     }
@@ -562,9 +568,6 @@ public class Fight : MonoBehaviour
                 skillName.GameObject().SetActive(true);
                 action.Execute(attacker, target);
                 
-                attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
-                    criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
-                
                 yield return StartCoroutine(GetDamageView(target, previousHp));
                 break;
             case Attack:
@@ -621,9 +624,10 @@ public class Fight : MonoBehaviour
                     }
 
                     case TypeOfAttack.Single:
-                    default:
                         yield return GetUnitAttackWithDamageView(attacker, target, attack);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
 
                 break;
