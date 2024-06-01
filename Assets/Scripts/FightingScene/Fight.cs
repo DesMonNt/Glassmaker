@@ -16,7 +16,7 @@ using UnityEngine.UI;
 
 public class Fight : MonoBehaviour
 {
-    public int FightKey;
+    [FormerlySerializedAs("FightKey")] public int fightKey;
     public List<GameObject> enemies = new();
     public List<GameObject> squads = new();
     private Queue<Unit> _readyFighters;
@@ -49,10 +49,6 @@ public class Fight : MonoBehaviour
     public GameObject winBoss;
     public GameObject winEnemy;
     public GameObject lose;
-    //
-    // private Sprite _winBossSprite;
-    // private Sprite _winEnemySprite;
-    // private Sprite _loseSprite;
 
     private bool _isBossFight;
     
@@ -110,8 +106,8 @@ public class Fight : MonoBehaviour
     private void Start()
     {
         (squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
-        var firstPosition = new Vector3(-340, 0);
-        var firstPositionToEnemy = new Vector3(580, 0);
+        var firstPosition = new Vector3(-430, 180);
+        var firstPositionToEnemy = new Vector3(420, 180);
         
         SpawnFighters(firstPosition, _charComponents, _allUnits, squads);
         SpawnFighters(firstPositionToEnemy, _enemyComponents, _allUnits, enemies);
@@ -274,7 +270,7 @@ public class Fight : MonoBehaviour
 
         yield return StartCoroutine(EndingScene());
 
-        Saves.Fights.Remove(FightKey);
+        Saves.Fights.Remove(fightKey);
         SceneManager.LoadScene("Tower exploration");
     }
     
@@ -289,7 +285,7 @@ public class Fight : MonoBehaviour
             {
                 winEnemy.GameObject().SetActive(true);
                 
-                yield return new WaitForSeconds(4);
+                yield return new WaitForSeconds(2);
             }
                 
             else winBoss.GameObject().SetActive(true);
@@ -319,8 +315,8 @@ public class Fight : MonoBehaviour
     private Coroutine StartAbility(Unit attacker, Unit target, KeyCode code) =>
         code switch
         {
-            KeyCode.W => StartCoroutine(Abilitier(attacker, target)),
-            KeyCode.R => StartCoroutine(Ultimater(attacker, target)),
+            KeyCode.W => StartCoroutine(AbilityUsage(attacker, target)),
+            KeyCode.R => StartCoroutine(UltimateUsage(attacker, target)),
             _ => throw new ArgumentOutOfRangeException(nameof(code), code, null)
         };
 
@@ -420,17 +416,20 @@ public class Fight : MonoBehaviour
     private void SpawnFighters<T>
         (Vector3 firstPositionality, List<T> fightersComps, List<T> allComps, List<GameObject> fighters)
     {
-        var coefficient = -1;
-        if (firstPositionality == new Vector3(-520, 480))
-            coefficient = 1;
+        var coefficient = 1;
+        if (firstPositionality == new Vector3(420, 180))
+            coefficient = -1;
         for (var i = 0; i < fighters.Count; i++)
         {
-            var initObject = new GameObject();
+            GameObject initObject;
             if (i == 0)
                 initObject = Instantiate(fighters[i], firstPositionality, new Quaternion());
-            else 
-                initObject = Instantiate(fighters[i], firstPositionality + new Vector3(180 * coefficient, 
-                (float) (-240 * Math.Pow(-1, i))), Quaternion.identity);
+            else
+            {
+                firstPositionality += new Vector3((float)(180 * coefficient * Math.Pow(-1, i)), -200);
+                initObject = Instantiate(fighters[i], firstPositionality, Quaternion.identity);
+            }
+                
             var comp = initObject.GetComponent<T>();
             fightersComps.Add(comp);
             allComps.Add(comp);
@@ -452,7 +451,7 @@ public class Fight : MonoBehaviour
 
     #region Enumerators
 
-    private IEnumerator Abilitier(Unit owner, Unit target)
+    private IEnumerator AbilityUsage(Unit owner, Unit target)
     {
         skillName.text = owner.Skill.Name;
         skillName.GameObject().SetActive(true);
@@ -461,13 +460,12 @@ public class Fight : MonoBehaviour
             yield return Offensive(owner, target, owner.Skill.Attack, owner.Skill.Name);
     }
     
-    private IEnumerator Ultimater(Unit owner, Unit target)
+    private IEnumerator UltimateUsage(Unit owner, Unit target)
     {
         owner.UseUltimate().Execute(owner, target);
         if (owner.Ultimate.Attack is not null)
             yield return Offensive(owner, target, owner.Ultimate.Attack, owner.Ultimate.Name);
     }
-    
     
     private object GetUnitAttackWithDamageView(Unit attacker, Unit target, Attack attack)
     {
@@ -562,17 +560,74 @@ public class Fight : MonoBehaviour
                     yield return Offensive(attacker, target, skill.Attack, skill.Name);
                 skillName.text = skill.Name;
                 skillName.GameObject().SetActive(true);
+                action.Execute(attacker, target);
+                
+                attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
+                    criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
+                
+                yield return StartCoroutine(GetDamageView(target, previousHp));
                 break;
             case Attack:
                 skillName.text = "Обычная атака";
                 skillName.GameObject().SetActive(true);
+                var attack = (Attack)action;
+                switch (attack.TypeAttack)
+                {
+                    case TypeOfAttack.Aoe:
+                    {
+                        var first = _charComponentsOrder[0];
+                        var second = _charComponentsOrder[1 % _charComponentsOrder.Count];
+                        var third = _charComponentsOrder[2 % _charComponentsOrder.Count];
+
+                        yield return GetUnitAttackWithDamageView(attacker, first, attack);
+
+                        if (second != first)
+                            yield return GetUnitAttackWithDamageView(attacker, second, attack);
+
+                        if (third != first && third != second)
+                            yield return GetUnitAttackWithDamageView(attacker, third, attack);
+                        break;
+                    }
+
+                    case TypeOfAttack.Group:
+                    {
+                        var neededIndex = _charComponentsOrder.IndexOf(target);
+                        var previous = target;
+                        var next = target;
+                        if (neededIndex != 0)
+                            previous = _charComponentsOrder[neededIndex - 1];
+                        if (neededIndex != _charComponentsOrder.Count - 1)
+                            next = _charComponentsOrder[neededIndex + 1];
+
+                        if (neededIndex == 0)
+                        {
+                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                            yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
+                        }
+                        else if (neededIndex == _charComponentsOrder.Count - 1)
+                        {
+                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                            yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
+                        }
+
+                        else
+                        {
+                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                            yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
+                            yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
+                        }
+
+                        break;
+                    }
+
+                    case TypeOfAttack.Single:
+                    default:
+                        yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                        break;
+                }
+
                 break;
         }
-
-        action.Execute(attacker, target);
-        attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
-            criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
-        yield return StartCoroutine(GetDamageView(target, previousHp));
     }
 
     private IEnumerator GetDamageView(Unit target, float previousHp)

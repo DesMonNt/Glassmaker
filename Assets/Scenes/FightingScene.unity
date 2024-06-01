@@ -3956,7 +3956,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7e99e3650d0bef040a198f05b9f94c24, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.574
+  m_Volume: 0.114
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4337,13 +4337,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4560c060334a8324796c840a5c25bc35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FightKey: 101
+  fightKey: 101
   enemies:
-  - {fileID: 6928505258116602385, guid: 54ac6d8dee4d9d047aa0293113e2b74b, type: 3}
-  - {fileID: 5599372507147096884, guid: 6769ef57def456e439adb1188cb4d880, type: 3}
+  - {fileID: 3831397986757872553, guid: c23bb911dccfa8b40ba5d7a9e4becaf1, type: 3}
+  - {fileID: 382332172058350637, guid: 40ef2f8d3de592748817ab03f21baaa5, type: 3}
   - {fileID: 5599372507147096884, guid: 6769ef57def456e439adb1188cb4d880, type: 3}
   squads:
   - {fileID: 3459059545088758473, guid: f156cdd6f75bfdd4887423690e8e8250, type: 3}
+  - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
   - {fileID: 585566850692105175, guid: f1a42e92fb67d854bb9b8b0383026d4c, type: 3}
   qte: {fileID: 7483550258029446731}
   qteAccuracy: {fileID: 4859831378510807771}

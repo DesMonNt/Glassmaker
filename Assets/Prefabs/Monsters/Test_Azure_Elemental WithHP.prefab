@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d28e72e481bdc3f4db6b22fa67bdeb0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepValue: 0.6
+  stepValue: 0.3
   maxValue: 1
 --- !u!114 &1360680203530201947
 MonoBehaviour:
@@ -202,6 +202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce8a03c2e660ff347a77714b3a488763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSprite: {fileID: 0}
+  skillSprite: {fileID: 0}
+  ultimateSprite: {fileID: 0}
   name: Azure
   currentHealthPoints: 0
   currentShield: 0

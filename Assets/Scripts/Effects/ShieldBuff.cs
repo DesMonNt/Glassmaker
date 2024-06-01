@@ -18,8 +18,6 @@ namespace Effects
             unit.currentShield += _shieldValue;
             _isUsed = true;
             
-            Debug.Log($"Наложил: {_shieldValue}");
-            
             return unit.CurrentStats;
         }
     }
