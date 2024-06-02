@@ -219,7 +219,7 @@ public class Fight : MonoBehaviour
                         _mouseAttack.isAttack = false;
                     }
 
-                    if (_activeSkill)
+                    else if (_activeSkill)
                     {
                         if (nextUnit.Skill.Target == Targets.Character)
                         {
@@ -236,7 +236,7 @@ public class Fight : MonoBehaviour
                         _activeSkill = false;
                     }
                     
-                    if (_activeUlt)
+                    else if (_activeUlt)
                     {
                         if (nextUnit.Ultimate.Target == Targets.Character)
                         {

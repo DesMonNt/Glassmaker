@@ -10,7 +10,7 @@ public class Circle : MonoBehaviour
     [FormerlySerializedAs("EndPos")] public Vector3 endPos;
     public Vector3 CurrentPos => transform.position;
 
-    public float Time_ { get; set; }
+    public float time;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +21,10 @@ public class Circle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time_ < 1)
+        if (time < 1)
         {
-            transform.position = Vector3.Lerp(startPos, endPos, Sigmoid(Time_));
-            Time_ += Time.deltaTime * 2;
+            transform.position = Vector3.Lerp(startPos, endPos, Sigmoid(time));
+            time += Time.deltaTime * 2;
         }
     }
 

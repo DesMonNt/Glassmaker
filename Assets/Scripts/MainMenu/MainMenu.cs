@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
             circleComp.endPos = _selected.circlePos;
 
             circleComp.startPos = circleComp.CurrentPos;
-            circleComp.Time_ = 0;
+            circleComp.time = 0;
             _hoverSound.Play();
         }
     }
@@ -103,7 +103,7 @@ public class MainMenu : MonoBehaviour
             
         }
 
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             selectedIndex = (selectedIndex + _menuButtonsList.Count) % _menuButtonsList.Count;
             Selected = _menuButtonsList[selectedIndex];

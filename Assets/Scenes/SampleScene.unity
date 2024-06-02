@@ -4242,7 +4242,7 @@ SpriteRenderer:
   m_Size: {x: 7.68, y: 7.68}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &882497053
@@ -4406,7 +4406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4bc51fd15c19c4459d39ad5a1726a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialoge: {fileID: 2004397938}
+  dialog: {fileID: 0}
+  dialoge1: {fileID: 0}
+  dialoge2: {fileID: 0}
+  blackOut: {fileID: 0}
 --- !u!1 &903473388
 GameObject:
   m_ObjectHideFlags: 0

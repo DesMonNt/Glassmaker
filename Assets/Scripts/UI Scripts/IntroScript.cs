@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -8,7 +9,7 @@ public class IntroScript : MonoBehaviour
     private VideoPlayer _videoPlayer;
     private ulong _frames;
     private bool _isPlay;
-    public GameObject buttons;
+    public List<GameObject> buttons = new();
     
     private void Start()
     {
@@ -19,7 +20,8 @@ public class IntroScript : MonoBehaviour
     public void StartGame()
     {
         video.SetActive(true);
-        buttons.SetActive(false);
+        foreach (var button in buttons)
+            button.SetActive(false);
         _isPlay = true;
     }
 
