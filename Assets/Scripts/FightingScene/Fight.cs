@@ -112,7 +112,7 @@ public class Fight : MonoBehaviour
     {
         (squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
         var firstPosition = new Vector3(-430, 180);
-        var firstPositionToEnemy = new Vector3(420, 180);
+        var firstPositionToEnemy = new Vector3(420, 140);
         
         SpawnFighters(firstPosition, _charComponents, _allUnits, squads);
         SpawnFighters(firstPositionToEnemy, _enemyComponents, _allUnits, enemies);
