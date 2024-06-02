@@ -11,6 +11,7 @@ namespace FightingScene
         private static List<GameObject> charactersPrefabs = new();
         private static List<GameObject> enemiesPrefabs = new();
         private static string folderName = "kskdjaknwb";
+        public static float volume = 1f;
 
         public static List<IBuff> savedShards = new();
         public static void SaveEnemies(List<GameObject> enemies) => enemiesPrefabs = enemies.ToList();

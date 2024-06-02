@@ -15,7 +15,6 @@ public class MainMenu : MonoBehaviour
 {  
     [SerializeField] private GameObject circle;
     [SerializeField] private GameObject[] texts;
-    private float alphaCoeffitient = .5f;
     private float opacity1;
     
     [SerializeField] private GameObject _menuButtons; 
@@ -27,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject _blackout;
 
-    private bool hadStarted = false;
+    private bool hadStarted;
 
     private int selectedIndex;
     [SerializeField] private MenuButton _selected;
@@ -51,13 +50,9 @@ public class MainMenu : MonoBehaviour
             circleComp.startPos = circleComp.CurrentPos;
             circleComp.Time_ = 0;
             _hoverSound.Play();
-            Debug.Log(_selected.circlePos);
-
-            
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         _selected = Selected;

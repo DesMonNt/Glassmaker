@@ -13,6 +13,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class Fight : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class Fight : MonoBehaviour
     public GameObject winEnemy;
     public GameObject lose;
 
+    private VideoPlayer _videoPlayer;
+    public GameObject titres;
+
     private bool _isBossFight;
     
     private ViewDescription _mouseAttack;
@@ -76,6 +80,7 @@ public class Fight : MonoBehaviour
 #region InitializeMembers
     private void Awake()
     {
+        _videoPlayer = titres.GetComponent<VideoPlayer>();
         winBoss.GameObject().SetActive(false);
         winEnemy.GameObject().SetActive(false);
         lose.GameObject().SetActive(false);
@@ -110,7 +115,7 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
-        (squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
+        //(squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
         var firstPosition = new Vector3(-430, 180);
         var firstPositionToEnemy = new Vector3(420, 140);
         
@@ -277,7 +282,9 @@ public class Fight : MonoBehaviour
         yield return StartCoroutine(EndingScene());
 
         Saves.Fights.Remove(fightKey);
-        SceneManager.LoadScene("Tower exploration");
+        SceneManager.LoadScene(_charComponentsOrder.Count > 0 
+            ? "Tower exploration" 
+            : "MainMenu");
     }
     
 
@@ -293,11 +300,19 @@ public class Fight : MonoBehaviour
                 
                 yield return new WaitForSeconds(2);
             }
-                
-            else winBoss.GameObject().SetActive(true);
+
+            else
+            {
+                winBoss.GameObject().SetActive(true);
+                _audio.Stop();
+                yield return new WaitForSeconds(3f);
+                titres.SetActive(true);
+                yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.H) || _videoPlayer.isPlaying);
+            }
         }
         
-        else if (_enemyComponentsOrder.Count > 0) lose.GameObject().SetActive(true);
+        else if (_enemyComponentsOrder.Count > 0) 
+            lose.GameObject().SetActive(true);
 
         yield return new WaitForSeconds(2);
     }

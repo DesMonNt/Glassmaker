@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
@@ -13,8 +15,8 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] public Vector3 circlePos;
 
     private MainMenu _mainMenu;
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         _mainMenu = GameObject.Find("Menu").GetComponent<MainMenu>();
         var rect = GetComponent<RectTransform>();
@@ -22,7 +24,6 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         var x = position.x ;
         var y = position.y;
         circlePos = new Vector3(x, y, 0);
-
     }
 
     public void SetPos()
