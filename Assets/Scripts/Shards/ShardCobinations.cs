@@ -11,25 +11,22 @@ public static class BuffInfo
     public static Dictionary<string, IBuff> KeyToCrimsonBuff = new()
     {
         ["+16% к урону"] = new DamageBuff(0.16f, int.MaxValue),
-        ["ХУЙ"] = new DamageBuff(0.16f, int.MaxValue),
-        ["Пизда"] = new DamageBuff(0.16f, int.MaxValue),
-        ["Залупа"] = new DamageBuff(0.16f, int.MaxValue)
+        ["+10% к урону"] = new DamageBuff(0.1f, int.MaxValue),
+        ["Очень горячий осколок"] = new BurnBuff(50, 2),
     };
     
     public static Dictionary<string, IBuff> KeyToAzureBuff = new()
     {
         ["+8% к защите"] = new DefenceBuff(0.08f, int.MaxValue),
-        ["АДСКАЯ ДРОЧКА ПЫЛЕСОСОМ"] = new DamageBuff(0.16f, int.MaxValue),
-        ["Малафья"] = new DamageBuff(0.16f, int.MaxValue),
-        ["СПЕРМА!!!"] = new DamageBuff(0.16f, int.MaxValue)
+        ["+12% к защите"] = new DefenceBuff(0.12f, int.MaxValue),
+        ["+500 к щиту"] = new ShieldBuff(500),
     };
 
     public static Dictionary<string, IBuff> KeyToAmberBuff = new()
     {
         ["+10% к скорости"] = new SpeedBuff(0.1f, int.MaxValue),
-        ["Понос"] = new DamageBuff(0.16f, int.MaxValue),
-        ["Отсос"] = new DamageBuff(0.16f, int.MaxValue),
-        ["Пиздапроёбина"] = new DamageBuff(0.16f, int.MaxValue)
+        ["+25% к скорости"] = new SpeedBuff(0.25f, int.MaxValue),
+        ["+100 к макс. здоровью"] = new MaxHPBuff(100),
     };
 
 }
