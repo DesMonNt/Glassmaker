@@ -205,6 +205,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 5e8b42bf91813444eb134b903e4c0a95, type: 3}
   name: Azure
   currentHealthPoints: 0
   currentShield: 0

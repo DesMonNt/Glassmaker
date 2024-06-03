@@ -68,6 +68,7 @@ public class Fight : MonoBehaviour
     [SerializeField] private List<GameObject> viewQueue;
     private List<SpriteRenderer> _viewQueueSprites;
     private Dictionary<Unit, (SpriteRenderer renderer, string typeOfFighter)> _spritesDictionary;
+    private Dictionary<Unit, AudioClip> _soundsDictionary;
     
     private int _numberOfChar;
     private Unit _selectedChar;
@@ -80,6 +81,7 @@ public class Fight : MonoBehaviour
 #region InitializeMembers
     private void Awake()
     {
+        _soundsDictionary = new();
         _videoPlayer = titres.GetComponent<VideoPlayer>();
         winBoss.GameObject().SetActive(false);
         winEnemy.GameObject().SetActive(false);
@@ -115,7 +117,7 @@ public class Fight : MonoBehaviour
 
     private void Start()
     {
-        //(squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
+        (squads, enemies) = SetUnitsFromPreviousScene.SetCharactersAndEnemies();
         var firstPosition = new Vector3(-430, 180);
         var firstPositionToEnemy = new Vector3(420, 140);
         
@@ -140,13 +142,17 @@ public class Fight : MonoBehaviour
                     : (unit.GameObject().GetComponent<SpriteRenderer>(), "Enemy"));
         }
 
+        foreach (var unit in listImages) 
+            _soundsDictionary.Add(unit, unit.attackSound);
+
         foreach (var point in ultPoints) 
             _ultPointsRenderers.Add(point.GetComponent<SpriteRenderer>());
         
         foreach (var circle in queueCircles) 
             _queueCirclesRenderers.Add(circle.GetComponent<SpriteRenderer>());
         
-        for (var i = 0; i < _currentPoints; i++) _ultPointsRenderers[i].sprite = ultSpriteActive;
+        for (var i = 0; i < _currentPoints; i++) 
+            _ultPointsRenderers[i].sprite = ultSpriteActive;
 
         _selectedComponentsOrder = _enemyComponentsOrder;
 
@@ -158,7 +164,7 @@ public class Fight : MonoBehaviour
             foreach (var shard in SetUnitsFromPreviousScene.savedShards) 
                 myUnit.AddBuff(shard);
         }
-
+        
         _audio.clip = _isBossFight 
             ? bossFight 
             : basicFight;
@@ -474,6 +480,7 @@ public class Fight : MonoBehaviour
 
     private IEnumerator AbilityUsage(Unit owner, Unit target)
     {
+        _audio.PlayOneShot(_soundsDictionary[owner]); 
         skillName.text = owner.Skill.Name;
         skillName.GameObject().SetActive(true);
         owner.UseAbility().Execute(owner, target);
@@ -483,6 +490,7 @@ public class Fight : MonoBehaviour
     
     private IEnumerator UltimateUsage(Unit owner, Unit target)
     {
+        _audio.PlayOneShot(_soundsDictionary[owner]); 
         owner.UseUltimate().Execute(owner, target);
         if (owner.Ultimate.Attack is not null)
             yield return Offensive(owner, target, owner.Ultimate.Attack, owner.Ultimate.Name);
@@ -504,6 +512,7 @@ public class Fight : MonoBehaviour
     
     private IEnumerator Offensive(Unit attacker, Unit target, Attack attack, string nameOfSkill)
     {
+        _audio.PlayOneShot(_soundsDictionary[attacker]); 
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
         skillName.text = nameOfSkill;
@@ -572,6 +581,7 @@ public class Fight : MonoBehaviour
             _charComponentsOrder.Select(x => x).ToList(),
             _enemyComponentsOrder.Select(x => x).ToList());
         var previousHp = target.currentHealthPoints;
+        _audio.PlayOneShot(_soundsDictionary[attacker]); 
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
         switch (action)

@@ -383,6 +383,7 @@ MonoBehaviour:
   attackSprite: {fileID: 21300000, guid: c00ca465c1084eb46857328b0679b173, type: 3}
   skillSprite: {fileID: 21300000, guid: 6b333c4c2c664114d98d362c1d6ee14e, type: 3}
   ultimateSprite: {fileID: 21300000, guid: 4717f150d1c1f1442ad3cb8fb2eef713, type: 3}
+  attackSound: {fileID: 8300000, guid: 17a9de9ce22c8a74b9ee14be9822baf1, type: 3}
   name: Blacksmith
   currentHealthPoints: 0
   currentShield: 0

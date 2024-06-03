@@ -475,6 +475,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 211f7dd017d405c4d9f1a973777ee9d2, type: 3}
   name: Tormentor
   currentHealthPoints: 0
   currentShield: 0

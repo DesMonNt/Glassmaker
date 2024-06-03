@@ -145,6 +145,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 14130a4cb0420244fb8e3aee32b7ba9d, type: 3}
   name: Shell
   currentHealthPoints: 0
   currentShield: 0

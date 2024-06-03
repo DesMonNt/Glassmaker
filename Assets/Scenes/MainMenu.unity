@@ -1460,6 +1460,7 @@ GameObject:
   - component: {fileID: 1565067647}
   - component: {fileID: 1565067646}
   - component: {fileID: 1565067645}
+  - component: {fileID: 1565067648}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -1494,7 +1495,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565067643}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 125732fc96d0c474b876220455a114c2, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 500e45c2ee997a341857bc7529ff60fe, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1750,6 +1751,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2076039899}
   m_CullTransparentMesh: 1
+--- !u!114 &1565067648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565067643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9c737f85f83ec4688ab03a5520944f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  video: {fileID: 0}
+  buttons: {fileID: 0}
 --- !u!1 &5057581893819412
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2158,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

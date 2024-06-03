@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 3831397986757872553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -492, y: 3, z: 0}
+  m_LocalPosition: {x: -1725.877, y: -132.45267, z: 0}
   m_LocalScale: {x: 24.447706, y: 24.043331, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -312,6 +312,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: ba21af6d3dbf5b742b00facff8291253, type: 3}
   name: GlassMaker
   currentHealthPoints: 0
   currentShield: 0

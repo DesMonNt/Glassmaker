@@ -381,6 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f897f7f16fc0b4848b237d835d946638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSprite: {fileID: 0}
+  skillSprite: {fileID: 0}
+  ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 5e4a6c30c1f5df04dbc0de340e9de9df, type: 3}
   name: Amber
   currentHealthPoints: 0
   currentShield: 0

@@ -1,5 +1,3 @@
-using System;
-using Unity;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -19,7 +17,9 @@ public class SaveManager : MonoBehaviour
         {
             var comp = shardGameObject.GetComponent<StationaryShard>();
             if (Saves.ShardsIsBroken[comp.key])
+            {
                 shardGameObject.SetActive(false);
+            }
         }
     }
 }

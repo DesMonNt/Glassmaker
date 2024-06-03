@@ -29,6 +29,7 @@ public class IntroScript : MonoBehaviour
     {
         if (!_isPlay)
             return;
-        if (Input.anyKeyDown || (ulong)(_videoPlayer.frame + 2) >= _frames) SceneManager.LoadScene("Tower exploration");
+        if (Input.anyKeyDown || (ulong)(_videoPlayer.frame + 2) >= _frames) 
+            SceneManager.LoadScene("Tower exploration");
     }
 }

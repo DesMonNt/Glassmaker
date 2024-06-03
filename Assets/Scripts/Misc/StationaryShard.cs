@@ -38,13 +38,17 @@ public class StationaryShard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"{Saves.ShardsIsBroken[key]}");
         if (other.CompareTag("Player"))
         {
             _renderer.sprite = pic;
             if (!isBroken)
             {
+                Saves.ShardsIsBroken[key] = true;
+                if (Saves.ShardsIsBroken[key])
+                    Debug.Log("GWEIUVI");
                 _audioSource.Play();
-                Saves.ShardsIsBroken.Remove(key);
+                
                 var crimsonShardBuffs = BuffInfo.KeyToCrimsonBuff.Keys.ToList();
                 var amberShardBuffs = BuffInfo.KeyToAmberBuff.Keys.ToList();
                 var azureShardBuffs = BuffInfo.KeyToAzureBuff.Keys.ToList();
@@ -60,7 +64,6 @@ public class StationaryShard : MonoBehaviour
                 amberShard.SetActive(true);
                 azureShard.SetActive(true);
                 isBroken = true;
-                Saves.ShardsIsBroken[key] = true;
 
                 StartCoroutine(DestroyThis());
             }

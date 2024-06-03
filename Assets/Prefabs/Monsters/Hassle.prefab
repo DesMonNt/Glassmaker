@@ -488,6 +488,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: d4b020d7a3abc9142941bbad0f06e3a8, type: 3}
   name: Hassle
   currentHealthPoints: 0
   currentShield: 0

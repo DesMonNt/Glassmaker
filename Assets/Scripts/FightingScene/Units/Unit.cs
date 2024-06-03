@@ -11,7 +11,9 @@ namespace FightingScene.Units
         [SerializeField] public Sprite attackSprite;
         [SerializeField] public Sprite skillSprite;
         [SerializeField] public Sprite ultimateSprite;
-        
+
+        public AudioClip attackSound;
+                                 
         [SerializeField] 
         public new string name;
         public UnitStats CurrentStats;
@@ -37,7 +39,10 @@ namespace FightingScene.Units
     
         private void Awake() => _fighterTurnMeter = GetComponent<FighterTurnMeter>();
 
-        private void Start() => currentHealthPoints = _baseStats.MaxHealth;
+        private void Start()
+        {
+            currentHealthPoints = _baseStats.MaxHealth;
+        }
 
         public void IncreaseTurnMeter()
         {
