@@ -11,7 +11,7 @@ namespace FightingScene.Units
             Brain = new HealerAI(this);
             Skill = new Ability(new () , new List<IBuff>(), "Исцеление")
             {
-                Attack = new Attack(-(int)(0.08 * CurrentStats.MaxHealth), Buffs, TypeOfAttack.Single)
+                Attack = new Attack(-(int)(0.24 * CurrentStats.MaxHealth), Buffs, TypeOfAttack.Single)
             };
 
             Ultimate = new Ability(new List<IBuff> 

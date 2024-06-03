@@ -11,9 +11,12 @@ namespace SceneScripts
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Saves.Triggers[key] = true;
-            if (!other.CompareTag("Player") || _isUsed) 
+            if (!other.CompareTag("Player") || _isUsed)
+            {
+                Saves.Triggers[key] = true;
                 return;
+            }
+                
             _isUsed = true;
             SetUnitsFromPreviousScene.SaveCharacters(character);
         }

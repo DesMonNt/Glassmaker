@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,12 +12,8 @@ public class StationaryShard : MonoBehaviour
     private SpriteRenderer _renderer;
     private AudioSource _audioSource;
     [FormerlySerializedAs("IsBroken")] [FormerlySerializedAs("_isBroken")] public bool isBroken;
-    [SerializeField] Sprite pic;
+    [SerializeField] private Sprite pic;
     [SerializeField] private GameObject canvas;
-    
-    [SerializeField] public string crimsonShardBuff;
-    [SerializeField] public string azureShardBuff;
-    [SerializeField] public string amberShardBuff;
 
     [SerializeField] public GameObject crimsonShard;
     [SerializeField] public GameObject azureShard;
@@ -38,33 +32,31 @@ public class StationaryShard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            _renderer.sprite = pic;
-            if (!isBroken)
-            {
-                Saves.ShardsIsBroken[key] = true;
-                _audioSource.Play();
+        if (!other.CompareTag("Player")) 
+            return;
+        _renderer.sprite = pic;
+        if (isBroken) 
+            return;
+        Saves.ShardsIsBroken[key] = true;
+        _audioSource.Play();
                 
-                var crimsonShardBuffs = BuffInfo.KeyToCrimsonBuff.Keys.ToList();
-                var amberShardBuffs = BuffInfo.KeyToAmberBuff.Keys.ToList();
-                var azureShardBuffs = BuffInfo.KeyToAzureBuff.Keys.ToList();
+        var crimsonShardBuffs = BuffInfo.KeyToCrimsonBuff.Keys.ToList();
+        var amberShardBuffs = BuffInfo.KeyToAmberBuff.Keys.ToList();
+        var azureShardBuffs = BuffInfo.KeyToAzureBuff.Keys.ToList();
 
-                var random = new Random();
+        var random = new Random();
                 
-                crimsonShardText.text = crimsonShardBuffs[random.Next(0, crimsonShardBuffs.Count)];
-                amberShardText.text = amberShardBuffs[random.Next(0, amberShardBuffs.Count)];
-                azureShardText.text = azureShardBuffs[random.Next(0, azureShardBuffs.Count)];
+        crimsonShardText.text = crimsonShardBuffs[random.Next(0, crimsonShardBuffs.Count)];
+        amberShardText.text = amberShardBuffs[random.Next(0, amberShardBuffs.Count)];
+        azureShardText.text = azureShardBuffs[random.Next(0, azureShardBuffs.Count)];
                 
-                canvas.SetActive(true);
-                crimsonShard.SetActive(true);
-                amberShard.SetActive(true);
-                azureShard.SetActive(true);
-                isBroken = true;
+        canvas.SetActive(true);
+        crimsonShard.SetActive(true);
+        amberShard.SetActive(true);
+        azureShard.SetActive(true);
+        isBroken = true;
 
-                StartCoroutine(DestroyThis());
-            }
-        }
+        StartCoroutine(DestroyThis());
     }
 
     private IEnumerator DestroyThis()

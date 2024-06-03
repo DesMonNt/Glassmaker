@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tower exploration.unity
     guid: 61ceb94a964474c4e8ae7105bcf54cd9
+  - enabled: 0
+    path: Assets/Scenes/FakeMenu.unity
+    guid: eabd2d2a6de29654e9ab3bc589cdc5da
   m_configObjects: {}

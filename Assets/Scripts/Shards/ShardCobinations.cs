@@ -12,9 +12,9 @@ public static class BuffInfo
     {
         ["+16% к урону"] = new DamageBuff(0.16f, int.MaxValue),
         ["+10% к урону"] = new DamageBuff(0.1f, int.MaxValue),
-        ["Очень горячий осколок"] = new BurnBuff(50, 2),
+        ["Очень горячий осколок"] = new BurnBuff(150, 2),
         ["+8% к шансу крит. урона"] = new CriticalChanceBuff(0.08f, int.MaxValue),
-        ["+400 к крит. урону"] = new CriticalDamageBuff(400, int.MaxValue)
+        ["+16% к крит. урону"] = new CriticalDamageBuff(40, int.MaxValue)
     };
     
     public static Dictionary<string, IBuff> KeyToAzureBuff = new()
