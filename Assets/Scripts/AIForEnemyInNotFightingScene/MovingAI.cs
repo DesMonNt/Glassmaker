@@ -26,6 +26,9 @@ public class MovingAI : MonoBehaviour
     private Vector2 _startPosition;
     
     [FormerlySerializedAs("_speed")] public int speed;
+
+    private Animator _animator;
+    public Sprite additionalSprite;
     
     private void Start()
     {
@@ -42,6 +45,7 @@ public class MovingAI : MonoBehaviour
         _currentTarget = _startPosition;
         _sphereCollider = GetComponent<CapsuleCollider2D>();
         _circleCollider = GetComponent<CircleCollider2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -52,6 +56,8 @@ public class MovingAI : MonoBehaviour
             Saves.Fights.Remove(key);
             _isStart = true;
             SetUnitsFromPreviousScene.SaveEnemies(enemiesInFight.ToList());
+            if (additionalSprite is not null)
+                GetComponent<SpriteRenderer>().sprite = additionalSprite;
         }
         
         if (_sphereCollider.IsTouching(_playerCollider))
@@ -64,6 +70,8 @@ public class MovingAI : MonoBehaviour
         
         if (!isCanMove)
             return;
+        
+        _animator.Play(name);
         
         if (!(Math.Abs(_currentTarget.x - _rb.position.x) < 1
               && Math.Abs(_currentTarget.y - _rb.position.y) < 1))

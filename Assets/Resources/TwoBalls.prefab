@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4790867285751100978}
   - component: {fileID: 3946461670487750937}
   - component: {fileID: 4892288050844668455}
+  - component: {fileID: 8578365825880162366}
   m_Layer: 0
   m_Name: TwoBalls
   m_TagString: BigB
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 7206332446904590322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.07, y: -6.38, z: 0}
+  m_LocalPosition: {x: -2.1494446, y: -5.631391, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 4947941574762787136, guid: 8d8776cf23c65be4fb4504915a9d2872, type: 3}
   isCanMove: 0
   speed: 0
+  additionalSprite: {fileID: 0}
 --- !u!61 &3946461670487750937
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,3 +251,24 @@ CircleCollider2D:
   m_Offset: {x: 0.083589554, y: 0}
   serializedVersion: 2
   m_Radius: 6.4738846
+--- !u!95 &8578365825880162366
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206332446904590322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e517b7547fe401c43be428fab026ab64, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

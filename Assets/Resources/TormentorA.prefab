@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6308593972115149542}
   - component: {fileID: 6444961596896653903}
   - component: {fileID: 6644882843827502079}
+  - component: {fileID: 5171758521116644494}
   m_Layer: 0
   m_Name: TormentorA
   m_TagString: BigB
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5143179755105985450}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.49186, y: 81.76555, z: 0}
+  m_LocalPosition: {x: -42.283867, y: 81.88223, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 6928505258116602385, guid: 54ac6d8dee4d9d047aa0293113e2b74b, type: 3}
   isCanMove: 0
   speed: 0
+  additionalSprite: {fileID: 21300000, guid: fe711d4350796324e9c79e8dfb4e7e78, type: 3}
 --- !u!61 &6444961596896653903
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,3 +251,24 @@ CircleCollider2D:
   m_Offset: {x: -0.55888176, y: -1.1466992}
   serializedVersion: 2
   m_Radius: 5.4335403
+--- !u!95 &5171758521116644494
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143179755105985450}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 962e590b8337b2344bd44e74b33d14eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

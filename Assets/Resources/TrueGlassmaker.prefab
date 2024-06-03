@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4867099162478778303}
   - component: {fileID: 331651948600337906}
   - component: {fileID: 3582372024332731910}
+  - component: {fileID: 5237791293669719770}
   m_Layer: 0
   m_Name: TrueGlassmaker
   m_TagString: BigB
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 2349434535882744154}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 61.28, y: -15.68, z: 0}
+  m_LocalPosition: {x: 60.25612, y: -15.148753, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,6 +171,7 @@ MonoBehaviour:
   - {fileID: 6928505258116602385, guid: 54ac6d8dee4d9d047aa0293113e2b74b, type: 3}
   isCanMove: 0
   speed: 0
+  additionalSprite: {fileID: 0}
 --- !u!61 &331651948600337906
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -250,3 +252,24 @@ CircleCollider2D:
   m_Offset: {x: 0.056346256, y: -0.17991066}
   serializedVersion: 2
   m_Radius: 6.593688
+--- !u!95 &5237791293669719770
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2349434535882744154}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 85f46e1070aef2d4e834db5b019cabf9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

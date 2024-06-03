@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
             PlayerInput();
             Move();
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

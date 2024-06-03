@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1348222002868916557}
   - component: {fileID: 5417828000167851149}
   - component: {fileID: 4640097622361068812}
+  - component: {fileID: 4722804626831994571}
   m_Layer: 0
   m_Name: Shell2
   m_TagString: BigB
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8890499817478743931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.94, y: -26.61, z: 0}
+  m_LocalPosition: {x: 18.96772, y: -27.122475, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 2287242829049515574, guid: bdf8c19d481bb6c48b566cfeed9287bd, type: 3}
   isCanMove: 0
   speed: 0
+  additionalSprite: {fileID: 0}
 --- !u!61 &5417828000167851149
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,3 +251,24 @@ CircleCollider2D:
   m_Offset: {x: -0.55888176, y: -1.1466992}
   serializedVersion: 2
   m_Radius: 5.4335403
+--- !u!95 &4722804626831994571
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8890499817478743931}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1e60e3e9928e4864989029c28e3cb1a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
