@@ -5316,11 +5316,15 @@ PrefabInstance:
     - target: {fileID: 3821033355627404282, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3524538657547238987}
     - target: {fileID: 3821033355627404282, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1633846053}
+    - target: {fileID: 3821033355627404282, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMenu
+      objectReference: {fileID: 0}
     - target: {fileID: 4588115245457281072, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
       propertyPath: buttons
       value: 
@@ -5333,6 +5337,10 @@ PrefabInstance:
       propertyPath: objectsToHide.Array.data[0]
       value: 
       objectReference: {fileID: 1633846053}
+    - target: {fileID: 7533899070226417284, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
+      propertyPath: m_Text
+      value: "\u0412\u044B\u0439\u0442\u0438 \u0432 \u043C\u0435\u043D\u044E"
+      objectReference: {fileID: 0}
     - target: {fileID: 7778682169050059618, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -5437,6 +5445,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2251743650090021391}
   m_SourcePrefab: {fileID: 100100000, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
+--- !u!114 &3524538657547238987 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4588115245457281072, guid: 27077283b2e43fd4babe5334f55cce60, type: 3}
+  m_PrefabInstance: {fileID: 3524538657547238986}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2251743650090021390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610e393a159e65e478b2b59ddad1c09c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3580107351570563014
 Transform:
   m_ObjectHideFlags: 0
