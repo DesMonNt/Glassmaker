@@ -38,11 +38,11 @@ namespace Effects
             Armor = Math.Abs(armor - default(float)) < 1e-5  ? baseStats.Armor : armor;
             Damage = damage == default ? baseStats.Damage : damage;
             Speed = speed == default ? baseStats.Speed : speed;
-            IsImmortal = isImmortal == default ? baseStats.IsImmortal : isImmortal;
+            IsImmortal = isImmortal != default || baseStats.IsImmortal;
             CriticalChance = Math.Abs(criticalChance - default(float)) < 1e-5 ? baseStats.CriticalChance : criticalChance;
             AttacksType = attacksType == default ? baseStats.AttacksType : attacksType;
             EnergyToUlt = energyToUlt == default ? baseStats.EnergyToUlt : energyToUlt;
-            IsConfused = isConfused == default ? baseStats.IsConfused : isConfused;
+            IsConfused = isConfused != default || baseStats.IsConfused;
         }
     }
 }

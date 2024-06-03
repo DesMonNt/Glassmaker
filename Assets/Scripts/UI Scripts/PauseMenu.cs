@@ -7,10 +7,8 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private GameObject circle;
     [SerializeField] private GameObject[] texts;
 
-    [SerializeField] private GameObject _menuButtons;
     private List<PauseButton> _menuButtonsList;
     private float time;
 
@@ -18,8 +16,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private PauseButton _selected;
 
     private AudioSource _hoverSound;
-
-
+    
     public static bool PauseGame;
     public GameObject pauseMenu;
     public List<GameObject> objectsToHide = new();
@@ -34,25 +31,15 @@ public class PauseMenu : MonoBehaviour
             _selected.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
 
             selectedIndex = _menuButtonsList.IndexOf(_selected);
-            var circleComp = circle.GetComponent<Circle>();
-            circleComp.endPos = _selected.circlePos;
-
-            circleComp.startPos = circleComp.CurrentPos;
-            circleComp.time = 0;
             _hoverSound.Play();
         }
     }
 
     void Start()
     {
-        circle.GetComponent<Circle>().time = 0;
         _hoverSound = GetComponent<AudioSource>();
         _selected = Selected;
         _menuButtonsList = new();
-        foreach (var button in _menuButtons.transform.GetComponentsInChildren<PauseButton>())
-        {
-            _menuButtonsList.Add(button);
-        }
     }
 
     private void Update()
@@ -68,7 +55,6 @@ public class PauseMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            Debug.Log(1);
             selectedIndex = (selectedIndex + _menuButtonsList.Count) % _menuButtonsList.Count;
             Selected = _menuButtonsList[selectedIndex];
         }

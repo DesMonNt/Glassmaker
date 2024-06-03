@@ -56,8 +56,6 @@ public class MovingAI : MonoBehaviour
             Saves.Fights.Remove(key);
             _isStart = true;
             SetUnitsFromPreviousScene.SaveEnemies(enemiesInFight.ToList());
-            if (additionalSprite is not null)
-                GetComponent<SpriteRenderer>().sprite = additionalSprite;
         }
         
         if (_sphereCollider.IsTouching(_playerCollider))
@@ -116,6 +114,8 @@ public class MovingAI : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Player"))
             _currentTarget = GetWalk();
+        if (additionalSprite is not null)
+            GetComponent<SpriteRenderer>().sprite = additionalSprite;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

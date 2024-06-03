@@ -23,7 +23,7 @@ namespace FightingScene.Units
 
         public override Ability UseAbility()
         {
-            _criticalStack = Math.Clamp(0, _criticalStack + 1, 5);
+            _criticalStack = Math.Clamp(_criticalStack + 1, 0, 5);
             AddBuff(new SpeedBuff(1.1f, 2));
             
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела")

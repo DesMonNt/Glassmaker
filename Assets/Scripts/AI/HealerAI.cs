@@ -3,7 +3,6 @@ using System.Linq;
 using Effects;
 using FightingScene;
 using FightingScene.Units;
-using UnityEngine;
 
 namespace AI
 {

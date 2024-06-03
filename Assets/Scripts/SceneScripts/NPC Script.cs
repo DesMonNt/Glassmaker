@@ -32,9 +32,9 @@ public class NPCScript : MonoBehaviour
         _renderer.sprite = dialoge1;
         dialog.SetActive(true);
         blackOut.SetActive(true);
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(12);
         _renderer.sprite = dialoge2;
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(12);
         dialog.SetActive(false);
         blackOut.SetActive(false);
     }

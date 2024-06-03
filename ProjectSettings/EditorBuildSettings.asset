@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 0db0038b9bdba48418b74659bfa69bd5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: f737383aae013cd40b955a060bfd61c4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/QTE.unity
     guid: fed2493745ec1c148ad8081467f37862
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameOver.unity
     guid: 8ba2119d5041e2d44b545e1a6a88ffc5
   - enabled: 1

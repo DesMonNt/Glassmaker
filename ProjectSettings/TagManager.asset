@@ -16,6 +16,7 @@ TagManager:
   - Wall
   - Circle
   - Shard
+  - Trigger
   layers:
   - Default
   - TransparentFX

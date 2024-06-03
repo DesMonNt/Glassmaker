@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Trigger : MonoBehaviour
 {
@@ -22,7 +19,7 @@ public class Trigger : MonoBehaviour
     private IEnumerator EightSecondsWait()
     {
         help.SetActive(true);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(12);
         help.SetActive(false);
     } 
 }

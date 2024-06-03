@@ -38,15 +38,12 @@ public class StationaryShard : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{Saves.ShardsIsBroken[key]}");
         if (other.CompareTag("Player"))
         {
             _renderer.sprite = pic;
             if (!isBroken)
             {
                 Saves.ShardsIsBroken[key] = true;
-                if (Saves.ShardsIsBroken[key])
-                    Debug.Log("GWEIUVI");
                 _audioSource.Play();
                 
                 var crimsonShardBuffs = BuffInfo.KeyToCrimsonBuff.Keys.ToList();

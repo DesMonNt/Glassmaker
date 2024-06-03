@@ -26,14 +26,14 @@ namespace AI
 
         protected IAction GetAction()
         {
-            var actionNumber = new Random().Next(0, 3);
+            var actionNumber = new Random().Next(0, 100);
 
             return actionNumber switch
             {
-                0 => Unit.UseAbility(),
-                1 => Unit.UseUltimate(),
-                2 => Unit.UseAttack(),
-                _ => throw new ArgumentOutOfRangeException()
+                <= 40 => Unit.UseAttack(),
+                <= 70 => Unit.UseAbility(),
+                <= 100 => Unit.UseUltimate(),
+                _ => throw new ArgumentException()
             };
         }
 

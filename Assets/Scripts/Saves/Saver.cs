@@ -21,6 +21,14 @@ public static class Saves
         [111] = new ExploreObject(Resources.Load("Hasssle") as GameObject),
         [112] = new ExploreObject(Resources.Load("TrueGlassmaker") as GameObject)
     };
+
+    public static Dictionary<int, bool> Triggers = new()
+    {
+        [1] = false,
+        [2] = false,
+        [3] = false
+    };
+        
     public static Dictionary<int, bool> ShardsIsBroken = new()
     {
         [50] = false,

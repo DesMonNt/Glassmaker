@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 244705733841812202}
   - component: {fileID: 8878273282643955956}
   - component: {fileID: 5146992503089072964}
+  - component: {fileID: 7542989055780993463}
   m_Layer: 0
   m_Name: Hasssle
   m_TagString: BigB
@@ -31,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 804804264540325771}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.62, y: -19.26, z: 0}
+  m_LocalPosition: {x: -1.4780388, y: -19.332396, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: df7914eeacf666c4db3d78637c8c8fa9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 790579e67a502364c96269d61ee4dcfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -169,6 +170,7 @@ MonoBehaviour:
   - {fileID: 7576757253658558974, guid: 7df0e4b33ffee2a4e9fed9069c5fcdc8, type: 3}
   isCanMove: 0
   speed: 0
+  additionalSprite: {fileID: 0}
 --- !u!61 &8878273282643955956
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -249,3 +251,24 @@ CircleCollider2D:
   m_Offset: {x: -0.55888176, y: -1.1466992}
   serializedVersion: 2
   m_Radius: 5.4335403
+--- !u!95 &7542989055780993463
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804804264540325771}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d3435a4683518841851bc15965852a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

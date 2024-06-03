@@ -517,59 +517,7 @@ public class Fight : MonoBehaviour
             criticalChance: attacker.CurrentStats.CriticalChance + CriticalChance);
         skillName.text = nameOfSkill;
         skillName.GameObject().SetActive(true);
-        switch (attack.TypeAttack)
-        {
-            case TypeOfAttack.Aoe:
-            {
-                var first = _selectedComponentsOrder[0];
-                var second = _selectedComponentsOrder[1 % _selectedComponentsOrder.Count];
-                var third = _selectedComponentsOrder[2 % _selectedComponentsOrder.Count];
-
-                yield return GetUnitAttackWithDamageView(attacker, first, attack);
-
-                if (second != first)
-                    yield return GetUnitAttackWithDamageView(attacker, second, attack);
-
-                if (third != first && third != second)
-                    yield return GetUnitAttackWithDamageView(attacker, third, attack);
-                break;
-            }
-            
-            case TypeOfAttack.Group:
-            {
-                var neededIndex = _selectedComponentsOrder.IndexOf(target);
-                var previous = target;
-                var next = target;
-                if (neededIndex != 0)
-                    previous = _selectedComponentsOrder[neededIndex - 1];
-                if (neededIndex != _selectedComponentsOrder.Count - 1)
-                    next = _selectedComponentsOrder[neededIndex + 1];
-            
-                if (neededIndex == 0)
-                {
-                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                    yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
-                }
-                else if (neededIndex == _selectedComponentsOrder.Count - 1)
-                {
-                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                    yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
-                }
-
-                else
-                {
-                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                    yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
-                    yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
-                }
-                break;
-            }
-            
-            case TypeOfAttack.Single:
-            default:
-                yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                break;
-        }
+        yield return HandleAttack(attacker, attack, target, _selectedComponentsOrder);
 
         attacker.CurrentStats = new UnitStats(attacker.CurrentStats,
             criticalChance: attacker.CurrentStats.CriticalChance - CriticalChance);
@@ -588,7 +536,7 @@ public class Fight : MonoBehaviour
         {
             case Ability skill:
                 if (skill.Attack is not null)
-                    yield return Offensive(attacker, target, skill.Attack, skill.Name);
+                    yield return HandleAttack(attacker, skill.Attack, target, _charComponentsOrder);
                 skillName.text = skill.Name;
                 skillName.GameObject().SetActive(true);
                 action.Execute(attacker, target);
@@ -599,62 +547,65 @@ public class Fight : MonoBehaviour
                 skillName.text = "Обычная атака";
                 skillName.GameObject().SetActive(true);
                 var attack = (Attack)action;
-                switch (attack.TypeAttack)
+                yield return HandleAttack(attacker, attack, target, _charComponentsOrder);
+
+                break;
+        }
+    }
+
+    private IEnumerator HandleAttack(Unit attacker, Attack attack, Unit target, IList<Unit> targets)
+    {
+        switch (attack.TypeAttack)
+        {
+            case TypeOfAttack.Aoe:
+            {
+                var first = targets[0];
+                var second = targets[1 % targets.Count];
+                var third = targets[2 % targets.Count];
+
+                yield return GetUnitAttackWithDamageView(attacker, first, attack);
+
+                if (second != first)
+                    yield return GetUnitAttackWithDamageView(attacker, second, attack);
+
+                if (third != first && third != second)
+                    yield return GetUnitAttackWithDamageView(attacker, third, attack);
+                break;
+            }
+            
+            case TypeOfAttack.Group:
+            {
+                var neededIndex = targets.IndexOf(target);
+                var previous = target;
+                var next = target;
+                if (neededIndex != 0)
+                    previous = targets[neededIndex - 1];
+                if (neededIndex != targets.Count - 1)
+                    next = targets[neededIndex + 1];
+            
+                if (neededIndex == 0)
                 {
-                    case TypeOfAttack.Aoe:
-                    {
-                        var first = _charComponentsOrder[0];
-                        var second = _charComponentsOrder[1 % _charComponentsOrder.Count];
-                        var third = _charComponentsOrder[2 % _charComponentsOrder.Count];
-
-                        yield return GetUnitAttackWithDamageView(attacker, first, attack);
-
-                        if (second != first)
-                            yield return GetUnitAttackWithDamageView(attacker, second, attack);
-
-                        if (third != first && third != second)
-                            yield return GetUnitAttackWithDamageView(attacker, third, attack);
-                        break;
-                    }
-
-                    case TypeOfAttack.Group:
-                    {
-                        var neededIndex = _charComponentsOrder.IndexOf(target);
-                        var previous = target;
-                        var next = target;
-                        if (neededIndex != 0)
-                            previous = _charComponentsOrder[neededIndex - 1];
-                        if (neededIndex != _charComponentsOrder.Count - 1)
-                            next = _charComponentsOrder[neededIndex + 1];
-
-                        if (neededIndex == 0)
-                        {
-                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                            yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
-                        }
-                        else if (neededIndex == _charComponentsOrder.Count - 1)
-                        {
-                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                            yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
-                        }
-
-                        else
-                        {
-                            yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                            yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
-                            yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
-                        }
-
-                        break;
-                    }
-
-                    case TypeOfAttack.Single:
-                        yield return GetUnitAttackWithDamageView(attacker, target, attack);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                    yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
+                }
+                else if (neededIndex == targets.Count - 1)
+                {
+                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                    yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
                 }
 
+                else
+                {
+                    yield return GetUnitAttackWithDamageView(attacker, target, attack);
+                    yield return GetOtherUnitAttack(attacker, previous, attack, 0.5f);
+                    yield return GetOtherUnitAttack(attacker, next, attack, 0.5f);
+                }
+                break;
+            }
+            
+            case TypeOfAttack.Single:
+            default:
+                yield return GetUnitAttackWithDamageView(attacker, target, attack);
                 break;
         }
     }

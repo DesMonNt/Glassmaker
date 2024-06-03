@@ -19,7 +19,7 @@ namespace FightingScene.Units
         public UnitStats CurrentStats;
 
         public AI.AI Brain;
-        protected readonly List<IBuff> Buffs = new();
+        public readonly List<IBuff> Buffs = new();
     
         public int currentHealthPoints;
         public int currentShield;

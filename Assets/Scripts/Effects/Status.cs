@@ -9,13 +9,6 @@ public static class Status // TODO: все скиллы переписать + e
         { "провокация", new AttackBuff(20) },
         { "непровокация", new TypeAttackBuff(TypeOfAttack.Aoe, 1) },
         { "Невосприимчивость", new ImmortalityBuff(1) },
-        // {
-        //     "3 скилл Оракла", target =>
-        //     {
-        //         target.currentHealthPoints -= target.HealthPoints * 0.4f;
-        //         target.currentHealthPoints += target.HealthPoints * 0.6f;
-        //     }
-        // },
         {
             "Аура на бафф атаки", new DamageBuff(0.15f, 1)
         },

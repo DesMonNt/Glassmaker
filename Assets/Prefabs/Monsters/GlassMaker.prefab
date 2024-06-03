@@ -312,7 +312,7 @@ MonoBehaviour:
   attackSprite: {fileID: 0}
   skillSprite: {fileID: 0}
   ultimateSprite: {fileID: 0}
-  attackSound: {fileID: 8300000, guid: ba21af6d3dbf5b742b00facff8291253, type: 3}
+  attackSound: {fileID: 8300000, guid: 0d4f1254d0e1098478be277a10875800, type: 3}
   name: GlassMaker
   currentHealthPoints: 0
   currentShield: 0

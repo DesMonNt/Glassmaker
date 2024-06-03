@@ -4,7 +4,6 @@ namespace Camera
 {
     public class CameraFollow2D : MonoBehaviour
     {
-
         public float damping = 3f;
         public Vector2 offset = new(2f, 1f);
         public bool faceLeft;

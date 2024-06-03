@@ -1,6 +1,4 @@
 using FightingScene.Units;
-using UnityEditor;
-using UnityEngine;
 
 namespace Effects
 {

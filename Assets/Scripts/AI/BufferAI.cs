@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Effects;
 using FightingScene;
 using FightingScene.Units;
-using UnityEngine;
 
 namespace AI
 {
