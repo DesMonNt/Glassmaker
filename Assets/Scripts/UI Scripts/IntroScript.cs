@@ -3,33 +3,36 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class IntroScript : MonoBehaviour
+namespace UI_Scripts
 {
-    public GameObject video;
-    private VideoPlayer _videoPlayer;
-    private ulong _frames;
-    private bool _isPlay;
-    public List<GameObject> buttons = new();
-    
-    private void Start()
+    public class IntroScript : MonoBehaviour
     {
-        _videoPlayer = video.GetComponent<VideoPlayer>();
-        _frames = _videoPlayer.frameCount;
-    }
+        public GameObject video;
+        private VideoPlayer _videoPlayer;
+        private ulong _frames;
+        private bool _isPlay;
+        public List<GameObject> buttons = new();
     
-    public void StartGame()
-    {
-        video.SetActive(true);
-        foreach (var button in buttons)
-            button.SetActive(false);
-        _isPlay = true;
-    }
+        private void Start()
+        {
+            _videoPlayer = video.GetComponent<VideoPlayer>();
+            _frames = _videoPlayer.frameCount;
+        }
+    
+        public void StartGame()
+        {
+            video.SetActive(true);
+            foreach (var button in buttons)
+                button.SetActive(false);
+            _isPlay = true;
+        }
 
-    private void Update()
-    {
-        if (!_isPlay)
-            return;
-        if (Input.anyKeyDown || (ulong)(_videoPlayer.frame + 2) >= _frames) 
-            SceneManager.LoadScene("Tower exploration");
+        private void Update()
+        {
+            if (!_isPlay)
+                return;
+            if (Input.anyKeyDown || (ulong)(_videoPlayer.frame + 2) >= _frames) 
+                SceneManager.LoadScene("Tower exploration");
+        }
     }
 }

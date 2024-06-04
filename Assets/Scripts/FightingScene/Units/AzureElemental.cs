@@ -15,15 +15,15 @@ namespace FightingScene.Units
             };
 
             Ultimate = new Ability(new List<IBuff> 
-                { new MaxHPBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
+                { new MaxHpBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
         }
 
-        public override Ability UseAbility() => new(new(), new List<IBuff>(), "Исцеление")
+        public override Ability UseAbility() => new(new List<IBuff>(), new List<IBuff>(), "Исцеление")
         {
             Attack = new Attack(-(int)(0.08 * CurrentStats.MaxHealth), Buffs, TypeOfAttack.Single)
         };
         
         public override Ability UseUltimate() => new (new List<IBuff> 
-            { new MaxHPBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
+            { new MaxHpBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
     }
 }

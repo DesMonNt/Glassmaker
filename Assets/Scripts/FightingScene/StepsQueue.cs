@@ -1,8 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StepsQueue : MonoBehaviour
+namespace FightingScene
 {
-    [SerializeField] public List<Sprite> spritesInQueue;
+    public class StepsQueue : MonoBehaviour
+    {
+        public List<Sprite> spritesInQueue;
+    }
 }

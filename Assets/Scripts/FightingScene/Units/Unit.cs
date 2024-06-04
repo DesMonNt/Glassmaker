@@ -8,18 +8,17 @@ namespace FightingScene.Units
 {
     public abstract class Unit : MonoBehaviour, IBuffable
     {
-        [SerializeField] public Sprite attackSprite;
-        [SerializeField] public Sprite skillSprite;
-        [SerializeField] public Sprite ultimateSprite;
+        public Sprite attackSprite;
+        public Sprite skillSprite;
+        public Sprite ultimateSprite;
 
         public AudioClip attackSound;
                                  
-        [SerializeField] 
         public new string name;
         public UnitStats CurrentStats;
 
         public AI.AI Brain;
-        public readonly List<IBuff> Buffs = new();
+        protected readonly List<IBuff> Buffs = new();
     
         public int currentHealthPoints;
         public int currentShield;
@@ -90,7 +89,7 @@ namespace FightingScene.Units
         public event UnityAction<Unit> TurnMeterFilled;
         public event UnityAction<Unit> Died;
 
-        public void GetDied() => Died?.Invoke(this);
+        private void GetDied() => Died?.Invoke(this);
 
         public void AddBuff(IBuff buff)
         {

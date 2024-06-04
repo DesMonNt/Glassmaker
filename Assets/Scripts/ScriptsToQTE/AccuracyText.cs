@@ -1,4 +1,5 @@
 using System;
+using FightingScene;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;

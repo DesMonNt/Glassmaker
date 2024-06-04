@@ -37,7 +37,7 @@ namespace AI
             };
         }
 
-        protected virtual Unit GetCharacterTarget(List<Unit> characters)
+        protected Unit GetCharacterTarget(List<Unit> characters)
         {
             var targetNumber = new Random().Next(0, characters.Count);
 

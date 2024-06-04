@@ -3,11 +3,11 @@ using UnityEngine;
 
 public static class Saves
 {
-    public static string savedValue;
+    public static string SavedValue;
 
-    public static Vector2 playerPosition = new(-198, -13);
+    public static Vector2 PlayerPosition = new(-198, -13);
 
-    public static Dictionary<int, ExploreObject> Fights = new()
+    public static readonly Dictionary<int, ExploreObject> Fights = new()
     {
         [102] = new ExploreObject(Resources.Load("Fight2") as GameObject),
         [103] = new ExploreObject(Resources.Load("BadYellowBall") as GameObject),
@@ -22,7 +22,7 @@ public static class Saves
         [112] = new ExploreObject(Resources.Load("TrueGlassmaker") as GameObject)
     };
 
-    public static Dictionary<int, bool> Triggers = new()
+    public static readonly Dictionary<int, bool> Triggers = new()
     {
         [1] = false,
         [2] = false,
@@ -30,7 +30,7 @@ public static class Saves
         [4] = false
     };
         
-    public static Dictionary<int, bool> ShardsIsBroken = new()
+    public static readonly Dictionary<int, bool> ShardsIsBroken = new()
     {
         [50] = false,
         [51] = false,
@@ -67,13 +67,14 @@ public class ExploreObject
 {
     public ExploreObject(GameObject trigger)
     {
-        TriggerObject = trigger;
-        Position = trigger.transform.position;
+        _triggerObject = trigger;
+        _position = trigger.transform.position;
     }
-    public GameObject TriggerObject;
-    public Vector3 Position;
+
+    private readonly GameObject _triggerObject;
+    private readonly Vector3 _position;
     public void SetObject()
     {
-        GameObject.Instantiate(TriggerObject, Position, new Quaternion());
+        Object.Instantiate(_triggerObject, _position, new Quaternion());
     }
 }

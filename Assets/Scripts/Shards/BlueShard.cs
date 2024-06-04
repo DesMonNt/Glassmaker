@@ -1,28 +1,15 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AzureShard : MonoBehaviour
+namespace Shards
 {
-    [SerializeField] public Text nameOfBuff;
-
-    public AzureShard(string name) => nameOfBuff.text = name;
-
-    public GameObject canvas;
-
-    public void Start()
+    public class AzureShard : MonoBehaviour
     {
-        this.GameObject().SetActive(false);
-    }
+        public Text nameOfBuff;
 
-    public void GetClicked()
-    {
-        canvas.SetActive(false);
-        Debug.Log($"{nameOfBuff.text}");
-        SetUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAzureBuff[nameOfBuff.text]);
+        public AzureShard(string name) => nameOfBuff.text = name;
+
+        public void Start() => this.GameObject().SetActive(false);
     }
 }

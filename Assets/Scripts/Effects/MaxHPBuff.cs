@@ -2,11 +2,11 @@
 
 namespace Effects
 {
-    public class MaxHPBuff : IBuff
+    public class MaxHpBuff : IBuff
     {
         private readonly int _maxHpBonus;
 
-        public MaxHPBuff(int maxHpBonus) => _maxHpBonus = maxHpBonus;
+        public MaxHpBuff(int maxHpBonus) => _maxHpBonus = maxHpBonus;
 
         public UnitStats ApplyBuff(Unit unit)
         {

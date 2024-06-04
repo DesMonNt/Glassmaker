@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using System;
-
-public static class Accuracy
+namespace ScriptsToQTE
 {
-    public static float accuracy;
-    public static int maxSum;
-    public static int currentSum;
-
-    public static Text accuracyText;
-
-    public static void Update()
+    public static class Accuracy
     {
-        accuracyText.text = Math.Round(accuracy, 2) + "%";
+        public static float accuracy;
+        public static int MaxSum;
+        public static int CurrentSum;
     }
 }

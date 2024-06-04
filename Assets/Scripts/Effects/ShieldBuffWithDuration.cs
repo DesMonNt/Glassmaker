@@ -1,27 +1,28 @@
-using Effects;
 using FightingScene.Units;
-using UnityEngine;
 
-public class ShieldBuffWithDuration : IBuff
+namespace Effects
 {
-    private readonly int _shieldValue;
-    private int _duration;
-
-    public ShieldBuffWithDuration(int shieldValue, int duration)
+    public class ShieldBuffWithDuration : IBuff
     {
-        _shieldValue = shieldValue;
-        _duration = duration;
-    }
+        private readonly int _shieldValue;
+        private int _duration;
 
-    public UnitStats ApplyBuff(Unit unit)
-    {
-        if (_duration <= 0)
-            return unit.CurrentStats;
+        public ShieldBuffWithDuration(int shieldValue, int duration)
+        {
+            _shieldValue = shieldValue;
+            _duration = duration;
+        }
 
-        _duration--;
+        public UnitStats ApplyBuff(Unit unit)
+        {
+            if (_duration <= 0)
+                return unit.CurrentStats;
+
+            _duration--;
         
-        unit.currentShield += _shieldValue;
+            unit.currentShield += _shieldValue;
             
-        return unit.CurrentStats;
+            return unit.CurrentStats;
+        }
     }
 }

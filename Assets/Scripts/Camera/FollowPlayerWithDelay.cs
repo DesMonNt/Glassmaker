@@ -19,18 +19,25 @@ namespace Camera
         private void FindPlayer(bool playerFaceLeft)
         {
             _player = GameObject.FindGameObjectWithTag("Player").transform;
-            _lastX = Mathf.RoundToInt(_player.position.x);
-            transform.position = playerFaceLeft ? new Vector3(_player.position.x - offset.x, _player.position.y + offset.y, transform.position.z) : new Vector3(_player.position.x + offset.x, _player.position.y + offset.y, transform.position.z);
+            var position = _player.position;
+            _lastX = Mathf.RoundToInt(position.x);
+            transform.position = playerFaceLeft 
+                ? new Vector3(position.x - offset.x, position.y + offset.y, transform.position.z) 
+                : new Vector3(position.x + offset.x, position.y + offset.y, transform.position.z);
         }
 
         private void Update()
         {
-            if (!_player) return;
+            if (!_player) 
+                return;
             var currentX = Mathf.RoundToInt(_player.position.x);
             if (currentX > _lastX) faceLeft = false; else if (currentX < _lastX) faceLeft = true;
-            _lastX = Mathf.RoundToInt(_player.position.x);
+            var position = _player.position;
+            _lastX = Mathf.RoundToInt(position.x);
 
-            var target = faceLeft ? new Vector3(_player.position.x - offset.x, _player.position.y + offset.y, transform.position.z) : new Vector3(_player.position.x + offset.x, _player.position.y + offset.y, transform.position.z);
+            var target = faceLeft 
+                ? new Vector3(position.x - offset.x, position.y + offset.y, transform.position.z) 
+                : new Vector3(_player.position.x + offset.x, position.y + offset.y, transform.position.z);
             var currentPosition = Vector3.Lerp(transform.position, target, damping * Time.deltaTime);
             transform.position = currentPosition;
         }

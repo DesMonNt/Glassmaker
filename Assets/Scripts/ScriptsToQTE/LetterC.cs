@@ -1,42 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class LetterC : MonoBehaviour
+namespace ScriptsToQTE
 {
-    private Rigidbody2D rb;
-
-    private void Start()
+    public class LetterC : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D _rb;
 
-    public int speed;
-    public bool isRight = true;
-    void Update()
-    {
-        // float horizontalInput = Input.GetAxis("Horizontal");
-        // float verticalInput = Input.GetAxis("Vertical");
-
-        // transform.position = transform.position + new Vector3(horizontalInput * speed * Time.deltaTime, verticalInput * speed * Time.deltaTime);
-
-        if (isRight)
+        private void Start()
         {
-            transform.position = new Vector3(570, 14f);
-            isRight = false;
+            _rb = GetComponent<Rigidbody2D>();
         }
 
-        if (!isRight)
+        public int speed;
+        public bool isRight = true;
+
+        private void Update()
         {
-            transform.position = transform.position + new Vector3(-0.4f * speed * Time.deltaTime, 0);
-            if (transform.position.x <= 0)
+            if (isRight)
             {
-                isRight = true;
+                transform.position = new Vector3(570, 14f);
+                isRight = false;
+                return;
             }
-                
-    
+            transform.position += new Vector3(-0.4f * speed * Time.deltaTime, 0);
+            if (transform.position.x <= 0) isRight = true;
+
         }
-    
     }
 }

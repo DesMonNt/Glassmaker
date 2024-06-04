@@ -1,34 +1,29 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FightingScene.Units;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarToEnemy : MonoBehaviour
+namespace FightingScene
 {
-    public Image hpBar;
-    private Unit _comp;
-    private void Start()
+    public class HealthBarToEnemy : MonoBehaviour
     {
-        GetComponent(typeof(Unit));
-        var assembly = Assembly.GetAssembly(typeof(Unit));
-        var unitTypes = assembly.GetTypes()
-            .Where(type => typeof(Unit).IsAssignableFrom(type) && !type.IsAbstract)
-            .ToList();
-
-        foreach (var unitType in unitTypes)
+        public Image hpBar;
+        private Unit _comp;
+        private void Start()
         {
-            if (GetComponent(unitType) is null) 
-                continue;
-            _comp = (Unit)GetComponent(unitType);
-        }
-    }
+            GetComponent(typeof(Unit));
+            var assembly = Assembly.GetAssembly(typeof(Unit));
+            var unitTypes = assembly.GetTypes()
+                .Where(type => typeof(Unit).IsAssignableFrom(type) && !type.IsAbstract)
+                .ToList();
 
-    private void Update()
-    {
-        hpBar.fillAmount = (float)Math.Round((double)_comp.currentHealthPoints / _comp.CurrentStats.MaxHealth, 2);
+            foreach (var unitType in unitTypes.Where(unitType => GetComponent(unitType) is not null))
+                _comp = (Unit)GetComponent(unitType);
+        }
+
+        private void Update() => 
+            hpBar.fillAmount = (float)Math.Round((double)_comp.currentHealthPoints / _comp.CurrentStats.MaxHealth, 2);
     }
 }

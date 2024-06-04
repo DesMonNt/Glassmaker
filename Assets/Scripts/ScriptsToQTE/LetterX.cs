@@ -1,34 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class LetterX : MonoBehaviour
+namespace ScriptsToQTE
 {
-    private Rigidbody2D rb;
-
-    private void Start()
+    public class LetterX : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody2D>();
-    }
+        private Rigidbody2D _rb;
 
-    public int speed;
-    public bool isDown = true;
-    void Update()
-    {
-        if (isDown)
-        {
-            transform.position = new Vector3(0, 380f);
-            isDown = false;
-        }
+        private void Start() => _rb = GetComponent<Rigidbody2D>();
 
-        if (!isDown)
+        public int speed;
+        public bool isDown = true;
+
+        private void Update()
         {
-            transform.position = transform.position + new Vector3(0, -0.4f * speed * Time.deltaTime);
-            if (transform.position.y <= 0)
+            if (isDown)
             {
-                isDown = true;
+                transform.position = new Vector3(0, 380f);
+                isDown = false;
+                return;
             }
+            
+            transform.position += new Vector3(0, -0.4f * speed * Time.deltaTime);
+            if (transform.position.y <= 0) 
+                isDown = true;
         }
     }
 }

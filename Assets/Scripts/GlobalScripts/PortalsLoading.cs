@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,13 +5,10 @@ namespace GlobalScripts
 {
     public class PortalsLoading : MonoBehaviour
     {
-        [SerializeField] public GameObject loadingScene;
+        public GameObject loadingScene;
         private LoadingBar _loading;
         
-        private void Awake()
-        {
-            _loading = loadingScene.GetComponent<LoadingBar>();
-        }
+        private void Awake() => _loading = loadingScene.GetComponent<LoadingBar>();
 
         private void Start()
         {
@@ -23,12 +19,11 @@ namespace GlobalScripts
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
-                _loading.isFake = true;
-                loadingScene.SetActive(true);
-                StartCoroutine(ChangeColor());
-            }
+            if (!other.CompareTag("Player")) 
+                return;
+            _loading.isFake = true;
+            loadingScene.SetActive(true);
+            StartCoroutine(ChangeColor());
         }
 
         private IEnumerator ChangeColor()

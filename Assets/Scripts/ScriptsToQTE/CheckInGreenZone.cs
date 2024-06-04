@@ -1,30 +1,33 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class CheckInGreenZone : MonoBehaviour
+namespace ScriptsToQTE
 {
-    public int _currentSum;
-    public int _maxSum;
-
-    public Text _accuracyText;
-
-    public void OnTriggerStay2D(Collider2D other)
+    public class CheckInGreenZone : MonoBehaviour
     {
-        if (other.CompareTag("Z") || other.CompareTag("X") || other.CompareTag("C"))
-        {
-            if (Input.GetButtonDown(other.tag + "Key"))
-            {
-                Accuracy.currentSum += 3;
-                Accuracy.accuracy = (float)Accuracy.currentSum / Accuracy.maxSum * 100;
-                _accuracyText.text = Math.Round(Accuracy.accuracy, 2) + "%";
-            }
+        [FormerlySerializedAs("_currentSum")] public int currentSum;
+        [FormerlySerializedAs("_maxSum")] public int maxSum;
 
-            else
+        [FormerlySerializedAs("_accuracyText")] public Text accuracyText;
+
+        public void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.CompareTag("Z") || other.CompareTag("X") || other.CompareTag("C"))
             {
-                Accuracy.accuracy = (float)Accuracy.currentSum / Accuracy.maxSum * 100;
-                _accuracyText.text = Math.Round(Accuracy.accuracy, 2) + "%";
+                if (Input.GetButtonDown(other.tag + "Key"))
+                {
+                    Accuracy.CurrentSum += 3;
+                    Accuracy.accuracy = (float)Accuracy.CurrentSum / Accuracy.MaxSum * 100;
+                    accuracyText.text = Math.Round(Accuracy.accuracy, 2) + "%";
+                }
+
+                else
+                {
+                    Accuracy.accuracy = (float)Accuracy.CurrentSum / Accuracy.MaxSum * 100;
+                    accuracyText.text = Math.Round(Accuracy.accuracy, 2) + "%";
+                }
             }
         }
     }

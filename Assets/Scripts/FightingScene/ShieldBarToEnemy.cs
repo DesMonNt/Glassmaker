@@ -1,33 +1,30 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using FightingScene.Units;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShieldBarToEnemy : MonoBehaviour
+namespace FightingScene
 {
-    public Image shieldBar;
-    private Unit _comp;
-    private void Start()
+    public class ShieldBarToEnemy : MonoBehaviour
     {
-        var assembly = Assembly.GetAssembly(typeof(Unit));
-        var unitTypes = assembly.GetTypes()
-            .Where(type => typeof(Unit).IsAssignableFrom(type) && !type.IsAbstract)
-            .ToList();
-
-        foreach (var unitType in unitTypes)
+        public Image shieldBar;
+        private Unit _comp;
+        private void Start()
         {
-            if (GetComponent(unitType) is null) 
-                continue;
-            _comp = (Unit)GetComponent(unitType);
-        }
-    }
+            var assembly = Assembly.GetAssembly(typeof(Unit));
+            var unitTypes = assembly.GetTypes()
+                .Where(type => typeof(Unit).IsAssignableFrom(type) && !type.IsAbstract)
+                .ToList();
 
-    private void Update()
-    {
-        shieldBar.fillAmount = (float)Math.Round((double)_comp.currentShield / _comp.CurrentStats.MaxHealth, 2);
+            foreach (var unitType in unitTypes.Where(unitType => GetComponent(unitType) is not null))
+                _comp = (Unit)GetComponent(unitType);
+        }
+
+        private void Update()
+        {
+            shieldBar.fillAmount = (float)Math.Round((double)_comp.currentShield / _comp.CurrentStats.MaxHealth, 2);
+        }
     }
 }

@@ -12,7 +12,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     private Text _text;
 
-    [SerializeField] public Vector3 circlePos;
+    public Vector3 circlePos;
 
     private MainMenu _mainMenu;
     
@@ -35,18 +35,9 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         circlePos = new Vector3(x, y, 0);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        _mainMenu.Selected = GetComponent<MenuButton>();
-    }
-    
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
-    }
+    public void OnPointerEnter(PointerEventData eventData) => _mainMenu.Selected = GetComponent<MenuButton>();
 
-    public void ChangeScene()
-    {
-        SceneManager.LoadScene("Tower exploration");
-    }
+    public void OnPointerExit(PointerEventData eventData) => GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;
+
+    public void ChangeScene() => SceneManager.LoadScene("Tower exploration");
 }

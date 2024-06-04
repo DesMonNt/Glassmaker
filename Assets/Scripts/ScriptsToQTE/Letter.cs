@@ -1,29 +1,33 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Letter : MonoBehaviour
+namespace ScriptsToQTE
 {
-    [FormerlySerializedAs("_speed")] public float speed;
-    private bool _inCenter;
-
-    private Vector3 _targetPosition;
-    private Transform _transform;
-
-    private Vector3 _direction;
-    void Start()
+    public class Letter : MonoBehaviour
     {
-        _transform = transform;
-        _targetPosition = new Vector3(0f, 1f);
-        _direction = (_targetPosition - _transform.position).normalized;
+        [FormerlySerializedAs("_speed")] public float speed;
+        private bool _inCenter;
+
+        private Vector3 _targetPosition;
+        private Transform _transform;
+
+        private Vector3 _direction;
+
+        private void Start()
+        {
+            _transform = transform;
+            _targetPosition = new Vector3(0f, 1f);
+            _direction = (_targetPosition - _transform.position).normalized;
         
-    }
+        }
 
-    void Update() => GoToTarget();
+        private void Update() => GoToTarget();
 
-    private void GoToTarget()
-    {
-        if (!RandomSpawner.CanSpawn)
-            Destroy(gameObject);
-        _transform.position += speed * Time.deltaTime * _direction;
+        private void GoToTarget()
+        {
+            if (!RandomSpawner.CanSpawn)
+                Destroy(gameObject);
+            _transform.position += speed * Time.deltaTime * _direction;
+        }
     }
 }

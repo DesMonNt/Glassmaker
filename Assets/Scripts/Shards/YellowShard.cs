@@ -1,26 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using FightingScene;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AmberShard : MonoBehaviour
+namespace Shards
 {
-    [SerializeField] public Text nameOfBuff;
-
-    public AmberShard(string name) => nameOfBuff.text = name;
-    
-    public GameObject canvas;
-    
-    public void Start()
+    public class AmberShard : MonoBehaviour
     {
-        this.GameObject().SetActive(false);
-    }
+        public Text nameOfBuff;
 
-    public void GetClicked()
-    {
-        canvas.SetActive(false);
-        SetUnitsFromPreviousScene.SaveShard(BuffInfo.KeyToAmberBuff[nameOfBuff.text]);
+        public AmberShard(string name) => nameOfBuff.text = name;
+
+        public void Start() => this.GameObject().SetActive(false);
     }
 }

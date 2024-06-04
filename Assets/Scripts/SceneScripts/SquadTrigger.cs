@@ -6,7 +6,7 @@ namespace SceneScripts
     public class SquadTrigger : MonoBehaviour
     {
         public int key;
-        [SerializeField] public GameObject character;
+        public GameObject character;
         private bool _isUsed;
 
         private void OnTriggerEnter2D(Collider2D other)

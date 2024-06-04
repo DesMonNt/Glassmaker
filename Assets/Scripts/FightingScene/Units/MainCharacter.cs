@@ -6,9 +6,10 @@ namespace FightingScene.Units
 {
     public class MainCharacter : Unit
     {
-        private int _criticalStack = 0;
+        private int _criticalStack;
         
-        public MainCharacter() : base(new UnitStats(5500, 0.2f, 300, 110, false, 0.1f, TypeOfAttack.Single, 3))
+        public MainCharacter() : base(new UnitStats(5500, 0.2f, 300, 110, false, 
+            0.1f, TypeOfAttack.Single, 3))
         {
             Skill = new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела")
             {
@@ -34,7 +35,7 @@ namespace FightingScene.Units
         
         public override Ability UseUltimate()
         {
-            var ultimateAttackDamage = Ultimate.Attack.Damage + 100 * _criticalStack;
+            var ultimateAttackDamage = Ultimate.Attack!.Damage + 100 * _criticalStack;
             
             if (_criticalStack > 2)
                 ultimateAttackDamage += 100 * (_criticalStack - 2);

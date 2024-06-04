@@ -6,10 +6,7 @@ namespace Effects
     {
         private int _duration;
 
-        public ConfusionBuff(int duration)
-        {
-            _duration = duration;
-        }
+        public ConfusionBuff(int duration) => _duration = duration;
 
         public UnitStats ApplyBuff(Unit unit)
         {

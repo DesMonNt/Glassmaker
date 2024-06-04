@@ -1,17 +1,17 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionsScript : MonoBehaviour
+namespace UI_Scripts
 {
-    public GameObject options;
-
-    public GameObject menuButtons;
-
-    public void ChangeButtons()
+    public class OptionsScript : MonoBehaviour
     {
-        menuButtons.SetActive(false);
-        options.SetActive(true);
+        public GameObject options;
+
+        public GameObject menuButtons;
+
+        public void ChangeButtons()
+        {
+            menuButtons.SetActive(false);
+            options.SetActive(true);
+        }
     }
 }

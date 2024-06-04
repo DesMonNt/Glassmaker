@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ButtonController : MonoBehaviour
+namespace Buttons
 {
-    [SerializeField] private string sceneName;
-
-    public void RunFightScene()
+    public class ButtonController : MonoBehaviour
     {
-        SceneManager.LoadScene(sceneName);
+        [SerializeField] private string sceneName;
+
+        public void RunFightScene()
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

@@ -1,59 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PlayerSelect : MonoBehaviour
+namespace FightingScene
 {
-    private GameObject[] characters;
-    private int index;
+    public class PlayerSelect : MonoBehaviour
+    {
+        private GameObject[] _characters;
+        private int _index;
     
-    private void Start()
-    {
-        index = PlayerPrefs.GetInt("CharacterSelected");
-        characters = new GameObject[transform.childCount];
+        private void Start()
+        {
+            _index = PlayerPrefs.GetInt("CharacterSelected");
+            _characters = new GameObject[transform.childCount];
 
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            characters[i] = transform.GetChild(i).gameObject;
-        }
-        foreach (GameObject go in characters)
-        {
-            go.SetActive(false);
-        }
+            for (var i = 0; i < transform.childCount; i++) 
+                _characters[i] = transform.GetChild(i).gameObject;
+            foreach (var character in _characters) 
+                character.SetActive(false);
 
-        if (characters[index])
-        {
-            characters[index].SetActive(true);
+            if (_characters[_index]) 
+                _characters[_index].SetActive(true);
         }
     }
-
-    public void SelectLeft()
-    {
-        characters[index].SetActive(false);
-        index--;
-        if (index < 0)
-        {
-            index = characters.Length - 1;
-        }
-        characters[index].SetActive(true);
-    }
-
-    public void SelectRight()
-    {
-        characters[index].SetActive(false);
-        index++;
-        if (index == characters.Length)
-        {
-            index = 0;
-        }
-        characters[index].SetActive(true);
-    }
-
-    public void StartScene()
-    {
-        PlayerPrefs.SetInt("CharacterSelected", index);
-        SceneManager.LoadScene("Level01");
-    }
-        
 }

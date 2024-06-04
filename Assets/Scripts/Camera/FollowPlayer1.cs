@@ -7,8 +7,10 @@ public class FollowPlayer1 : MonoBehaviour
 
     private void LateUpdate()
     {
-        var temp = transform.position;
-        (temp.x, temp.y) = (_player.position.x, _player.position.y);
-        transform.position = temp;
+        var transform1 = transform;
+        var savedTransform = transform1.position;
+        var position = _player.position;
+        (savedTransform.x, savedTransform.y) = (position.x, position.y);
+        transform1.position = savedTransform;
     }
 }
