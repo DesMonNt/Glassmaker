@@ -48,7 +48,7 @@ namespace FightingScene.Units
 
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Третье желание: Последнее")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 2.5), Buffs, TypeOfAttack.Aoe)
+                Attack = new Attack((int)(CurrentStats.Damage * 2.5), TypeOfAttack.Aoe)
             };
         }
         

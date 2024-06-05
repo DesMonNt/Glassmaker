@@ -13,7 +13,7 @@ namespace FightingScene.Units
             Brain = new DamageDealerAI(this);
             Skill = new Ability(new List<IBuff>(), new List<IBuff>(), "Багровый шип")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 1.25), Buffs, TypeOfAttack.Single)
+                Attack = new Attack((int)(CurrentStats.Damage * 1.25), TypeOfAttack.Single)
             };
             Ultimate = new Ability(
                 new List<IBuff> { new BurnBuff((int)(CurrentStats.Damage * 0.35), 3) }, 
@@ -23,7 +23,7 @@ namespace FightingScene.Units
         public override Ability UseAbility() => 
             new (new List<IBuff>(), new List<IBuff>(), "Багровый шип")
         {
-            Attack = new Attack((int)(CurrentStats.Damage * 1.25), Buffs, TypeOfAttack.Single)
+            Attack = new Attack((int)(CurrentStats.Damage * 1.25), TypeOfAttack.Single)
         };
         
         public override Ability UseUltimate() => 

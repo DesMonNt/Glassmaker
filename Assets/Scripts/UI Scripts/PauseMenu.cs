@@ -8,8 +8,6 @@ namespace UI_Scripts
 {
     public class PauseMenu : MonoBehaviour
     {
-        [SerializeField] private GameObject[] texts;
-
         private List<PauseButton> _menuButtonsList;
         private float _time;
 
@@ -22,10 +20,7 @@ namespace UI_Scripts
         public GameObject pauseMenu;
         public List<GameObject> objectsToHide = new();
 
-        public PauseMenu(List<PauseButton> menuButtonsList)
-        {
-            _menuButtonsList = menuButtonsList;
-        }
+        public PauseMenu(List<PauseButton> menuButtonsList) => _menuButtonsList = menuButtonsList;
 
         public PauseButton Selected
         {
@@ -41,7 +36,7 @@ namespace UI_Scripts
             }
         }
 
-        void Start()
+        private void Start()
         {
             _hoverSound = GetComponent<AudioSource>();
             selected = Selected;

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Effects;
-using JetBrains.Annotations;
+﻿using Effects;
 using Unit = FightingScene.Units.Unit;
 
 namespace FightingScene
@@ -8,13 +6,11 @@ namespace FightingScene
     public class Attack : IAction
     {
         public readonly int Damage;
-        [CanBeNull] public IEnumerable<IBuff> AttackEffects;
         public readonly TypeOfAttack TypeAttack;
 
-        public Attack(int damage, [CanBeNull] IEnumerable<IBuff> buffs, TypeOfAttack type)
+        public Attack(int damage, TypeOfAttack type)
         {
             Damage = damage;
-            AttackEffects = buffs;
             TypeAttack = type;
         }
 

@@ -17,7 +17,7 @@ namespace FightingScene.Units
                 new List<IBuff> {new BurnBuff((int)(CurrentStats.Damage * 0.35), 3)}, 
                 new List<IBuff> { new DamageBuff(1.07f, 2) }, "Обжигающий багрянец")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 0.9), Buffs, TypeOfAttack.Single)
+                Attack = new Attack((int)(CurrentStats.Damage * 0.9), TypeOfAttack.Single)
             };
         }
         
@@ -28,7 +28,7 @@ namespace FightingScene.Units
             new (new List<IBuff> {new BurnBuff((int)(CurrentStats.Damage * 0.35), 3)}, 
             new List<IBuff> { new DamageBuff(1.07f, 2) }, "Обжигающий багрянец")
         {
-            Attack = new Attack((int)(CurrentStats.Damage * 0.9), Buffs, TypeOfAttack.Single)
+            Attack = new Attack((int)(CurrentStats.Damage * 0.9), TypeOfAttack.Single)
         };
     }
 }

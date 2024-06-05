@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace FightingScene.Units
 {
-    public abstract class Unit : MonoBehaviour, IBuffable
+    public abstract class Unit : MonoBehaviour
     {
         public Sprite attackSprite;
         public Sprite skillSprite;
@@ -82,7 +82,7 @@ namespace FightingScene.Units
                 GetDied();
         }
 
-        public virtual Attack UseAttack() => new (CurrentStats.Damage, Buffs, CurrentStats.AttacksType);
+        public virtual Attack UseAttack() => new (CurrentStats.Damage, CurrentStats.AttacksType);
         public virtual Ability UseAbility() => Skill;
         public virtual Ability UseUltimate() => Ultimate;
 

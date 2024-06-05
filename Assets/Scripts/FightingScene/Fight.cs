@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Effects;
 using FightingScene.Units;
+using ObjectSaves;
 using ScriptsToQTE;
 using UI_Scripts;
 using Unity.VisualScripting;
@@ -84,21 +85,21 @@ namespace FightingScene
         #region InitializeMembers
         private void Awake()
         {
-            _soundsDictionary = new();
+            _soundsDictionary = new Dictionary<Unit, AudioClip>();
             _videoPlayer = titres.GetComponent<VideoPlayer>();
             winBoss.GameObject().SetActive(false);
             winEnemy.GameObject().SetActive(false);
             lose.GameObject().SetActive(false);
-            _selectedComponentsOrder = new();
-            _queueCirclesRenderers = new();
-            _charComponentsOrder = new();
-            _enemyComponentsOrder = new();
-            _ultPointsRenderers = new();
+            _selectedComponentsOrder = new List<Unit>();
+            _queueCirclesRenderers = new List<SpriteRenderer>();
+            _charComponentsOrder = new List<Unit>();
+            _enemyComponentsOrder = new List<Unit>();
+            _ultPointsRenderers = new List<SpriteRenderer>();
             _currentPoints = 2;
             _activeSkill = false;
             _activeUlt = false;
             _pointsToUseAbility = 5;
-            _spritesDictionary = new();
+            _spritesDictionary = new Dictionary<Unit, (SpriteRenderer renderer, string typeOfFighter)>();
             _viewQueueSprites = viewQueue
                 .Select(x => x.GetComponent<SpriteRenderer>())
                 .ToList();
@@ -108,10 +109,10 @@ namespace FightingScene
             CriticalChance = -1;
             IsEndQte = false;
             _readyFighters = new Queue<Unit>();
-            _charComponents = new();
-            _enemyComponents = new();
-            _allUnits = new();
-            _deletedUnits = new();
+            _charComponents = new List<Unit>();
+            _enemyComponents = new List<Unit>();
+            _allUnits = new List<Unit>();
+            _deletedUnits = new List<Unit>();
             buttons.SetActive(false);
             qte.SetActive(false);
             skillName.GameObject().SetActive(false);
@@ -159,7 +160,7 @@ namespace FightingScene
 
             _selectedComponentsOrder = _enemyComponentsOrder;
 
-            if (_enemyComponentsOrder.Any(comp => comp.GetComponent<Glassmaker>() is not null)) 
+            if (_enemyComponentsOrder.Any(component => component.GetComponent<Glassmaker>() is not null)) 
                 _isBossFight = true;
         
             foreach (var myUnit in _charComponentsOrder)
@@ -205,7 +206,8 @@ namespace FightingScene
                     
                         var targetsList = _enemyComponentsOrder;
                         _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
-                        var (previousX, previousY) = (nextUnit.transform.position.x, nextUnit.transform.position.y);
+                        var position = nextUnit.transform.position;
+                        var (previousX, previousY) = (position.x, position.y);
                         GoToTarget(nextUnit, new Vector3(0, 0));
                         buttons.SetActive(true);
                     
@@ -224,7 +226,7 @@ namespace FightingScene
                             PrepareCommonAttack();
                             yield return new WaitWhile(() => !IsEndQte);
                             IsEndQte = false;
-                            yield return StartOffensive(nextUnit, _enemyComponentsOrder[_numberOfChar]);
+                            yield return StartOffense(nextUnit, _enemyComponentsOrder[_numberOfChar]);
                             _mouseAttack.isAttack = false;
                         }
 
@@ -340,7 +342,7 @@ namespace FightingScene
         private Coroutine StartAIOffensive(Unit attacker) 
             => StartCoroutine(AIOffensive(attacker));
     
-        private Coroutine StartOffensive(Unit attacker, Unit victim) 
+        private Coroutine StartOffense(Unit attacker, Unit victim) 
             => StartCoroutine(Offensive(attacker, victim, attacker.UseAttack(), "Attack"));
 
         private Coroutine StartAbility(Unit attacker, Unit target, KeyCode code) =>
@@ -444,21 +446,21 @@ namespace FightingScene
                 : null;
         }
 
-        private void SpawnFighters<T>
-            (Vector3 firstPositionality, List<T> fightersComps, List<T> allComps, List<GameObject> fighters)
+        private static void SpawnFighters<T>
+            (Vector3 firstPosition, List<T> fightersComps, List<T> allComps, List<GameObject> fighters)
         {
             var coefficient = 1;
-            if (firstPositionality == new Vector3(420, 180))
+            if (firstPosition == new Vector3(420, 180))
                 coefficient = -1;
             for (var i = 0; i < fighters.Count; i++)
             {
                 GameObject initObject;
                 if (i == 0)
-                    initObject = Instantiate(fighters[i], firstPositionality, new Quaternion());
+                    initObject = Instantiate(fighters[i], firstPosition, new Quaternion());
                 else
                 {
-                    firstPositionality += new Vector3((float)(180 * coefficient * Math.Pow(-1, i)), -200);
-                    initObject = Instantiate(fighters[i], firstPositionality, Quaternion.identity);
+                    firstPosition += new Vector3((float)(180 * coefficient * Math.Pow(-1, i)), -200);
+                    initObject = Instantiate(fighters[i], firstPosition, Quaternion.identity);
                 }
                 
                 var comp = initObject.GetComponent<T>();
@@ -467,7 +469,7 @@ namespace FightingScene
             }
         }
     
-        private static async Task GoToTarget(Unit attacker, Vector3 positionTo)
+        private static async Task GoToTarget(Component attacker, Vector3 positionTo)
         {
             var timer = 0f;
             var startPosition = attacker.transform.position;

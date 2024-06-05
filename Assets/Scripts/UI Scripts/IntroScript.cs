@@ -10,7 +10,7 @@ namespace UI_Scripts
         public GameObject video;
         private VideoPlayer _videoPlayer;
         private ulong _frames;
-        private bool _isPlay;
+        private bool _isPlayed;
         public List<GameObject> buttons = new();
     
         private void Start()
@@ -24,12 +24,12 @@ namespace UI_Scripts
             video.SetActive(true);
             foreach (var button in buttons)
                 button.SetActive(false);
-            _isPlay = true;
+            _isPlayed = true;
         }
 
         private void Update()
         {
-            if (!_isPlay)
+            if (!_isPlayed)
                 return;
             if (Input.anyKeyDown || (ulong)(_videoPlayer.frame + 2) >= _frames) 
                 SceneManager.LoadScene("Tower exploration");

@@ -7,9 +7,6 @@ namespace ScriptsToQTE
 {
     public class CheckInRed : MonoBehaviour
     {
-        [FormerlySerializedAs("_currentSum")] public int currentSum;
-        [FormerlySerializedAs("_maxSum")] public int maxSum;
-
         [FormerlySerializedAs("_accuracyText")] public Text accuracyText;
 
         public void OnTriggerEnter2D(Collider2D other)

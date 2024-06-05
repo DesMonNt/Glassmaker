@@ -11,7 +11,7 @@ namespace FightingScene.Units
             Brain = new HealerAI(this);
             Skill = new Ability(new () , new List<IBuff>(), "Исцеление")
             {
-                Attack = new Attack(-(int)(0.24 * CurrentStats.MaxHealth), Buffs, TypeOfAttack.Single)
+                Attack = new Attack(-(int)(0.24 * CurrentStats.MaxHealth), TypeOfAttack.Single)
             };
 
             Ultimate = new Ability(new List<IBuff> 
@@ -20,7 +20,7 @@ namespace FightingScene.Units
 
         public override Ability UseAbility() => new(new List<IBuff>(), new List<IBuff>(), "Исцеление")
         {
-            Attack = new Attack(-(int)(0.08 * CurrentStats.MaxHealth), Buffs, TypeOfAttack.Single)
+            Attack = new Attack(-(int)(0.08 * CurrentStats.MaxHealth), TypeOfAttack.Single)
         };
         
         public override Ability UseUltimate() => new (new List<IBuff> 

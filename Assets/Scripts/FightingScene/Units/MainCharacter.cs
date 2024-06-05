@@ -13,12 +13,12 @@ namespace FightingScene.Units
         {
             Skill = new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 2.75), Buffs, TypeOfAttack.Single)
+                Attack = new Attack((int)(CurrentStats.Damage * 2.75), TypeOfAttack.Single)
             };
 
             Ultimate = new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела: Дождь")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 5.7), Buffs, TypeOfAttack.Group)
+                Attack = new Attack((int)(CurrentStats.Damage * 5.7), TypeOfAttack.Group)
             };
         }
 
@@ -29,7 +29,7 @@ namespace FightingScene.Units
             
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела")
             {
-                Attack = new Attack((int)(CurrentStats.Damage * 2.75), Buffs, TypeOfAttack.Single)
+                Attack = new Attack((int)(CurrentStats.Damage * 2.75), TypeOfAttack.Single)
             };
         }
         
@@ -44,7 +44,7 @@ namespace FightingScene.Units
             
             return new Ability(new List<IBuff>(), new List<IBuff>(), "Багровая стрела: Дождь")
             {
-                Attack = new Attack(ultimateAttackDamage, Buffs, TypeOfAttack.Group)
+                Attack = new Attack(ultimateAttackDamage, TypeOfAttack.Group)
             };
         }
     }

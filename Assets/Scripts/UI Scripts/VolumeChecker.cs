@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI_Scripts
 {
-    public class CheckerVolume : MonoBehaviour
+    public class VolumeChecker : MonoBehaviour
     {
         private AudioSource _audio;
 

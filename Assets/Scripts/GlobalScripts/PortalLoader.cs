@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GlobalScripts
 {
-    public class PortalsLoading : MonoBehaviour
+    public class PortalLoader : MonoBehaviour
     {
         public GameObject loadingScene;
         private LoadingBar _loading;

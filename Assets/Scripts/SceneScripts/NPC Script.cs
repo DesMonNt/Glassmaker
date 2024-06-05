@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 namespace SceneScripts
 {
-    public class NPCScript : MonoBehaviour
+    public class NpcScript : MonoBehaviour
     {
         [FormerlySerializedAs("dialoge")] public GameObject dialog;
         public Sprite dialogue1;

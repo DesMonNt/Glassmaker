@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ScriptsToQTE
 {
@@ -11,12 +10,8 @@ namespace ScriptsToQTE
         private int _maxSum;
         private SpriteRenderer _sprite;
         private bool _isPulsing;
-        [FormerlySerializedAs("_isUpdateMax")] [SerializeField] private bool isUpdateMax;
 
-        private void Start()
-        {
-            _sprite = GetComponent<SpriteRenderer>();
-        }
+        private void Start() => _sprite = GetComponent<SpriteRenderer>();
 
         private void Update()
         {
