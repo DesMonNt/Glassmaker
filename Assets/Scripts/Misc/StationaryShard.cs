@@ -18,6 +18,7 @@ namespace Misc
         [FormerlySerializedAs("IsBroken")] [FormerlySerializedAs("_isBroken")] public bool isBroken;
         [SerializeField] private Sprite pic;
         [SerializeField] private GameObject canvas;
+        private Random _random;
 
         public GameObject crimsonShard;
         public GameObject azureShard;
@@ -30,6 +31,7 @@ namespace Misc
 
         private void Awake()
         {
+            _random = new Random();
             _renderer = GetComponent<SpriteRenderer>();
             _audioSource = GetComponent<AudioSource>();
         }
@@ -41,18 +43,16 @@ namespace Misc
             _renderer.sprite = pic;
             if (isBroken) 
                 return;
-            Saves.ShardsIsBroken[key] = true;
+            Saves.BrokenShards[key] = true;
             _audioSource.Play();
                 
             var crimsonShardBuffs = BuffInfo.KeyToCrimsonBuff.Keys.ToList();
             var amberShardBuffs = BuffInfo.KeyToAmberBuff.Keys.ToList();
             var azureShardBuffs = BuffInfo.KeyToAzureBuff.Keys.ToList();
-
-            var random = new Random();
                 
-            crimsonShardText.text = crimsonShardBuffs[random.Next(0, crimsonShardBuffs.Count)];
-            amberShardText.text = amberShardBuffs[random.Next(0, amberShardBuffs.Count)];
-            azureShardText.text = azureShardBuffs[random.Next(0, azureShardBuffs.Count)];
+            crimsonShardText.text = crimsonShardBuffs[_random.Next(0, crimsonShardBuffs.Count)];
+            amberShardText.text = amberShardBuffs[_random.Next(0, amberShardBuffs.Count)];
+            azureShardText.text = azureShardBuffs[_random.Next(0, azureShardBuffs.Count)];
                 
             canvas.SetActive(true);
             crimsonShard.SetActive(true);

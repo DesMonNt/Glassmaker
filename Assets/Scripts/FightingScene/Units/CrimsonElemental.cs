@@ -20,14 +20,8 @@ namespace FightingScene.Units
                 new List<IBuff>(), "Колющая рана");
         }
         
-        public override Ability UseAbility() => 
-            new (new List<IBuff>(), new List<IBuff>(), "Багровый шип")
-        {
-            Attack = new Attack((int)(CurrentStats.Damage * 1.25), TypeOfAttack.Single)
-        };
+        public override Ability UseAbility() => Skill;
         
-        public override Ability UseUltimate() => 
-            new (new List<IBuff> { new BurnBuff((int)(CurrentStats.Damage * 0.35), 3) }, 
-                new List<IBuff>(), "Колющая рана");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

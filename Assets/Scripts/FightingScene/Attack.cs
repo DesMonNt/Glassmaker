@@ -13,19 +13,6 @@ namespace FightingScene
             Damage = damage;
             TypeAttack = type;
         }
-
-        public void Execute(Unit owner, Unit target)
-        {
-            var random = new System.Random();
-            var randomValue = random.Next(0, 100);
-            if (randomValue < owner.CurrentStats.CriticalChance)
-            {
-                target.GetAttack(2 * Damage);
-            }
-                
-            else 
-                target.GetAttack(Damage);
-        }
         
         public void Execute(Unit owner, Unit target, float coefficientOfDamage)
         {
@@ -33,7 +20,7 @@ namespace FightingScene
             var randomValue = random.Next(0, 100);
             if (randomValue < owner.CurrentStats.CriticalChance)
                 target.GetAttack((int)(2 * Damage * coefficientOfDamage));
-            else 
+            else
                 target.GetAttack((int)(Damage * coefficientOfDamage));
         }
     }

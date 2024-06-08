@@ -12,7 +12,13 @@ namespace AI
     {
         protected readonly Unit Unit;
 
-        protected AI(Unit unit) => Unit = unit;
+        private readonly Random _random;
+
+        protected AI(Unit unit)
+        {
+            Unit = unit;
+            _random = new Random();
+        }
 
         public virtual (IAction, Unit target) MakeDecision(List<Unit> characters, List<Unit> enemies)
         {
@@ -26,7 +32,7 @@ namespace AI
 
         protected IAction GetAction()
         {
-            var actionNumber = new Random().Next(0, 100);
+            var actionNumber = _random.Next(0, 100);
 
             return actionNumber switch
             {

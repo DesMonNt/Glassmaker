@@ -29,6 +29,5 @@ namespace Shards
             ["+500 к макс. здоровью"] = new MaxHpBuff(500),
             ["+100 к макс. здоровью"] = new MaxHpBuff(100)
         };
-
     }
 }

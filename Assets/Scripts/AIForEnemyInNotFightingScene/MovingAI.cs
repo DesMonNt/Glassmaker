@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FightingScene;
-using ObjectSaves;
 using Unity.VisualScripting;
 using UnityEngine;
+using ObjectSaves;
 using UnityEngine.Serialization;
 using Random = System.Random;
 
@@ -19,6 +19,7 @@ namespace AIForEnemyInNotFightingScene
         private Collider2D _playerCollider;
         public List<GameObject> enemiesInFight;
         public bool canMove;
+        private Random _random;
         private bool IsRun { get; set; }
         private bool _isStart;
         private Rigidbody2D _rb;
@@ -35,6 +36,7 @@ namespace AIForEnemyInNotFightingScene
     
         private void Start()
         {
+            _random = new Random();
             _rb = GetComponent<Rigidbody2D>();
             _maybeCoordinates = new[]
             {
@@ -102,7 +104,7 @@ namespace AIForEnemyInNotFightingScene
 
         private Vector2 GetWalk()
         {
-            var randomValue = new Random().Next(0, 7);
+            var randomValue = _random.Next(0, 7);
             var position = _rb.position;
             var delta = new Vector2( 
                 position.x + _maybeCoordinates[randomValue].x,

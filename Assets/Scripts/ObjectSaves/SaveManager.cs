@@ -20,7 +20,7 @@ namespace ObjectSaves
             foreach (var shardGameObject in foundShards)
             {
                 var comp = shardGameObject.GetComponent<StationaryShard>();
-                if (Saves.ShardsIsBroken[comp.key]) 
+                if (Saves.BrokenShards[comp.key]) 
                     shardGameObject.SetActive(false);
             }
 

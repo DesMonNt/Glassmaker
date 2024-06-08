@@ -52,8 +52,6 @@ namespace FightingScene.Units
             };
         }
         
-        public override Ability UseUltimate() => new (new List<IBuff>(), 
-            new List<IBuff> { new ShieldBuff((int)(0.2 * CurrentStats.MaxHealth)) },
-            "Хрустальный доспех");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

@@ -81,7 +81,7 @@ namespace FightingScene
         public AudioClip basicFight;
         public AudioClip bossFight;
         private AudioSource _audio;
-    
+        
         #region InitializeMembers
         private void Awake()
         {
@@ -177,8 +177,7 @@ namespace FightingScene
         
             StartCoroutine(Battle());
         }
-    
-
+        
         #endregion
 
 
@@ -193,95 +192,47 @@ namespace FightingScene
 
                 if (nextUnit is not null)
                 {
-                    var previousHp = nextUnit.currentHealthPoints;
-                    nextUnit.ApplyBuffs();
-                    StartCoroutine(GetDamageView(nextUnit, previousHp));
-                
+                    ApplyBuffsToPlayer(nextUnit);
+
                     if (_charComponentsOrder.Contains(nextUnit))
                     {
-                        _selectedChar = nextUnit;
-                        _mouseAttack.description.sprite = nextUnit.attackSprite;
-                        _mouseSkill.description.sprite = nextUnit.skillSprite;
-                        _mouseUltimate.description.sprite = nextUnit.ultimateSprite;
-                    
-                        var targetsList = _enemyComponentsOrder;
-                        _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
-                        var position = nextUnit.transform.position;
-                        var (previousX, previousY) = (position.x, position.y);
-                        GoToTarget(nextUnit, new Vector3(0, 0));
-                        buttons.SetActive(true);
-                    
-                        yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Q) 
+                        var targetsList = PreparePlayersStep(nextUnit, out var previousX, out var previousY);
+
+                        yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.Q) // ожидание действий игрока
                                                          && !_activeSkill && !_activeUlt
                                                          && !_mouseAttack.isAttack);
                     
                         if (Input.GetKeyDown(KeyCode.Q) || _mouseAttack.isAttack)
                         {
                             _isPrepare = true;
-                            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.E));
-                            skillName.GameObject().SetActive(false);
-                            buttons.SetActive(false);
-                            _currentPoints = Math.Clamp(_currentPoints + 1, 0, 5);
-                            _ultPointsRenderers[_currentPoints - 1].sprite = ultSpriteActive;
+                            yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.E)); 
+                            // когда пытался вынести в метод (а уж тем более в класс(!)) во всех if'ах всё ломалось(
                             PrepareCommonAttack();
                             yield return new WaitWhile(() => !IsEndQte);
-                            IsEndQte = false;
-                            yield return StartOffense(nextUnit, _enemyComponentsOrder[_numberOfChar]);
-                            _mouseAttack.isAttack = false;
+                            yield return EndOfSimpleAttack(nextUnit);
                         }
 
                         else if (_activeSkill)
                         {
-                            if (nextUnit.Skill.Target == Targets.Character)
-                            {
-                                targetsList = _charComponentsOrder;
-                                _selectedComponentsOrder = _charComponentsOrder;
-                            }
-                            _isPrepare = true;
+                            targetsList = BeginOfSkill(nextUnit, targetsList);
                             yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.E));
-                            _ultPointsRenderers[_currentPoints - 1].sprite = ultSpritePassive;
-                            _currentPoints--;
-                            skillName.GameObject().SetActive(false);
-                            yield return StartAbility(nextUnit, targetsList[_numberOfChar % targetsList.Count], KeyCode.W);
-                            _mouseSkill.isSkill = false;
-                            _activeSkill = false;
+                            yield return EndOfSkill(nextUnit, targetsList);
                         }
                     
                         else if (_activeUlt)
                         {
-                            if (nextUnit.Ultimate.Target == Targets.Character)
-                            {
-                                targetsList = _charComponentsOrder;
-                                _selectedComponentsOrder = _charComponentsOrder;
-                            }
-                            _isPrepare = true;
+                            targetsList = BeginOfUltimate(nextUnit, targetsList);
                             yield return new WaitWhile(() => !Input.GetKeyDown(KeyCode.E));
                             yield return StartAbility(nextUnit, targetsList[_numberOfChar % targetsList.Count], KeyCode.R);
-                            _mouseUltimate.isUltimate = false;
-                            _currentPoints -=  nextUnit.CurrentStats.EnergyToUlt;
-                            for (var i = 0; i < 5; i++)
-                            {
-                                if (i + 1 > _currentPoints)
-                                    _ultPointsRenderers[i].sprite = ultSpritePassive;
-                            }
-                            _activeUlt = false;
+                            EndOfUltimate(nextUnit);
                         }
                         
-                        GoToTarget(nextUnit, new Vector3(previousX, previousY));
-                        buttons.SetActive(false);
-                        _isPrepare = false;
-                        _numberOfChar = 0;
-                        _activeSkill = false;
-                        _selectedComponentsOrder = _enemyComponentsOrder;
+                        EndOfPlayersStep(nextUnit, previousX, previousY);
                     }
                     else
                     {
-                        var (previousX, previousY) = (nextUnit.transform.position.x, 
-                            nextUnit.transform.position.y);
-                        GoToTarget(nextUnit, new Vector3(0, 0));
-                        targetsPointer.transform.position = new Vector3(1500, 1500);
-                        yield return StartAIOffensive(nextUnit);
-                        GoToTarget(nextUnit, new Vector3(previousX, previousY));
+                        yield return EnemiesStep(nextUnit, out var previousX, out var previousY);
+                        _ = GoToTarget(nextUnit, new Vector3(previousX, previousY));
                     }
                 }
             
@@ -298,7 +249,101 @@ namespace FightingScene
                 ? "Tower exploration" 
                 : "MainMenu");
         }
-    
+
+        private void EndOfUltimate(Unit nextUnit)
+        {
+            _mouseUltimate.isUltimate = false;
+            _currentPoints -=  nextUnit.CurrentStats.EnergyToUlt;
+            for (var i = 0; i < 5; i++)
+            {
+                if (i + 1 > _currentPoints)
+                    _ultPointsRenderers[i].sprite = ultSpritePassive;
+            }
+            _activeUlt = false;
+        }
+
+        private void ApplyBuffsToPlayer(Unit nextUnit)
+        {
+            var previousHp = nextUnit.currentHealthPoints;
+            nextUnit.ApplyBuffs();
+            StartCoroutine(GetDamageView(nextUnit, previousHp));
+        }
+
+        private object EnemiesStep(Unit nextUnit, out float previousX, out float previousY)
+        {
+            (previousX, previousY) = (nextUnit.transform.position.x, 
+                nextUnit.transform.position.y);
+            _ = GoToTarget(nextUnit, new Vector3(0, 0));
+            targetsPointer.transform.position = new Vector3(1500, 1500);
+            return StartAIOffensive(nextUnit);
+        }
+
+        private List<Unit> BeginOfUltimate(Unit nextUnit, List<Unit> targetsList)
+        {
+            if (nextUnit.Ultimate.Target == Targets.Character)
+            {
+                targetsList = _charComponentsOrder;
+                _selectedComponentsOrder = _charComponentsOrder;
+            }
+
+            _isPrepare = true;
+            return targetsList;
+        }
+
+        private void EndOfPlayersStep(Unit nextUnit, float previousX, float previousY)
+        {
+            _ = GoToTarget(nextUnit, new Vector3(previousX, previousY));
+            buttons.SetActive(false);
+            _isPrepare = false;
+            _numberOfChar = 0;
+            _activeSkill = false;
+            _selectedComponentsOrder = _enemyComponentsOrder;
+        }
+
+        private List<Unit> PreparePlayersStep(Unit nextUnit, out float previousX, out float previousY)
+        {
+            _selectedChar = nextUnit;
+            _mouseAttack.description.sprite = nextUnit.attackSprite;
+            _mouseSkill.description.sprite = nextUnit.skillSprite;
+            _mouseUltimate.description.sprite = nextUnit.ultimateSprite;
+                    
+            var targetsList = _enemyComponentsOrder;
+            _pointsToUseAbility = nextUnit.CurrentStats.EnergyToUlt;
+            var position = nextUnit.transform.position;
+            (previousX, previousY) = (position.x, position.y);
+            _ = GoToTarget(nextUnit, new Vector3(0, 0));
+            buttons.SetActive(true);
+            return targetsList;
+        }
+
+        private object EndOfSimpleAttack(Unit nextUnit)
+        {
+            IsEndQte = false;
+            _mouseAttack.isAttack = false;
+            return StartOffense(nextUnit, _enemyComponentsOrder[_numberOfChar]);
+        }
+
+        private List<Unit> BeginOfSkill(Unit nextUnit, List<Unit> targetsList)
+        {
+            if (nextUnit.Skill.Target == Targets.Character)
+            {
+                targetsList = _charComponentsOrder;
+                _selectedComponentsOrder = _charComponentsOrder;
+            }
+
+            _isPrepare = true;
+            return targetsList;
+        }
+
+        private object EndOfSkill(Unit nextUnit, List<Unit> targetsList)
+        {
+            _ultPointsRenderers[_currentPoints - 1].sprite = ultSpritePassive;
+            _currentPoints--;
+            skillName.GameObject().SetActive(false);
+            _mouseSkill.isSkill = false;
+            _activeSkill = false;
+            return StartAbility(nextUnit, targetsList[_numberOfChar % targetsList.Count], KeyCode.W);
+        }
 
         #endregion
 
@@ -328,8 +373,13 @@ namespace FightingScene
 
             yield return new WaitForSeconds(2);
         }
+        
         private void PrepareCommonAttack()
         {
+            skillName.GameObject().SetActive(false);
+            buttons.SetActive(false);
+            _currentPoints = Math.Clamp(_currentPoints + 1, 0, 5);
+            _ultPointsRenderers[_currentPoints - 1].sprite = ultSpriteActive;
             RandomSpawner.SpawnDelay = 86;
             AccuracyText.MaxSum = 0;
             AccuracyText.CurrentSum = 0;
@@ -477,7 +527,7 @@ namespace FightingScene
             while (timer < time)
             {
                 attacker.transform.position = Vector3.Lerp(startPosition, positionTo, timer / time);
-                await Task.Yield();
+                await Task.Yield(); // для красоты и плавности
                 timer += Time.deltaTime;
             }
         }
@@ -489,7 +539,7 @@ namespace FightingScene
             _audio.PlayOneShot(_soundsDictionary[owner]); 
             skillName.text = owner.Skill.Name;
             skillName.GameObject().SetActive(true);
-            owner.UseAbility().Execute(owner, target);
+            owner.UseAbility().Execute(owner, target, 0);
             if (owner.Skill.Attack is not null)
                 yield return Offensive(owner, target, owner.Skill.Attack, owner.Skill.Name);
         }
@@ -497,7 +547,7 @@ namespace FightingScene
         private IEnumerator UltimateUsage(Unit owner, Unit target)
         {
             _audio.PlayOneShot(_soundsDictionary[owner]); 
-            owner.UseUltimate().Execute(owner, target);
+            owner.UseUltimate().Execute(owner, target, 0);
             if (owner.Ultimate.Attack is not null)
                 yield return Offensive(owner, target, owner.Ultimate.Attack, owner.Ultimate.Name);
         }
@@ -505,7 +555,7 @@ namespace FightingScene
         private object GetUnitAttackWithDamageView(Unit attacker, Unit target, Attack attack)
         {
             var previousHp = target.currentHealthPoints;
-            attack.Execute(attacker, target);
+            attack.Execute(attacker, target, 1);
             return StartCoroutine(GetDamageView(target, previousHp));
         }
     
@@ -545,7 +595,7 @@ namespace FightingScene
                         yield return HandleAttack(attacker, skill.Attack, target, _charComponentsOrder);
                     skillName.text = skill.Name;
                     skillName.GameObject().SetActive(true);
-                    action.Execute(attacker, target);
+                    action.Execute(attacker, target, 0);
                 
                     yield return StartCoroutine(GetDamageView(target, previousHp));
                     break;

@@ -7,9 +7,6 @@ namespace Buttons
     {
         [SerializeField] private string sceneName;
 
-        public void RunFightScene()
-        {
-            SceneManager.LoadScene(sceneName);
-        }
+        public void RunFightScene() => SceneManager.LoadScene(sceneName);
     }
 }

@@ -18,12 +18,8 @@ namespace FightingScene.Units
                 { new MaxHpBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
         }
 
-        public override Ability UseAbility() => new(new List<IBuff>(), new List<IBuff>(), "Исцеление")
-        {
-            Attack = new Attack(-(int)(0.08 * CurrentStats.MaxHealth), TypeOfAttack.Single)
-        };
+        public override Ability UseAbility() => Skill;
         
-        public override Ability UseUltimate() => new (new List<IBuff> 
-            { new MaxHpBuff((int)(0.15 * CurrentStats.MaxHealth))} , new List<IBuff>(), "Успокаивающая лазурь");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

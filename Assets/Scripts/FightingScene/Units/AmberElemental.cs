@@ -14,10 +14,8 @@ namespace FightingScene.Units
             Ultimate = new Ability(new List<IBuff> { new SpeedBuff(1.15f, 3) }, new List<IBuff>(), "Ускорение частиц");
         }
 
-        public override Ability UseAbility() => new(new List<IBuff>
-            { new DefenceBuff(1.1f, 5) }, new List<IBuff>(), "Повышение защиты");
+        public override Ability UseAbility() => Skill;
         
-        public override Ability UseUltimate() => new(new List<IBuff>
-            { new SpeedBuff(1.15f, 3) }, new List<IBuff>(), "Ускорение частиц");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

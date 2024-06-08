@@ -5,23 +5,23 @@ namespace MainMenuLogic
 {
     public class Circle : MonoBehaviour
     {
-        public Vector3 startPos;
-        [FormerlySerializedAs("EndPos")] public Vector3 endPos;
-        public Vector3 CurrentPos => transform.position;
+        [FormerlySerializedAs("startPos")] public Vector3 startPosition;
+        [FormerlySerializedAs("endPos")] [FormerlySerializedAs("EndPos")] public Vector3 endPosition;
+        public Vector3 CurrentPosition => transform.position;
 
         public float time;
 
         private void Start()
         {
-            startPos = transform.position;
-            endPos = CurrentPos;
+            startPosition = transform.position;
+            endPosition = CurrentPosition;
         }
 
         private void Update()
         {
             if (!(time < 1)) 
                 return;
-            transform.position = Vector3.Lerp(startPos, endPos, Sigmoid(time));
+            transform.position = Vector3.Lerp(startPosition, endPosition, Sigmoid(time));
             time += Time.deltaTime * 2;
         }
 

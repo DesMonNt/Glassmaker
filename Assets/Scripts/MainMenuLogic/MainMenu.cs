@@ -24,6 +24,7 @@ namespace MainMenuLogic
         [FormerlySerializedAs("_blackout")] [SerializeField] private GameObject blackout;
 
         private bool _hadStarted;
+        private Circle _circle;
 
         private int _selectedIndex;
         [FormerlySerializedAs("_selected")] [SerializeField] private MenuButton selected;
@@ -41,17 +42,17 @@ namespace MainMenuLogic
                 selected.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
 
                 _selectedIndex = _menuButtonsList.IndexOf(selected);
-                var circleComp = circle.GetComponent<Circle>();
-                circleComp.endPos = selected.circlePos;
+                _circle.endPosition = selected.circlePosition;
 
-                circleComp.startPos = circleComp.CurrentPos;
-                circleComp.time = 0;
+                _circle.startPosition = _circle.CurrentPosition;
+                _circle.time = 0;
                 _hoverSound.Play();
             }
         }
 
-        void Start()
+        private void Start()
         {
+            _circle = circle.GetComponent<Circle>();
             selected = Selected;
             _hoverSound = GameObject.Find("HoverSound").GetComponent<AudioSource>();
             menuButtons = GameObject.Find("MenuButtons");
@@ -66,7 +67,6 @@ namespace MainMenuLogic
             exitConformation.SetActive(false);
             blackout = GameObject.Find("Blackout");
             blackout.SetActive(false);
-
         }
 
         private void Update()
@@ -81,28 +81,22 @@ namespace MainMenuLogic
                 menuButtons.SetActive(true);
                 const float appearTime = 1f;
                 foreach (var textComponent in texts.Select(x => x.GetComponent<Text>()))
-                    Appear(textComponent, appearTime);
-                Appear(circle.GetComponent<Image>(), appearTime);
+                    _ = Appear(textComponent, appearTime);
+                _ = Appear(circle.GetComponent<Image>(), appearTime);
                 startLine.SetActive(false);
-                Selected.SetPos();
+                Selected.SetPosition();
             }
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
                 _selectedIndex++;
-            }
-            else if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                _selectedIndex--;
             
-            }
+            else if (Input.GetKeyDown(KeyCode.UpArrow)) 
+                _selectedIndex--;
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                _selectedIndex = (_selectedIndex + _menuButtonsList.Count) % _menuButtonsList.Count;
-                Selected = _menuButtonsList[_selectedIndex];
-            }
-        
+            if (!Input.GetKeyDown(KeyCode.UpArrow) && !Input.GetKeyDown(KeyCode.DownArrow)) 
+                return;
+            _selectedIndex = (_selectedIndex + _menuButtonsList.Count) % _menuButtonsList.Count;
+            Selected = _menuButtonsList[_selectedIndex];
         }
 
         private async Task Appear(Graphic graphic, float duration)

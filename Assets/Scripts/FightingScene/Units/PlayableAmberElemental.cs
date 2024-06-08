@@ -16,15 +16,9 @@ namespace FightingScene.Units
                 "Замешательство", Targets.Enemy);
         }
         
-        public override Ability UseAbility() => new (new List<IBuff> 
-            { new SpeedBuff(1.17f, 3), new DamageBuff(1.42f, 2) },
-            new List<IBuff>(), "Янтарный пакт");
+        public override Ability UseAbility() => Skill;
         
-        public override Ability UseUltimate() =>  new (new List<IBuff>
-            {
-                new ConfusionBuff(4)
-            }, new List<IBuff>(), "Замешательство",
-            Targets.Enemy);
+        public override Ability UseUltimate() => Ultimate;
 
     }
 }

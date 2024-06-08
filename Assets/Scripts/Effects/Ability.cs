@@ -11,7 +11,7 @@ namespace Effects
         private readonly List<IBuff> _targetStatuses;
         public readonly string Name;
         [CanBeNull] public Attack Attack;
-        public readonly Targets Target;
+        public readonly Targets Target; // важно знать для реализации, например, исцеления
 
         public Ability(List<IBuff> targetS, List<IBuff> ownerS, string name, Targets target = default)
         {
@@ -21,7 +21,7 @@ namespace Effects
             _ownerStatuses = ownerS;
         }
     
-        public void Execute(Unit owner, Unit target)
+        public void Execute(Unit owner, Unit target, float coefficientOfDamage)
         {
             foreach (var status in _targetStatuses) 
                 target.AddBuff(status);

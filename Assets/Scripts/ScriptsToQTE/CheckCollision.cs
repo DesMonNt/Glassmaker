@@ -22,19 +22,19 @@ namespace ScriptsToQTE
             if (IsInGreenZone())
             {
                 if (!_isPulsing) 
-                    Pulse(_sprite, Color.green, .1f);
+                    _ = Pulse(_sprite, Color.green, .1f);
                 AccuracyText.CurrentSum += 3;
             }
             else if (IsInYellowZone())
             {
                 if (!_isPulsing)
-                    Pulse(_sprite, Color.green, .1f);
+                    _ = Pulse(_sprite, Color.green, .1f);
                 AccuracyText.CurrentSum += 2;
             }
             else
             {
                 if (!_isPulsing)
-                    Pulse(_sprite, Color.green, .1f);
+                    _ = Pulse(_sprite, Color.green, .1f);
                 AccuracyText.CurrentSum++;
             }
         }

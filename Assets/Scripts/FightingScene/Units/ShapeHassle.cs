@@ -17,10 +17,8 @@ namespace FightingScene.Units
                 new List<IBuff> { new ImmortalityBuff(1) }, new List<IBuff>(), "Нерушимость");
         }
         
-        public override Ability UseAbility() => new (new List<IBuff>(),
-            new List<IBuff> { new DamageBuff(1.15f, 2) }, "Усиливающий янтарь");
+        public override Ability UseAbility() => Skill;
 
-        public override Ability UseUltimate() => 
-            new(new List<IBuff> { new ImmortalityBuff(1) }, new List<IBuff>(), "Нерушимость");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

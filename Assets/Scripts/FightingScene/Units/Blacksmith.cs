@@ -20,15 +20,8 @@ namespace FightingScene.Units
                 currentShield += (int)(0.34 * damage);
         }
         
-        public override Ability UseAbility() => 
-            new (new List<IBuff> { new ShieldBuff(
-                (int)(0.67 * CurrentStats.MaxHealth)) }, new List<IBuff>(),
-                "Лазурная защита");
+        public override Ability UseAbility() => Skill;
 
-        public override Ability UseUltimate() 
-            => new(new List<IBuff>
-            {
-                new ShieldHealBuff(0.09f, 3)
-            }, new List<IBuff>(), "Исцеляющий щит");
+        public override Ability UseUltimate() => Ultimate;
     }
 }

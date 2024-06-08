@@ -30,7 +30,7 @@ namespace ObjectSaves
             [4] = false
         };
         
-        public static readonly Dictionary<int, bool> ShardsIsBroken = new()
+        public static readonly Dictionary<int, bool> BrokenShards = new()
         {
             [50] = false,
             [51] = false,

@@ -18,7 +18,7 @@ namespace FightingScene.Units
         public UnitStats CurrentStats;
 
         public AI.AI Brain;
-        protected readonly List<IBuff> Buffs = new();
+        private readonly List<IBuff> _buffs = new();
     
         public int currentHealthPoints;
         public int currentShield;
@@ -50,7 +50,11 @@ namespace FightingScene.Units
             if (_fighterTurnMeter.CanOffensive)
                 TurnMeterFilled?.Invoke(this);
         }
-
+        
+        /// <summary>
+        /// Принимает на вход урон, нанесённый атакующим. Далее в методе просчитывается урон, который получит
+        /// цель с учётом всех баффов/дебаффов, брони и щита, которые на ней висят
+        /// </summary>
         public virtual void GetAttack(int damage)
         {
             if (damage < 0)
@@ -82,7 +86,7 @@ namespace FightingScene.Units
                 GetDied();
         }
 
-        public virtual Attack UseAttack() => new (CurrentStats.Damage, CurrentStats.AttacksType);
+        public Attack UseAttack() => new (CurrentStats.Damage, CurrentStats.AttacksType);
         public virtual Ability UseAbility() => Skill;
         public virtual Ability UseUltimate() => Ultimate;
 
@@ -93,24 +97,18 @@ namespace FightingScene.Units
 
         public void AddBuff(IBuff buff)
         {
-            Buffs.Add(buff);
+            _buffs.Add(buff);
         
             ApplyBuffs();
         }
 
-        public void RemoveBuff(IBuff buff)
-        {
-            Buffs.Remove(buff);
-            ApplyBuffs();
-        }
-
-        public void RemoveAllBuffs() => Buffs.Clear();
+        public void RemoveAllBuffs() => _buffs.Clear();
 
         public void ApplyBuffs()
         {
             CurrentStats = _baseStats;
 
-            foreach (var buff in Buffs) 
+            foreach (var buff in _buffs) 
                 CurrentStats = buff.ApplyBuff(this);
         }
     }

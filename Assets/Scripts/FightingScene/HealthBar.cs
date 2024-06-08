@@ -15,10 +15,7 @@ namespace FightingScene
         private float _decreaseTime = 1f;
         private float _currentFillAmount;
 
-        private void Start()
-        {
-            _comp = GetComponent<IBuffable>() as Unit;
-        }
+        private void Start() => _comp = GetComponent<IBuffable>() as Unit;
 
         private void Update()
         {
